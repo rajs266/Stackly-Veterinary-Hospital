@@ -422,12 +422,21 @@ a {
   font-size: 0.95rem;
 }
 
-/* Hero Section */
+/* Hero Section â€” CSS bg paints instantly (no solid-color wait for WebGL) */
 .hero-section {
   position: relative;
   padding: 60px 0 80px 0;
   overflow: hidden;
   min-height: 520px;
+  background-color: #023e8a;
+  background-image: url("assets/hero-aquarium11.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-section.is-aquarium-ready #hero-ripple-canvas {
+  opacity: 1;
 }
 
 #hero-ripple-canvas,
@@ -441,10 +450,19 @@ a {
 
 #hero-ripple-canvas {
   z-index: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
 #hero-aquarium-canvas {
   z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero-ripple-canvas,
+  #hero-aquarium-canvas {
+    display: none !important;
+  }
 }
 
 .hero-grid {
@@ -582,7 +600,7 @@ a {
   transform: translateZ(0);
 }
 
-/* Floating Badges — compact pills */
+/* Floating Badges â€” compact pills */
 .floating-card {
   position: absolute;
   background: rgba(15, 23, 42, 0.76);
@@ -1330,7 +1348,7 @@ a {
     margin-left: auto;
   }
 
-  /* Full-viewport overlay — site brand colors (not purple) */
+  /* Full-viewport overlay â€” site brand colors (not purple) */
   .nav-panel {
     position: fixed;
     inset: 0;
@@ -2878,10 +2896,10 @@ a {
 }
 
 /* =========================================================
-   Content zoom (−10%) — like Chrome Ctrl+scroll
+   Content zoom (âˆ’10%) â€” like Chrome Ctrl+scroll
    Scales WIDTH + HEIGHT together.
    Excludes: navbar, top-bar, hero-section
-   Footer: separate −10% zoom
+   Footer: separate âˆ’10% zoom
    ========================================================= */
 
 .section > .container,
@@ -4494,3 +4512,381 @@ main > div[style*="max-width"],
 }
 
 
+
+/* ===== Site Preloader (max ~2s) — rich motion + warm brand bg ===== */
+html.is-preloading,
+html.is-preloading body {
+  overflow: hidden;
+}
+
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #eef6f4;
+  transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.45s ease;
+  animation: preloaderAutoHide 2s forwards;
+}
+
+.site-preloader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.04);
+  animation: none;
+}
+
+.preloader-bg {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(42, 157, 143, 0.28), transparent 42%),
+    radial-gradient(circle at 82% 78%, rgba(224, 109, 83, 0.22), transparent 46%),
+    radial-gradient(circle at 50% 45%, rgba(244, 162, 97, 0.18), transparent 50%),
+    linear-gradient(145deg, #e8f5f2 0%, #f7f3ee 40%, #fdeee6 72%, #e6f0f4 100%);
+  background-size: 140% 140%;
+  animation: preloaderBgShift 3.2s ease-in-out infinite alternate;
+}
+
+.preloader-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      -18deg,
+      transparent 0 18px,
+      rgba(43, 45, 66, 0.02) 18px 19px
+    );
+  animation: preloaderGrain 8s linear infinite;
+  pointer-events: none;
+}
+
+.preloader-waves {
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  pointer-events: none;
+}
+
+.preloader-waves span {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 120px;
+  border-radius: 45% 55% 50% 50%;
+  opacity: 0.22;
+  animation: preloaderWave 3.6s ease-in-out infinite;
+}
+
+.preloader-waves span:nth-child(1) {
+  bottom: -30px;
+  background: rgba(42, 157, 143, 0.28);
+  animation-duration: 3.2s;
+}
+
+.preloader-waves span:nth-child(2) {
+  bottom: -50px;
+  background: rgba(224, 109, 83, 0.22);
+  animation-duration: 4.1s;
+  animation-delay: -1s;
+}
+
+.preloader-waves span:nth-child(3) {
+  bottom: -70px;
+  background: rgba(244, 162, 97, 0.2);
+  animation-duration: 4.8s;
+  animation-delay: -2s;
+}
+
+.preloader-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.preloader-floaters .pf {
+  position: absolute;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(42, 157, 143, 0.35);
+  animation: preloaderFloat 4.5s ease-in-out infinite;
+}
+
+.preloader-floaters .pf::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid rgba(43, 45, 66, 0.12);
+}
+
+.pf1 { left: 12%; bottom: 8%; width: 10px; height: 10px; animation-delay: 0s; }
+.pf2 { left: 28%; bottom: 2%; width: 16px; height: 16px; animation-delay: -0.6s; background: rgba(224, 109, 83, 0.4); }
+.pf3 { left: 48%; bottom: 10%; width: 8px; height: 8px; animation-delay: -1.2s; }
+.pf4 { left: 62%; bottom: 4%; width: 12px; height: 12px; animation-delay: -1.8s; background: rgba(244, 162, 97, 0.45); }
+.pf5 { left: 78%; bottom: 12%; width: 18px; height: 18px; animation-delay: -2.4s; background: rgba(42, 157, 143, 0.3); }
+.pf6 { left: 88%; bottom: 6%; width: 9px; height: 9px; animation-delay: -3s; background: rgba(224, 109, 83, 0.35); }
+
+.preloader-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+/* Multi-arc spinner + heart/medical mark (no emoji) */
+.preloader-spinner {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+
+.spin-halo {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 157, 143, 0.22), transparent 68%);
+  animation: spinHalo 1.6s ease-in-out infinite;
+}
+
+.spin-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  overflow: visible;
+}
+
+.spin-ring circle {
+  fill: none;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+}
+
+.spin-ring-a {
+  animation: spinSweep 1.8s linear infinite;
+}
+
+.spin-ring-a circle {
+  stroke: #2a9d8f;
+  stroke-width: 3.5;
+  stroke-dasharray: 28 72;
+  filter: drop-shadow(0 0 6px rgba(42, 157, 143, 0.45));
+}
+
+.spin-ring-b {
+  animation: spinSweepRev 2.4s linear infinite;
+}
+
+.spin-ring-b circle {
+  stroke: #e06d53;
+  stroke-width: 3;
+  stroke-dasharray: 18 82;
+  filter: drop-shadow(0 0 5px rgba(224, 109, 83, 0.4));
+}
+
+.spin-ring-c {
+  animation: spinSweep 3.2s ease-in-out infinite;
+}
+
+.spin-ring-c circle {
+  stroke: #f4a261;
+  stroke-width: 2.5;
+  stroke-dasharray: 12 40 8 40;
+  opacity: 0.95;
+}
+
+.spin-core {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), transparent 55%),
+    linear-gradient(145deg, #ffffff, #fde8df);
+  border: 1px solid rgba(224, 109, 83, 0.22);
+  box-shadow:
+    0 10px 28px rgba(43, 45, 66, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  animation: spinCorePulse 1.3s ease-in-out infinite;
+}
+
+.spin-mark {
+  width: 34px;
+  height: 34px;
+  overflow: visible;
+}
+
+.spin-heart {
+  fill: #e06d53;
+  stroke: #ffd6aa;
+  stroke-width: 1.5;
+  transform-origin: 32px 34px;
+  animation: spinHeartBeat 1.15s ease-in-out infinite;
+}
+
+.spin-plus {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  animation: spinPlusGlow 1.15s ease-in-out infinite;
+}
+
+.preloader-logo {
+  width: min(190px, 58vw);
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(43, 45, 66, 0.12));
+  animation: preloaderLogo 1.35s ease-in-out infinite;
+}
+
+.preloader-text {
+  margin: 0;
+  color: #2b2d42;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-shadow: none;
+  animation: preloaderTextGlow 1.6s ease-in-out infinite;
+}
+
+.preloader-dots::after {
+  content: "";
+  display: inline-block;
+  width: 1.4em;
+  text-align: left;
+  animation: preloaderDots 1.2s steps(4, end) infinite;
+}
+
+.preloader-bar {
+  width: min(220px, 64vw);
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(43, 45, 66, 0.1);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(43, 45, 66, 0.06);
+}
+
+.preloader-bar span {
+  display: block;
+  height: 100%;
+  width: 42%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #e06d53, #f4a261, #ffd6aa, #f4a261, #e06d53);
+  background-size: 220% 100%;
+  animation: preloaderBar 1s ease-in-out infinite;
+}
+
+@keyframes preloaderBgShift {
+  0% { transform: translate3d(-2%, -1%, 0) scale(1); filter: hue-rotate(0deg); }
+  100% { transform: translate3d(2%, 1.5%, 0) scale(1.06); filter: hue-rotate(12deg); }
+}
+
+@keyframes preloaderGrain {
+  to { transform: translate3d(-12px, 8px, 0); }
+}
+
+@keyframes preloaderWave {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-4%) scaleY(1.08); }
+}
+
+@keyframes preloaderFloat {
+  0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
+  15% { opacity: 0.85; }
+  100% { transform: translate3d(12px, -110vh, 0) scale(1.15); opacity: 0; }
+}
+
+@keyframes spinSweep {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinSweepRev {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes spinHalo {
+  0%, 100% { transform: scale(0.92); opacity: 0.55; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes spinCorePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes spinHeartBeat {
+  0%, 100% { transform: scale(1); }
+  35% { transform: scale(1.1); }
+  55% { transform: scale(0.96); }
+  75% { transform: scale(1.06); }
+}
+
+@keyframes spinPlusGlow {
+  0%, 100% { stroke: #ffffff; opacity: 0.9; }
+  50% { stroke: #fff8f0; opacity: 1; }
+}
+
+@keyframes preloaderLogo {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.03); }
+}
+
+@keyframes preloaderTextGlow {
+  0%, 100% { opacity: 0.78; letter-spacing: 0.05em; }
+  50% { opacity: 1; letter-spacing: 0.09em; }
+}
+
+@keyframes preloaderDots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+
+@keyframes preloaderBar {
+  0% { transform: translateX(-130%); background-position: 0% 50%; }
+  100% { transform: translateX(260%); background-position: 100% 50%; }
+}
+
+@keyframes preloaderAutoHide {
+  0%, 82% { opacity: 1; visibility: visible; transform: scale(1); }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-preloader,
+  .preloader-bg,
+  .preloader-bg::after,
+  .preloader-waves span,
+  .preloader-floaters .pf,
+  .spin-halo,
+  .spin-ring,
+  .spin-core,
+  .spin-heart,
+  .spin-plus,
+  .preloader-logo,
+  .preloader-text,
+  .preloader-dots::after,
+  .preloader-bar span {
+    animation: none !important;
+  }
+}

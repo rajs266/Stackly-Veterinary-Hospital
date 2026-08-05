@@ -1,11 +1,50 @@
 /* Stackly Veterinary Hospital ? single site script */
 
+/* ??? Site preloader (max 2s) ??????????????????????????????????????????????? */
+(function initPreloader() {
+  const el = document.getElementById('site-preloader');
+  if (!el) return;
+
+  const MAX_MS = 2000;
+  const MIN_MS = 500;
+  const started = performance.now();
+  let done = false;
+
+  document.documentElement.classList.add('is-preloading');
+
+  function hide() {
+    if (done) return;
+    done = true;
+    el.classList.add('is-done');
+    el.setAttribute('aria-busy', 'false');
+    document.documentElement.classList.remove('is-preloading');
+    window.setTimeout(() => el.remove(), 420);
+  }
+
+  function finishSoon() {
+    const elapsed = performance.now() - started;
+    const wait = Math.max(0, MIN_MS - elapsed);
+    window.setTimeout(hide, wait);
+  }
+
+  // Hard cap: page always opens within 2 seconds
+  window.setTimeout(hide, MAX_MS);
+
+  if (document.readyState === 'complete') finishSoon();
+  else window.addEventListener('load', finishSoon, { once: true });
+})();
+
 /* ??? Cursor trail ??????????????????????????????????????????????????????????? */
 (function initCursor() {
+  // Skip on touch / reduced-motion — saves a full-screen rAF loop on phones & Edge
+  if (window.matchMedia('(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
   const canvas = document.createElement('canvas');
   canvas.id = 'cursor-canvas';
   document.body.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
 
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
@@ -65,8 +104,8 @@
     const dy = mouse.y - mouse.py;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (dist > 2) {
-      for (let i = 0; i < Math.min(6, Math.ceil(dist / 4)); i++) {
+    if (dist > 4 && particles.length < 48) {
+      for (let i = 0; i < Math.min(3, Math.ceil(dist / 8)); i++) {
         const color = colors[Math.floor(Math.random() * colors.length)];
         particles.push(new Particle(
           mouse.x, mouse.y,
@@ -79,8 +118,8 @@
   });
 
   window.addEventListener('click', (e) => {
-    for (let i = 0; i < 24; i++) {
-      const angle = (Math.PI * 2 * i) / 24;
+    for (let i = 0; i < 12; i++) {
+      const angle = (Math.PI * 2 * i) / 12;
       const speed = Math.random() * 4 + 2;
       particles.push(new Particle(
         e.clientX, e.clientY,
@@ -121,6 +160,7 @@
 (function initAquarium() {
   const container = document.querySelector('.hero-section');
   if (!container) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   container.style.position = 'relative';
   container.style.overflow = 'hidden';
@@ -142,43 +182,51 @@
   container.insertBefore(rippleCanvas, container.firstChild);
   container.insertBefore(overlayCanvas, rippleCanvas.nextSibling);
 
-  const ctx = overlayCanvas.getContext('2d');
+  const ctx = overlayCanvas.getContext('2d', { alpha: true });
   let width = container.offsetWidth;
   let height = container.offsetHeight;
 
   const bgImg = new Image();
-  bgImg.crossOrigin = 'anonymous';
+  bgImg.decoding = 'async';
   bgImg.src = 'assets/hero-aquarium11.webp';
   let bgLoaded = false;
   bgImg.onload = () => { bgLoaded = true; };
+  if (bgImg.complete && bgImg.naturalWidth > 0) bgLoaded = true;
 
   // Facing based on sprite art: true = image faces left
-  // glow = underwater color bloom so the tank reads colorful
   const fishDefs = [
-    { src: 'assets/fish_4.webp', facesLeft: true, glow: '#ef4444' },
-    { src: 'assets/fish_5.webp', facesLeft: true, glow: '#22d3ee' },
-    { src: 'assets/fish_6.webp', facesLeft: true, glow: '#d946ef' },
-    { src: 'assets/fish_blue_tang.webp', facesLeft: true, glow: '#3b82f6' },
-    { src: 'assets/fish_clownfish.webp', facesLeft: true, glow: '#f97316' },
-    { src: 'assets/fish_discus_red.webp', facesLeft: true, glow: '#ef4444' },
-    { src: 'assets/fish_green_tang.webp', facesLeft: true, glow: '#22d3ee' },
-    { src: 'assets/fish_purple_tang.webp', facesLeft: true, glow: '#d946ef' },
-    { src: 'assets/fish_yellow_tang.webp', facesLeft: true, glow: '#eab308' }
+    { src: 'assets/fish_4.webp', facesLeft: true },
+    { src: 'assets/fish_5.webp', facesLeft: true },
+    { src: 'assets/fish_6.webp', facesLeft: true },
+    { src: 'assets/fish_blue_tang.webp', facesLeft: true },
+    { src: 'assets/fish_clownfish.webp', facesLeft: true },
+    { src: 'assets/fish_discus_red.webp', facesLeft: true },
+    { src: 'assets/fish_green_tang.webp', facesLeft: true },
+    { src: 'assets/fish_purple_tang.webp', facesLeft: true },
+    { src: 'assets/fish_yellow_tang.webp', facesLeft: true }
   ];
 
-  // Bias toward brighter species so the aquarium looks more colorful
   const colorfulSpawnOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-  const loadedFishData = [];
-  fishDefs.forEach((def) => {
+  const loadedFishData = new Array(fishDefs.length);
+
+  fishDefs.forEach((def, index) => {
     const img = new Image();
+    img.decoding = 'async';
     img.src = def.src;
-    img.onload = () => loadedFishData.push({
-      img,
-      facesLeft: def.facesLeft,
-      glow: def.glow,
-      src: def.src
-    });
+    const finish = () => {
+      if (img.naturalWidth > 0) {
+        loadedFishData[index] = {
+          img,
+          facesLeft: def.facesLeft,
+          src: def.src
+        };
+      }
+    };
+    if (img.complete && img.naturalWidth > 0) finish();
+    else {
+      img.onload = finish;
+    }
   });
 
   const mouse = {
@@ -194,7 +242,7 @@
   let uImageLocation = null;
   let uHeightmapLocation = null;
 
-  const GRID = 128;
+  const GRID = 96;
   const bufferSize = GRID * GRID;
   let buffer1 = new Float32Array(bufferSize);
   let buffer2 = new Float32Array(bufferSize);
@@ -213,7 +261,7 @@
   }
 
   function initWebGL() {
-    gl = rippleCanvas.getContext('webgl', { alpha: false, antialias: false })
+    gl = rippleCanvas.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' })
       || rippleCanvas.getContext('experimental-webgl', { alpha: false, antialias: false });
 
     if (!gl) {
@@ -239,7 +287,7 @@
       uniform sampler2D u_heightmap;
 
       void main() {
-        float texel = 1.0 / 128.0;
+        float texel = 1.0 / 96.0;
         float hL = texture2D(u_heightmap, v_texCoord + vec2(-texel, 0.0)).r;
         float hR = texture2D(u_heightmap, v_texCoord + vec2( texel, 0.0)).r;
         float hU = texture2D(u_heightmap, v_texCoord + vec2(0.0, -texel)).r;
@@ -298,6 +346,7 @@
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    // 1x1 transparent placeholder — CSS background shows aquarium until real texture is ready
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([2, 62, 138, 255]));
 
     heightmapTexture = gl.createTexture();
@@ -307,7 +356,6 @@
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, GRID, GRID, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, heightmapData);
-    // No ambient seed ripples ? water stays calm until cursor / click
   }
 
   function addRipple(x, y, radius, strength) {
@@ -349,6 +397,8 @@
 
   function drawWebGL() {
     if (!gl || isWebGLFallback) return;
+    if (!bgTextureUploaded && !(bgLoaded && bgImg.complete && bgImg.naturalWidth > 0)) return;
+
     stepWaves();
     try {
       gl.viewport(0, 0, rippleCanvas.width, rippleCanvas.height);
@@ -357,6 +407,7 @@
       if (!bgTextureUploaded && bgLoaded && bgImg.complete && bgImg.naturalWidth > 0) {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, bgImg);
         bgTextureUploaded = true;
+        container.classList.add('is-aquarium-ready');
       }
       gl.uniform1i(uImageLocation, 0);
 
@@ -367,22 +418,15 @@
 
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
-    } catch (e) {
+    } catch (err) {
       isWebGLFallback = true;
       rippleCanvas.style.display = 'none';
     }
   }
 
   function drawFallbackBG() {
-    if (bgLoaded) {
-      ctx.drawImage(bgImg, 0, 0, width, height);
-    } else {
-      const grad = ctx.createLinearGradient(0, 0, 0, height);
-      grad.addColorStop(0, '#023e8a');
-      grad.addColorStop(1, '#0077b6');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, width, height);
-    }
+    if (!bgLoaded) return;
+    ctx.drawImage(bgImg, 0, 0, width, height);
   }
 
   /* Bubbles */
@@ -436,27 +480,27 @@
     }
   }
 
-  /* Natural aquarium fish – full 2D depth wandering (top-center, mid, bottom) with diverse sizes */
+  /* Natural aquarium fish – even coverage across full hero (L/R + top/mid/bottom) */
   class Fish {
     constructor(laneIndex, total) {
       const marginX = 40;
       const marginY = 20;
-      
-      // Even 2D Grid allocation ensuring 50/50 balance between Left and Right halves
-      const cols = Math.max(7, Math.ceil(Math.sqrt(total * (width / Math.max(height, 1)))));
-      const rows = Math.max(6, Math.ceil(total / cols));
+
+      // Even 2D grid: cover left/right and top/mid/bottom equally
+      const cols = Math.max(6, Math.ceil(Math.sqrt(total * (width / Math.max(height, 1)))));
+      const rows = Math.max(5, Math.ceil(total / cols));
       const col = laneIndex % cols;
       const row = Math.floor(laneIndex / cols) % rows;
-      
+
       const cellW = (width - marginX * 2) / cols;
       const cellH = (height - marginY * 2) / rows;
-      
+
       this.x = marginX + cellW * (col + 0.5) + (Math.random() - 0.5) * cellW * 0.7;
       this.y = marginY + cellH * (row + 0.5) + (Math.random() - 0.5) * cellH * 0.6;
       this.x = Math.max(20, Math.min(width - 20, this.x));
       this.y = Math.max(20, Math.min(height - 20, this.y));
 
-      // Alternate direction based on column: left side swims right, right side swims left
+      // Alternate direction by half: left fish often go right, right fish often go left
       const goingRight = col < cols / 2 ? (Math.random() > 0.3) : (Math.random() > 0.7);
       const speed = 0.75 + Math.random() * 1.15;
 
@@ -465,17 +509,20 @@
       this.vx = this.dir * speed;
       this.vy = 0;
       this.baseY = this.y;
+      this.homeBand = row % 3; // 0 top, 1 mid, 2 bottom — keep wander spread
+      this.targetX = this.pickTargetX();
+      this.wanderTimer = 50 + Math.floor(Math.random() * 100);
 
       // Varied fish sizes: Small (24-36px), Medium (42-58px), Large (64-85px), Extra Large Majestic (92-115px)
       const sizeRoll = Math.random();
       if (sizeRoll < 0.28) {
-        this.size = 24 + Math.random() * 12; // Small
+        this.size = 24 + Math.random() * 12;
       } else if (sizeRoll < 0.62) {
-        this.size = 42 + Math.random() * 16; // Medium
+        this.size = 42 + Math.random() * 16;
       } else if (sizeRoll < 0.88) {
-        this.size = 64 + Math.random() * 21; // Large
+        this.size = 64 + Math.random() * 21;
       } else {
-        this.size = 92 + Math.random() * 23; // Extra Large Majestic
+        this.size = 92 + Math.random() * 23;
       }
 
       this.targetY = this.pickTargetY();
@@ -486,28 +533,35 @@
       this.wiggleSpeed = 0.11 + Math.random() * 0.12;
       this.scaredTimer = 0;
       this.defIndex = colorfulSpawnOrder[laneIndex % colorfulSpawnOrder.length];
-      this.glow = fishDefs[this.defIndex].glow;
       this.turnCooldown = 35 + Math.floor(Math.random() * 85);
       this.depthChangeTimer = 20 + Math.floor(Math.random() * 100);
-      this.pulse = Math.random() * Math.PI * 2;
     }
 
     pickTargetY() {
-      // 100% Even 2D depth distribution across top, middle, and bottom corners (33% each)
+      // Even thirds: top / mid / bottom — prefer home band, still visit other bands
       const r = Math.random();
-      if (r < 0.33) {
-        return height * (0.04 + Math.random() * 0.28); // Top-Left, Top-Center, Top-Right
-      } else if (r < 0.67) {
-        return height * (0.33 + Math.random() * 0.33); // Mid-Left, Mid-Center, Mid-Right
-      } else {
-        return height * (0.67 + Math.random() * 0.27); // Bottom-Left, Bottom-Center, Bottom-Right
-      }
+      let band = this.homeBand;
+      if (r < 0.22) band = 0;
+      else if (r < 0.44) band = 1;
+      else if (r < 0.66) band = 2;
+      // else keep homeBand (~34%)
+
+      if (band === 0) return height * (0.05 + Math.random() * 0.25);
+      if (band === 1) return height * (0.35 + Math.random() * 0.30);
+      return height * (0.68 + Math.random() * 0.26);
+    }
+
+    pickTargetX() {
+      // Even left / mid / right coverage — no center clustering
+      const zone = Math.floor(Math.random() * 3);
+      if (zone === 0) return width * (0.06 + Math.random() * 0.26);
+      if (zone === 1) return width * (0.36 + Math.random() * 0.28);
+      return width * (0.66 + Math.random() * 0.28);
     }
 
     update() {
       this.wiggle += this.wiggleSpeed;
       this.bobPhase += this.bobSpeed;
-      this.pulse += 0.05;
       if (this.turnCooldown > 0) this.turnCooldown--;
       if (this.depthChangeTimer > 0) this.depthChangeTimer--;
 
@@ -534,22 +588,38 @@
           this.wiggleSpeed = 0.12 + Math.random() * 0.1;
           this.baseY = this.y;
           this.targetY = this.pickTargetY();
+          this.targetX = this.pickTargetX();
         }
       } else {
         this.vx += (this.dir * this.speed - this.vx) * 0.09;
 
-        // Periodically pick a new target depth across all 9 sectors
         if (this.depthChangeTimer === 0) {
           this.targetY = this.pickTargetY();
           this.depthChangeTimer = 90 + Math.floor(Math.random() * 190);
         }
 
-        // Smoothly float towards target depth
+        // Wander evenly across left/mid/right — not stuck in one zone
+        if (this.wanderTimer > 0) this.wanderTimer--;
+        if (this.wanderTimer === 0) {
+          this.targetX = this.pickTargetX();
+          this.wanderTimer = 80 + Math.floor(Math.random() * 140);
+          if (this.targetX > this.x + 12) this.dir = 1;
+          else if (this.targetX < this.x - 12) this.dir = -1;
+        }
+
+        const dxTarget = this.targetX - this.x;
+        if (Math.abs(dxTarget) > 24) {
+          this.vx += Math.sign(dxTarget) * 0.04;
+          const maxSpeed = this.speed * 1.3;
+          if (this.vx > maxSpeed) this.vx = maxSpeed;
+          if (this.vx < -maxSpeed) this.vx = -maxSpeed;
+        }
+
         const dyTarget = this.targetY - this.baseY;
         this.baseY += dyTarget * 0.009;
         this.vy = dyTarget * 0.014 + Math.sin(this.bobPhase) * 0.45;
 
-        if (this.turnCooldown === 0 && Math.random() < 0.0035) {
+        if (this.turnCooldown === 0 && Math.random() < 0.003) {
           this.dir *= -1;
           this.turnCooldown = 80 + Math.floor(Math.random() * 120);
         }
@@ -560,21 +630,25 @@
         ? this.y + this.vy
         : this.baseY + Math.sin(this.bobPhase) * this.bobAmp;
 
-      // Smooth re-entry across outer bounds
+      // Re-enter from opposite side at a random depth band (keeps spread even)
       if (this.x < -90) {
         this.x = -60;
         this.dir = 1;
         this.vx = this.dir * this.speed;
         this.targetY = this.pickTargetY();
+        this.targetX = this.pickTargetX();
         this.baseY = this.targetY;
         this.y = this.baseY;
+        this.wanderTimer = 40;
       } else if (this.x > width + 90) {
         this.x = width + 60;
         this.dir = -1;
         this.vx = this.dir * this.speed;
         this.targetY = this.pickTargetY();
+        this.targetX = this.pickTargetX();
         this.baseY = this.targetY;
         this.y = this.baseY;
+        this.wanderTimer = 40;
       }
 
       // Keep within canvas vertical padding
@@ -591,16 +665,13 @@
     }
 
     draw() {
-      if (loadedFishData.length === 0) return;
-      const def = fishDefs[this.defIndex];
-      const data = loadedFishData.find((d) => d.src === def.src) || loadedFishData[this.defIndex % loadedFishData.length];
-      if (!data || !data.img.complete) return;
+      const data = loadedFishData[this.defIndex];
+      if (!data || !data.img.complete || data.img.naturalWidth === 0) return;
 
       const movingRight = this.vx >= 0;
       const flip = data.facesLeft ? movingRight : !movingRight;
       const tilt = Math.max(-0.2, Math.min(0.2, this.vy * 0.07));
       const tailWiggle = Math.sin(this.wiggle) * (this.scaredTimer > 0 ? 0.1 : 0.05);
-      const glowPulse = 0.65 + Math.sin(this.pulse) * 0.25;
 
       ctx.save();
       ctx.translate(this.x, this.y);
@@ -611,19 +682,18 @@
       const fw = this.size;
       const fh = this.size * aspect;
 
-      ctx.shadowColor = this.glow;
-      ctx.shadowBlur = (this.size > 70 ? 14 : 10) * glowPulse;
-      ctx.shadowOffsetY = 0;
+      // No colored shadowBlur — that made fish look like solid color blobs while loading
       ctx.drawImage(data.img, -fw / 2, -fh / 2, fw, fh);
       ctx.restore();
     }
   }
 
-  const FISH_COUNT = 44;
-  const bubbles = Array.from({ length: 38 }, () => new Bubble());
+  const FISH_COUNT = 28;
+  const bubbles = Array.from({ length: 16 }, () => new Bubble());
   const fishes = Array.from({ length: FISH_COUNT }, (_, i) => new Fish(i, FISH_COUNT));
   const caustics = [];
   function spawnCaustic(x, y, intensity) {
+    if (caustics.length > 8) return;
     caustics.push({
       x, y, radius: 4,
       maxRadius: 28 + intensity * 18,
@@ -635,7 +705,8 @@
   function resize() {
     width = container.offsetWidth;
     height = container.offsetHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Cap at 1x — aquarium is decorative; 2x DPR was crushing Edge GPU
+    const dpr = 1;
 
     rippleCanvas.width = Math.floor(width * dpr);
     rippleCanvas.height = Math.floor(height * dpr);
@@ -647,8 +718,8 @@
 
     // Keep fish evenly covering top-center, mid, and bottom after window resize
     if (typeof fishes !== 'undefined' && fishes.length) {
-      const cols = Math.max(7, Math.ceil(Math.sqrt(fishes.length * (width / Math.max(height, 1)))));
-      const rows = Math.max(6, Math.ceil(fishes.length / cols));
+      const cols = Math.max(4, Math.ceil(Math.sqrt(fishes.length * (width / Math.max(height, 1)))));
+      const rows = Math.max(3, Math.ceil(fishes.length / cols));
       const marginX = 20;
       const marginY = 16;
       const cellW = (width - marginX * 2) / cols;
@@ -704,7 +775,9 @@
     mouse.y = -1000;
   });
 
+  let frame = 0;
   function render() {
+    frame += 1;
     if (isWebGLFallback) {
       ctx.clearRect(0, 0, width, height);
       drawFallbackBG();
@@ -722,24 +795,26 @@
 
     bubbles.forEach((b) => { b.update(); b.draw(); });
 
-    // Apply gentle pairwise separation to prevent crowding and keep fish naturally spread
-    for (let i = 0; i < fishes.length; i++) {
-      for (let j = i + 1; j < fishes.length; j++) {
-        const f1 = fishes[i];
-        const f2 = fishes[j];
-        const dx = f2.x - f1.x;
-        const dy = f2.y - f1.y;
-        const minDist = (f1.size + f2.size) * 0.85;
-        const distSq = dx * dx + dy * dy;
-        if (distSq < minDist * minDist && distSq > 1) {
-          const dist = Math.sqrt(distSq);
-          const push = (minDist - dist) * 0.05;
-          const nx = dx / dist;
-          const ny = dy / dist;
-          f1.x -= nx * push;
-          f1.y -= ny * push * 0.5;
-          f2.x += nx * push;
-          f2.y += ny * push * 0.5;
+    // Separation every other frame — O(n^2) was expensive with many fish
+    if (frame % 2 === 0) {
+      for (let i = 0; i < fishes.length; i++) {
+        for (let j = i + 1; j < fishes.length; j++) {
+          const f1 = fishes[i];
+          const f2 = fishes[j];
+          const dx = f2.x - f1.x;
+          const dy = f2.y - f1.y;
+          const minDist = (f1.size + f2.size) * 0.85;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < minDist * minDist && distSq > 1) {
+            const dist = Math.sqrt(distSq);
+            const push = (minDist - dist) * 0.05;
+            const nx = dx / dist;
+            const ny = dy / dist;
+            f1.x -= nx * push;
+            f1.y -= ny * push * 0.5;
+            f2.x += nx * push;
+            f2.y += ny * push * 0.5;
+          }
         }
       }
     }
@@ -764,9 +839,16 @@
     requestAnimationFrame(render);
   }
 
-  initWebGL();
-  resize();
-  render();
+  // Start after first paint so CSS aquarium + hero doctor show instantly
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    initWebGL();
+    resize();
+    render();
+  };
+  requestAnimationFrame(() => requestAnimationFrame(start));
 })();
 
 /* ??? Main UI + dashboard logic ????????????????????????????????????????????? */
