@@ -207,16 +207,27 @@
 
   <!-- New Section 1: Weekly Pet Health Newsletter Banner -->
   <section class="section-sm container">
-    <div class="cta-banner reveal-item">
+    <div class="cta-banner reveal-item" style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:28px; align-items:center; padding:28px 36px;">
       <div class="cta-banner-bg"></div>
-      <div class="cta-banner-content">
-        <span class="section-tag" style="background:rgba(255,255,255,0.18);color:#fff;border:none;"><i class="fa-solid fa-envelope-open-text"></i> Pet Care Tips</span>
-        <h2>Subscribe To Stackly Pet Parent Health Digest</h2>
-        <p>Get monthly vet advice, seasonal vaccination reminders, and grooming tips delivered to your inbox.</p>
-        <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
+      <div class="cta-banner-content" style="max-width:100%;">
+        <span class="section-tag" style="background:rgba(255,255,255,0.18);color:#fff;border:none;margin-bottom:10px;"><i class="fa-solid fa-envelope-open-text"></i> Pet Care Tips</span>
+        <h2 style="font-size:clamp(1.5rem, 2.5vw, 2.05rem); margin:8px 0 10px;">Subscribe To Stackly Pet Parent Health Digest</h2>
+        <p style="font-size:0.92rem; color:rgba(255,255,255,0.9); margin-bottom:18px; line-height:1.55;">Get monthly vet advice, seasonal vaccination reminders, and grooming tips delivered to your inbox.</p>
+        <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';" style="max-width:100%;">
           <input type="email" placeholder="Enter Email Address" style="color:var(--dark);" required>
           <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
         </form>
+      </div>
+
+      <div class="cta-banner-visual" style="position:relative; z-index:1; width:100%; height:230px; border-radius:24px; overflow:hidden; box-shadow:0 16px 36px rgba(0,0,0,0.35); border:3px solid rgba(255,255,255,0.3);">
+        <img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" alt="Pet Health Tips" style="width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; bottom:14px; left:14px; right:14px; background:rgba(43,45,66,0.88); backdrop-filter:blur(10px); padding:10px 16px; border-radius:14px; display:flex; align-items:center; justify-content:space-between; color:#fff; font-size:0.85rem; border:1px solid rgba(255,255,255,0.15);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <i class="fa-solid fa-circle-check" style="color:var(--primary); font-size:1.1rem;"></i>
+            <span style="font-weight:600;">Weekly Doctor Health Digest</span>
+          </div>
+          <span class="ethic-pill" style="background:var(--primary); color:#fff; padding:3px 10px; font-size:0.75rem;">Free Access</span>
+        </div>
       </div>
     </div>
   </section>
@@ -238,17 +249,28 @@
         </div>
         <div class="slideshow-dots" data-slideshow-dots></div>
       </div>
-      <div class="reveal-item" data-reveal="right">
-        <div class="section-header" style="text-align:left;margin-bottom:18px;">
-          <span class="section-tag"><i class="fa-solid fa-book-open"></i> Keep Learning</span>
-          <h2 style="margin:10px 0;">More Topics Coming Soon</h2>
-          <p>Nutrition, senior pets, travel health certificates, and emergency first-aid checklists.</p>
+      <div class="blog-topics-card reveal-item" style="background:#ffffff; border-radius:var(--radius-md); padding:32px 28px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div>
+          <span class="section-tag" style="margin-bottom:14px;"><i class="fa-solid fa-graduation-cap"></i> Keep Learning</span>
+          <h3 style="font-size:1.45rem; margin-bottom:12px; color:var(--dark);">Vet-Curated Pet Knowledge Hub</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:22px; line-height:1.6;">Our Salem medical team continuously publishes evidence-based guides to help you make informed health decisions for your pets.</p>
+
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px;">
+            <span class="ethic-pill" style="background:var(--primary-light); color:var(--primary);"><i class="fa-solid fa-bone"></i> Canine Nutrition</span>
+            <span class="ethic-pill" style="background:var(--secondary-light); color:var(--secondary);"><i class="fa-solid fa-tooth"></i> Feline Dental</span>
+            <span class="ethic-pill" style="background:rgba(43,45,66,0.08); color:var(--dark);"><i class="fa-solid fa-syringe"></i> Vaccine Schedules</span>
+            <span class="ethic-pill" style="background:var(--primary-light); color:var(--primary);"><i class="fa-solid fa-kit-medical"></i> Emergency First-Aid</span>
+            <span class="ethic-pill" style="background:var(--secondary-light); color:var(--secondary);"><i class="fa-solid fa-shield-cat"></i> Senior Pet Care</span>
+            <span class="ethic-pill" style="background:rgba(43,45,66,0.08); color:var(--dark);"><i class="fa-solid fa-heart-pulse"></i> Cardiac Wellness</span>
+          </div>
         </div>
-        <div class="stats-bar" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div class="stat-item"><h3 class="counter-val" data-target="48">0</h3><p>Articles Published</p></div>
-          <div class="stat-item"><h3 class="counter-val" data-target="12">0</h3><p>Doctor Authors</p></div>
-          <div class="stat-item"><h3 class="counter-val" data-target="6">0</h3><p>Care Categories</p></div>
-          <div class="stat-item"><h3 class="counter-val" data-target="5">0</h3><p>Min Read Average</p></div>
+
+        <div style="border-top:1px solid var(--border-color); padding-top:18px; margin-top:auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:0.86rem; color:var(--dark); font-weight:600;">
+            <i class="fa-solid fa-user-doctor" style="color:var(--primary); font-size:1.1rem;"></i>
+            <span>Reviewed by Senior Vets</span>
+          </div>
+          <a href="contact.html#book-visit" class="btn btn-secondary btn-sm">Ask A Doctor <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>

@@ -439,10 +439,10 @@
   /* Natural aquarium fish – full 2D depth wandering (top-center, mid, bottom) with diverse sizes */
   class Fish {
     constructor(laneIndex, total) {
-      const marginX = 20;
-      const marginY = 16;
+      const marginX = 40;
+      const marginY = 20;
       
-      // Grid allocation ensuring active fish across all 2D sectors (top-left, top-center, top-right, mid, bottom)
+      // Even 2D Grid allocation ensuring 50/50 balance between Left and Right halves
       const cols = Math.max(7, Math.ceil(Math.sqrt(total * (width / Math.max(height, 1)))));
       const rows = Math.max(6, Math.ceil(total / cols));
       const col = laneIndex % cols;
@@ -451,12 +451,13 @@
       const cellW = (width - marginX * 2) / cols;
       const cellH = (height - marginY * 2) / rows;
       
-      this.x = marginX + cellW * (col + 0.5) + (Math.random() - 0.5) * cellW * 0.8;
-      this.y = marginY + cellH * (row + 0.5) + (Math.random() - 0.5) * cellH * 0.7;
-      this.x = Math.max(marginX, Math.min(width - marginX, this.x));
-      this.y = Math.max(marginY, Math.min(height - marginY, this.y));
+      this.x = marginX + cellW * (col + 0.5) + (Math.random() - 0.5) * cellW * 0.7;
+      this.y = marginY + cellH * (row + 0.5) + (Math.random() - 0.5) * cellH * 0.6;
+      this.x = Math.max(20, Math.min(width - 20, this.x));
+      this.y = Math.max(20, Math.min(height - 20, this.y));
 
-      const goingRight = Math.random() > 0.5;
+      // Alternate direction based on column: left side swims right, right side swims left
+      const goingRight = col < cols / 2 ? (Math.random() > 0.3) : (Math.random() > 0.7);
       const speed = 0.75 + Math.random() * 1.15;
 
       this.dir = goingRight ? 1 : -1;
@@ -492,14 +493,14 @@
     }
 
     pickTargetY() {
-      // 35% Top & Top-Center (5%-32%), 35% Middle & Center (33%-67%), 30% Lower & Bottom (68%-94%)
+      // 100% Even 2D depth distribution across top, middle, and bottom corners (33% each)
       const r = Math.random();
-      if (r < 0.35) {
-        return height * (0.05 + Math.random() * 0.27);
-      } else if (r < 0.70) {
-        return height * (0.33 + Math.random() * 0.34);
+      if (r < 0.33) {
+        return height * (0.04 + Math.random() * 0.28); // Top-Left, Top-Center, Top-Right
+      } else if (r < 0.67) {
+        return height * (0.33 + Math.random() * 0.33); // Mid-Left, Mid-Center, Mid-Right
       } else {
-        return height * (0.68 + Math.random() * 0.26);
+        return height * (0.67 + Math.random() * 0.27); // Bottom-Left, Bottom-Center, Bottom-Right
       }
     }
 
@@ -537,20 +538,20 @@
       } else {
         this.vx += (this.dir * this.speed - this.vx) * 0.09;
 
-        // Periodically pick a new depth target across top-center, mid, or bottom
+        // Periodically pick a new target depth across all 9 sectors
         if (this.depthChangeTimer === 0) {
           this.targetY = this.pickTargetY();
-          this.depthChangeTimer = 90 + Math.floor(Math.random() * 200);
+          this.depthChangeTimer = 90 + Math.floor(Math.random() * 190);
         }
 
-        // Smoothly float towards target depth (allows fish to swim up, down, and across center-top)
+        // Smoothly float towards target depth
         const dyTarget = this.targetY - this.baseY;
         this.baseY += dyTarget * 0.009;
         this.vy = dyTarget * 0.014 + Math.sin(this.bobPhase) * 0.45;
 
-        if (this.turnCooldown === 0 && Math.random() < 0.0055) {
+        if (this.turnCooldown === 0 && Math.random() < 0.0035) {
           this.dir *= -1;
-          this.turnCooldown = 65 + Math.floor(Math.random() * 105);
+          this.turnCooldown = 80 + Math.floor(Math.random() * 120);
         }
       }
 
@@ -559,14 +560,18 @@
         ? this.y + this.vy
         : this.baseY + Math.sin(this.bobPhase) * this.bobAmp;
 
-      // Re-entry off edges with fresh target depth covering top-center, middle, bottom
-      if (this.x < -100) {
-        this.x = width + 70;
+      // Smooth re-entry across outer bounds
+      if (this.x < -90) {
+        this.x = -60;
+        this.dir = 1;
+        this.vx = this.dir * this.speed;
         this.targetY = this.pickTargetY();
         this.baseY = this.targetY;
         this.y = this.baseY;
-      } else if (this.x > width + 100) {
-        this.x = -70;
+      } else if (this.x > width + 90) {
+        this.x = width + 60;
+        this.dir = -1;
+        this.vx = this.dir * this.speed;
         this.targetY = this.pickTargetY();
         this.baseY = this.targetY;
         this.y = this.baseY;
@@ -716,6 +721,29 @@
     ctx.fillRect(0, 0, width, height);
 
     bubbles.forEach((b) => { b.update(); b.draw(); });
+
+    // Apply gentle pairwise separation to prevent crowding and keep fish naturally spread
+    for (let i = 0; i < fishes.length; i++) {
+      for (let j = i + 1; j < fishes.length; j++) {
+        const f1 = fishes[i];
+        const f2 = fishes[j];
+        const dx = f2.x - f1.x;
+        const dy = f2.y - f1.y;
+        const minDist = (f1.size + f2.size) * 0.85;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < minDist * minDist && distSq > 1) {
+          const dist = Math.sqrt(distSq);
+          const push = (minDist - dist) * 0.05;
+          const nx = dx / dist;
+          const ny = dy / dist;
+          f1.x -= nx * push;
+          f1.y -= ny * push * 0.5;
+          f2.x += nx * push;
+          f2.y += ny * push * 0.5;
+        }
+      }
+    }
+
     fishes.forEach((f) => { f.update(); f.draw(); });
 
     for (let i = caustics.length - 1; i >= 0; i--) {
