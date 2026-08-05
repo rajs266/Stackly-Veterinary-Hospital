@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Health Blog | Stackly Veterinary Hospital Salem</title>
+  <meta name="description" content="Read expert veterinary articles on puppy vaccination schedules, cat nutrition, seasonal tick protection, and pet wellness tips from Stackly doctors.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span><i class="fa-solid fa-location-dot"></i> MMR Complex, Chinna Thirupathi, Salem - 636008</span>
+        <span><i class="fa-solid fa-phone"></i> +91 98765 43210</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+    <header class="navbar">
+    <div class="container navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+      </a>
+
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="nav-panel" id="nav-panel">
+        <div class="nav-panel-header">
+          <a href="index.html" class="brand-logo nav-panel-brand">
+            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+          </a>
+          <button type="button" class="nav-close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="team.html" class="nav-link">Veterinarians</a></li>
+          <li><a href="blog.html" class="nav-link active">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-secondary">Sign In</a>
+          <a href="contact.html#book-visit" class="btn btn-primary">Book Visit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="page-hero-media"><img src="assets/arseny-togulev-DE6rYp1nAho-unsplash.webp" alt=""></div>
+    <div class="container">
+      <span class="section-tag"><i class="fa-solid fa-newspaper"></i> Health & Wellness Guide</span>
+      <h1>Stackly Pet Care Articles & Advice</h1>
+      <p>Practical tips on nutrition, vaccines, dental care, and emergency readiness.</p>
+      <div class="page-hero-actions">
+        <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Visit</a>
+        <a href="tel:+919876543210" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Main Section -->
+  <section class="section">
+    <div class="container">
+      <!-- Magazine Spotlight Article -->
+      <div class="blog-spotlight reveal-item">
+        <div class="blog-spotlight-img">
+          <img src="assets/inside_surgery_suite.webp" alt="Pet Surgery Preparation Guide">
+        </div>
+        <div class="blog-spotlight-body">
+          <span class="section-tag"><i class="fa-solid fa-star"></i> Featured Guide</span>
+          <h2>Preparing Your Pet For Surgery: Anesthesia Safety &amp; Recovery Protocols</h2>
+          <p>Learn how Stackly's sterile operating theatre, inhalation anesthesia gas, and dedicated recovery ICU keep pets safe during soft-tissue and orthopedic procedures.</p>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+            <img src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh Kumar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;">
+            <div>
+              <strong style="font-size:0.9rem;display:block;color:var(--dark);">Dr. Rajesh Kumar</strong>
+              <span style="font-size:0.78rem;color:var(--text-muted);">Chief Veterinary Surgeon · 6 min read</span>
+            </div>
+          </div>
+          <a href="404.html" class="btn btn-primary btn-sm" style="align-self:flex-start;">Read Full Guide <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar reveal-item">
+        <button type="button" class="filter-btn active">All Articles</button>
+        <button type="button" class="filter-btn">Canine Health</button>
+        <button type="button" class="filter-btn">Feline Care</button>
+        <button type="button" class="filter-btn">Surgeries &amp; Anesthesia</button>
+        <button type="button" class="filter-btn">Dental &amp; Skin</button>
+      </div>
+
+      <!-- Magazine Articles Grid -->
+      <div class="blog-magazine-grid">
+        <article class="blog-magazine-card reveal-item" data-delay="1">
+          <div class="blog-magazine-img">
+            <img src="assets/karlo-tottoc-ybZ5hRxaWS4-unsplash.webp" alt="Puppy Vaccination Guide">
+          </div>
+          <div class="blog-magazine-body">
+            <div class="blog-magazine-meta">
+              <span style="color:var(--primary);font-weight:700;">VACCINATION</span>
+              <span>May 2026 · 4 min</span>
+            </div>
+            <h3>Essential Puppy Vaccination Schedule: What Every Salem Pet Parent Must Know</h3>
+            <p>Protecting your newborn pup against Parvovirus, Distemper, and Rabies during their first 16 weeks.</p>
+            <a href="404.html" class="btn btn-secondary btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="blog-magazine-card reveal-item" data-delay="2">
+          <div class="blog-magazine-img">
+            <img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" alt="Ear Infection Symptoms">
+          </div>
+          <div class="blog-magazine-body">
+            <div class="blog-magazine-meta">
+              <span style="color:var(--primary);font-weight:700;">CYTOLOGY</span>
+              <span>Jun 2026 · 5 min</span>
+            </div>
+            <h3>5 Signs Your Dog Has An Ear Yeast Infection (And How Cytology Helps)</h3>
+            <p>Head shaking, odour, and redness: diagnosing ear infections before they cause permanent hearing damage.</p>
+            <a href="404.html" class="btn btn-secondary btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="blog-magazine-card reveal-item" data-delay="3">
+          <div class="blog-magazine-img">
+            <img src="assets/story_persian_cat.webp" alt="Feline Hydration Tips">
+          </div>
+          <div class="blog-magazine-body">
+            <div class="blog-magazine-meta">
+              <span style="color:var(--primary);font-weight:700;">FELINE CARE</span>
+              <span>Jul 2026 · 4 min</span>
+            </div>
+            <h3>Preventing Heatstroke &amp; Kidney Disease In Indoor Cats During Tamil Nadu Summers</h3>
+            <p>Key tips for keeping your cats hydrated, cool, and active during high summer temperatures in Salem.</p>
+            <a href="404.html" class="btn btn-secondary btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="blog-magazine-card reveal-item" data-delay="1">
+          <div class="blog-magazine-img">
+            <img src="assets/story_beagle_bruno.webp" alt="Canine Joint Health">
+          </div>
+          <div class="blog-magazine-body">
+            <div class="blog-magazine-meta">
+              <span style="color:var(--primary);font-weight:700;">ORTHOPEDICS</span>
+              <span>Jul 2026 · 6 min</span>
+            </div>
+            <h3>Recognizing Early Joint Pain &amp; Arthritis In Senior Dogs</h3>
+            <p>How early Doppler ultrasound, weight management, and physical therapy keep senior dogs active.</p>
+            <a href="404.html" class="btn btn-secondary btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="blog-magazine-card reveal-item" data-delay="2">
+          <div class="blog-magazine-img">
+            <img src="assets/ask_stackly_consult.webp" alt="Dental Care Routine">
+          </div>
+          <div class="blog-magazine-body">
+            <div class="blog-magazine-meta">
+              <span style="color:var(--primary);font-weight:700;">DENTAL HEALTH</span>
+              <span>Aug 2026 · 5 min</span>
+            </div>
+            <h3>Why Bad Breath In Pets Is A Warning Sign Of Periodontal Disease</h3>
+            <p>Understanding calculus plaque accumulation and how ultrasonic scaling preserves tooth roots.</p>
+            <a href="404.html" class="btn btn-secondary btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="blog-magazine-card reveal-item" data-delay="3">
+          <div class="blog-magazine-img">
+            <img src="assets/story_indie_dog.webp" alt="Pet First Aid Kit">
+          </div>
+          <div class="blog-magazine-body">
+            <div class="blog-magazine-meta">
+              <span style="color:var(--primary);font-weight:700;">FIRST AID</span>
+              <span>Aug 2026 · 7 min</span>
+            </div>
+            <h3>Pet Emergency First Aid: What To Do Before Reaching The Vet Hospital</h3>
+            <p>Crucial steps for handling accidental poisoning, severe bleeding, or trauma wounds in transit.</p>
+            <a href="404.html" class="btn btn-secondary btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 1: Weekly Pet Health Newsletter Banner -->
+  <section class="section-sm container">
+    <div class="cta-banner reveal-item">
+      <div class="cta-banner-bg"></div>
+      <div class="cta-banner-content">
+        <span class="section-tag" style="background:rgba(255,255,255,0.18);color:#fff;border:none;"><i class="fa-solid fa-envelope-open-text"></i> Pet Care Tips</span>
+        <h2>Subscribe To Stackly Pet Parent Health Digest</h2>
+        <p>Get monthly vet advice, seasonal vaccination reminders, and grooming tips delivered to your inbox.</p>
+        <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
+          <input type="email" placeholder="Enter Email Address" style="color:var(--dark);" required>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-light">
+    <div class="container tour-split">
+      <div class="slideshow reveal-item" data-slideshow>
+        <div class="slideshow-slide is-active">
+          <img src="assets/arseny-togulev-DE6rYp1nAho-unsplash.webp" alt="Wellness">
+          <div class="slideshow-caption"><h3>Seasonal Wellness</h3><p>Guides timed for Salem weather</p></div>
+        </div>
+        <div class="slideshow-slide">
+          <img src="assets/premium_photo-1663013500255-775d9d949ad5.webp" alt="Dental">
+          <div class="slideshow-caption"><h3>Dental Insights</h3><p>Preventive care before pain starts</p></div>
+        </div>
+        <div class="slideshow-slide">
+          <img src="assets/veterinarian-taking-care-pet-dog.webp" alt="Clinic tips">
+          <div class="slideshow-caption"><h3>Clinic Tips</h3><p>Practical advice from our doctors</p></div>
+        </div>
+        <div class="slideshow-dots" data-slideshow-dots></div>
+      </div>
+      <div class="reveal-item" data-reveal="right">
+        <div class="section-header" style="text-align:left;margin-bottom:18px;">
+          <span class="section-tag"><i class="fa-solid fa-book-open"></i> Keep Learning</span>
+          <h2 style="margin:10px 0;">More Topics Coming Soon</h2>
+          <p>Nutrition, senior pets, travel health certificates, and emergency first-aid checklists.</p>
+        </div>
+        <div class="stats-bar" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="stat-item"><h3 class="counter-val" data-target="48">0</h3><p>Articles Published</p></div>
+          <div class="stat-item"><h3 class="counter-val" data-target="12">0</h3><p>Doctor Authors</p></div>
+          <div class="stat-item"><h3 class="counter-val" data-target="6">0</h3><p>Care Categories</p></div>
+          <div class="stat-item"><h3 class="counter-val" data-target="5">0</h3><p>Min Read Average</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col footer-brand">
+          <img src="assets/footer-logo.webp" alt="Stackly Logo Footer">
+          <p>Stackly Veterinary Hospital & Pet Care Clinic delivers world-class medical treatment, surgery, and wellness care for all companion animals in Salem.</p>
+          
+          <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
+            <input type="email" placeholder="Enter Email Address" required>
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+
+        <!-- Col 2: Specialty Services -->
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Skin & Ear Cytology</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Ultrasound Scan Services</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Dental Care & Cleanings</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Nutritional Counseling</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Puppy Wellness Program</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Surgical Procedures</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quicklinks -->
+        <div class="footer-col">
+          <h4>Quicklinks</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-angle-right"></i> Services</a></li>
+            <li><a href="team.html"><i class="fa-solid fa-angle-right"></i> Veterinarians</a></li>
+            <li><a href="blog.html"><i class="fa-solid fa-angle-right"></i> Blog</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Opening Hours -->
+        <div class="footer-col">
+          <h4>Opening Hours</h4>
+          <div class="opening-hours-list">
+            <div class="hours-row">
+              <span>Mon - Tues</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Wed - Thu</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Fri - Sat</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Sunday</span>
+              <span style="color: #e06d53;">Emergency Only</span>
+            </div>
+          </div>
+          <div style="margin-top: 15px; font-size: 0.82rem; color: #a39f99;">
+            <i class="fa-solid fa-location-dot" style="color: var(--secondary);"></i> MMR Complex, Chinna Thirupathi, Salem
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; Copyright 2026. All rights reserved. <strong>Stackly Veterinary Hospital</strong>.</p>
+        <p>Address: MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

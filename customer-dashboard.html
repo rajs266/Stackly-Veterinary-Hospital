@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard | Stackly Pet Care Portal</title>
+  <meta name="description" content="Manage your registered pets, view upcoming appointments, download digital medical prescriptions and vaccination records.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dashboard Navbar -->
+  <header class="navbar dash-navbar">
+    <div class="container dash-navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Logo">
+      </a>
+
+      <div class="dash-navbar-meta">
+        <div class="dash-user">
+          <div class="dash-avatar dash-avatar-light">AK</div>
+          <div>
+            <div class="dash-user-name">Anbarasan K</div>
+            <div class="dash-user-role" style="color: var(--text-muted);">Pet Owner (Salem)</div>
+          </div>
+        </div>
+        <a href="login.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Layout -->
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div style="font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 14px;">Main Menu</div>
+        <ul class="sidebar-menu">
+          <li><a href="#" class="sidebar-link active" data-tab="tab-overview"><i class="fa-solid fa-gauge"></i> Overview</a></li>
+          <li><a href="#" class="sidebar-link" data-tab="tab-pets"><i class="fa-solid fa-paw"></i> My Pets (2)</a></li>
+          <li><a href="#" class="sidebar-link" data-tab="tab-appointments"><i class="fa-solid fa-calendar-days"></i> Appointments</a></li>
+          <li><a href="#" class="sidebar-link" data-tab="tab-records"><i class="fa-solid fa-file-medical"></i> Medical Prescriptions</a></li>
+        </ul>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.06); padding: 14px; border-radius: var(--radius-sm);">
+        <div style="font-size: 0.8rem; font-weight: 600; color: #fff; margin-bottom: 4px;"><i class="fa-solid fa-phone-volume" style="color: var(--secondary);"></i> Emergency Hotline</div>
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--secondary);">+91 98765 43210</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dash-main">
+      
+      <!-- Tab 1: Overview -->
+      <div id="tab-overview" class="tab-pane">
+        <div class="dash-header">
+          <div>
+            <h2>Welcome Back, Anbarasan!</h2>
+            <p>Here is your pet care summary at Stackly Veterinary Hospital, Salem.</p>
+          </div>
+          <a href="get-started.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Book New Visit</a>
+        </div>
+
+        <div class="dash-card-grid">
+          <div class="dash-stat-card">
+            <i class="fa-solid fa-dog" style="font-size: 1.8rem; color: var(--primary);"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">2</h3>
+              <p>Registered Pets</p>
+            </div>
+          </div>
+
+          <div class="dash-stat-card" style="border-left-color: var(--secondary);">
+            <i class="fa-solid fa-calendar-check" style="font-size: 1.8rem; color: var(--secondary);"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">1</h3>
+              <p>Upcoming Visit</p>
+            </div>
+          </div>
+
+          <div class="dash-stat-card" style="border-left-color: #10b981;">
+            <i class="fa-solid fa-syringe" style="font-size: 1.8rem; color: #10b981;"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">Up to date</h3>
+              <p>Rabies Vaccine</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Registered Pets Quick Cards -->
+        <h3 style="margin-bottom: 12px;">Your Pets Profile</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 30px;">
+          
+          <div style="background: #fff; padding: 18px; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); display: flex; gap: 16px; align-items: center;">
+            <img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" alt="Beagle">
+            <div>
+              <h4 style="margin-bottom: 2px;">Bruno (Beagle)</h4>
+              <p style="font-size: 0.8rem; margin-bottom: 4px;">Age: 2 Yrs | Weight: 12.4 kg</p>
+              <span class="badge-status badge-confirmed">Healthy</span>
+            </div>
+          </div>
+
+          <div style="background: #fff; padding: 18px; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); display: flex; gap: 16px; align-items: center;">
+            <img src="assets/premium_photo-1664300965124-5919ac08340f.webp" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" alt="Persian Cat">
+            <div>
+              <h4 style="margin-bottom: 2px;">Luna (Persian Cat)</h4>
+              <p style="font-size: 0.8rem; margin-bottom: 4px;">Age: 1 Yr | Weight: 3.8 kg</p>
+              <span class="badge-status badge-pending">Vaccine Due in 10 days</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Recent Appointments Table -->
+        <h3 style="margin-bottom: 12px;">Recent Appointment History</h3>
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Pet Name</th>
+              <th>Service</th>
+              <th>Doctor</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Aug 08, 2026 - 11:30 AM</td>
+              <td>Bruno (Beagle)</td>
+              <td>Skin & Ear Cytology Check</td>
+              <td>Dr. Anitha Ramesh</td>
+              <td><span class="badge-status badge-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td>Jul 14, 2026 - 04:00 PM</td>
+              <td>Luna (Persian Cat)</td>
+              <td>Routine Dental Scaling</td>
+              <td>Dr. Priya Sharma</td>
+              <td><span class="badge-status badge-confirmed">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

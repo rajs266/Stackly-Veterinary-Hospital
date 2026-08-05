@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started | Create Account & Book Visit | Stackly Veterinary Hospital</title>
+  <meta name="description" content="Create your Stackly Pet Care account or book a veterinary visit online at our Salem hospital.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+  <header class="navbar">
+    <div class="container navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+      </a>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="nav-panel" id="nav-panel">
+        <div class="nav-panel-header">
+          <a href="index.html" class="brand-logo nav-panel-brand">
+            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+          </a>
+          <button type="button" class="nav-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-secondary">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero" style="min-height:220px;">
+    <div class="page-hero-media"><img src="assets/veterinarian-taking-care-pet-dog.webp" alt=""></div>
+    <div class="container">
+      <span class="section-tag"><i class="fa-solid fa-paw"></i> Get Started</span>
+      <h1>Create Account Or Book A Visit</h1>
+      <p>Join the Stackly Pet Care portal, or schedule a consultation in under two minutes.</p>
+    </div>
+  </section>
+
+  <main class="container" style="flex:1;padding-bottom:40px;">
+    <div style="max-width:560px;margin:0 auto;">
+      <!-- Sign Up -->
+      <div class="auth-card reveal-item" data-reveal="scale">
+        <img src="assets/logo.webp" alt="Stackly" style="height:48px;display:block;margin:0 auto 10px;">
+        <h2>Create Your Free Account</h2>
+        <p class="auth-sub">Choose your portal role to register.</p>
+
+        <form id="registerForm" novalidate autocomplete="off">
+          <div class="role-cards" id="regRoles">
+            <label class="role-card is-selected">
+              <input type="radio" name="role" value="customer" checked>
+              <i class="fa-solid fa-paw"></i>
+              <strong>Pet Owner</strong>
+              <span>Customer portal</span>
+            </label>
+            <label class="role-card">
+              <input type="radio" name="role" value="admin">
+              <i class="fa-solid fa-user-doctor"></i>
+              <strong>Vet Staff</strong>
+              <span>Admin dashboard</span>
+            </label>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="regFirstName">First Name</label>
+              <input id="regFirstName" name="firstname" type="text" placeholder="Rajesh">
+              <div class="field-error" id="regFirstNameError"></div>
+            </div>
+            <div class="form-group">
+              <label for="regLastName">Last Name</label>
+              <input id="regLastName" name="lastname" type="text" placeholder="Kumar">
+              <div class="field-error" id="regLastNameError"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regPetName">Pet / Clinic Name</label>
+            <input id="regPetName" name="company" type="text" placeholder="e.g. Bruno or Stackly Clinic">
+            <div class="field-error" id="regCompanyError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">Email Address</label>
+            <input id="regEmail" name="email" type="email" placeholder="name@domain.com" autocomplete="email">
+            <div class="field-error" id="regEmailError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <div class="password-wrap">
+              <input id="regPassword" name="password" type="password" placeholder="Min. 8 characters" autocomplete="new-password">
+              <button type="button" class="toggle-password" data-target="regPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+            <div class="field-error" id="regPasswordError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="regConfirmPassword">Confirm Password</label>
+            <div class="password-wrap">
+              <input id="regConfirmPassword" name="confirm_password" type="password" placeholder="Re-enter password" autocomplete="new-password">
+              <button type="button" class="toggle-password" data-target="regConfirmPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+            <div class="field-error" id="regConfirmPasswordError"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px;">
+            <i class="fa-solid fa-user-plus"></i> Create Account
+          </button>
+        </form>
+
+        <div class="auth-divider">OR CONTINUE WITH</div>
+        <div class="social-auth">
+          <a href="404.html"><i class="fa-brands fa-google"></i> Google</a>
+          <a href="404.html"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+        </div>
+
+        <p style="text-align:center;margin-top:18px;font-size:0.85rem;color:var(--text-muted);">
+          Already registered? <a href="login.html" style="color:var(--primary);font-weight:700;">Sign In Here</a> | Need to book a visit? <a href="contact.html#book-visit" style="color:var(--primary);font-weight:700;">Book Visit Online</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <div class="stackly-overlay" id="regSuccessModal" aria-live="polite">
+    <div class="stackly-modal">
+      <i class="fa-solid fa-circle-check ok"></i>
+      <h3>Account Created!</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;">Your Stackly Pet Care account is ready. Redirecting to Sign In…</p>
+    </div>
+  </div>
+
+  <div class="stackly-overlay" id="booking-modal" aria-live="polite">
+    <div class="stackly-modal">
+      <i class="fa-solid fa-circle-check ok"></i>
+      <h3>Appointment Confirmed!</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:18px;">Your visit request is recorded for Stackly Veterinary Hospital, MMR Complex, Salem. A confirmation SMS will follow shortly.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="customer-dashboard.html" class="btn btn-primary btn-sm">Go To Patient Dashboard</a>
+        <button type="button" class="btn btn-secondary btn-sm" data-close-overlay="booking-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background:var(--dark);color:#9ca3af;padding:15px 0;text-align:center;font-size:0.82rem;">
+    <div class="container">&copy; 2026 Stackly Veterinary Hospital. MMR Complex, Salem.</div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

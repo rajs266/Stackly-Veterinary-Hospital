@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In & Portal Access | Stackly Veterinary Hospital</title>
+  <meta name="description" content="Log in to Stackly Pet Care Portal. Access pet medical records as a Pet Owner or manage hospital schedules as Admin/Vet Staff.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+  <header class="navbar">
+    <div class="container navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+      </a>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="nav-panel" id="nav-panel">
+        <div class="nav-panel-header">
+          <a href="index.html" class="brand-logo nav-panel-brand">
+            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+          </a>
+          <button type="button" class="nav-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="contact.html#book-visit" class="btn btn-primary">Book Visit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="flex:1;">
+    <div class="auth-card reveal-item">
+      <img src="assets/logo.webp" alt="Stackly" style="height:48px;display:block;margin:0 auto 10px;">
+      <h2>Stackly Portal Access</h2>
+      <p class="auth-sub">Sign in as a pet parent or hospital staff.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="role-cards" id="loginRoles">
+          <label class="role-card is-selected">
+            <input type="radio" name="role" value="customer" checked>
+            <i class="fa-solid fa-paw"></i>
+            <strong>Pet Owner</strong>
+            <span>Customer portal</span>
+          </label>
+          <label class="role-card">
+            <input type="radio" name="role" value="admin">
+            <i class="fa-solid fa-user-doctor"></i>
+            <strong>Vet Staff</strong>
+            <span>Admin dashboard</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="signInName">Full Name</label>
+          <input id="signInName" name="fullname" type="text" placeholder="Your full name" autocomplete="name">
+          <div class="field-error" id="signInNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="signInEmail">Email Address</label>
+          <input id="signInEmail" name="email" type="email" placeholder="name@domain.com" autocomplete="email">
+          <div class="field-error" id="signInEmailError"></div>
+        </div>
+
+        <div class="form-group">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label for="signInPassword">Password</label>
+            <a href="404.html" style="font-size:0.78rem;color:var(--primary);">Forgot Password?</a>
+          </div>
+          <div class="password-wrap">
+            <input id="signInPassword" name="password" type="password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="toggle-password" data-target="signInPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <div class="field-error" id="signInPasswordError"></div>
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;margin:8px 0 16px;color:var(--text-muted);">
+          <input type="checkbox" id="rememberMe"> Remember login on this device
+        </label>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard</button>
+      </form>
+
+      <div class="auth-divider">OR CONTINUE WITH</div>
+      <div class="social-auth">
+        <a href="404.html"><i class="fa-brands fa-google"></i> Google</a>
+        <a href="404.html"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+      </div>
+
+      <p style="text-align:center;margin-top:18px;font-size:0.85rem;color:var(--text-muted);">
+        New here? <a href="get-started.html" style="color:var(--primary);font-weight:700;">Book a visit to register</a>
+      </p>
+    </div>
+  </main>
+
+  <div class="stackly-overlay" id="loginConfirmOverlay" aria-live="polite">
+    <div class="stackly-modal">
+      <i class="fa-solid fa-circle-check ok"></i>
+      <h3>Authentication Successful!</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;">Redirecting to your dashboard…</p>
+    </div>
+  </div>
+
+  <footer style="background:var(--dark);color:#9ca3af;padding:15px 0;text-align:center;font-size:0.82rem;">
+    <div class="container">&copy; 2026 Stackly Veterinary Hospital. MMR Complex, Salem.</div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

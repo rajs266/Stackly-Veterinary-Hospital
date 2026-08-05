@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Stackly Veterinary Hospital Salem</title>
+  <meta name="description" content="Contact Stackly Veterinary Hospital at MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008. Call +91 98765 43210.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span><i class="fa-solid fa-location-dot"></i> MMR Complex, Chinna Thirupathi, Salem - 636008</span>
+        <span><i class="fa-solid fa-phone"></i> +91 98765 43210</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+    <header class="navbar">
+    <div class="container navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+      </a>
+
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="nav-panel" id="nav-panel">
+        <div class="nav-panel-header">
+          <a href="index.html" class="brand-logo nav-panel-brand">
+            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+          </a>
+          <button type="button" class="nav-close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="team.html" class="nav-link">Veterinarians</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-secondary">Sign In</a>
+          <a href="contact.html#book-visit" class="btn btn-primary">Book Visit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="page-hero-media"><img src="assets/premium_photo-1661963606290-34deef08c3c2.webp" alt=""></div>
+    <div class="container">
+      <span class="section-tag"><i class="fa-solid fa-location-dot"></i> Find Our Hospital</span>
+      <h1>Contact Stackly Veterinary Hospital</h1>
+      <p>Visit us at MMR Complex, Chinna Thirupathi, Salem ? or call our 24/7 triage line.</p>
+      <div class="page-hero-actions">
+        <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Visit</a>
+        <a href="tel:+919876543210" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Grid -->
+  <section class="section">
+    <div class="container contact-equal">
+      <div class="reveal-item contact-info-stack" data-reveal="left">
+        <div class="arch-card contact-info-card">
+          <div class="arch-card-icon" style="width:50px;height:50px;font-size:1.2rem;margin-bottom:10px;"><i class="fa-solid fa-map-location-dot"></i></div>
+          <h3 style="font-size:1.15rem;margin-bottom:6px;">Hospital Address</h3>
+          <p style="color:var(--text-main);font-weight:500;">Stackly Veterinary Hospital & Pet Care Clinic</p>
+          <p>MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008.</p>
+        </div>
+        <div class="arch-card contact-info-card">
+          <div class="arch-card-icon" style="width:50px;height:50px;font-size:1.2rem;margin-bottom:10px;"><i class="fa-solid fa-phone-volume"></i></div>
+          <h3 style="font-size:1.15rem;margin-bottom:6px;">Emergency Hotline & Support</h3>
+          <p style="color:var(--text-main);font-weight:600;">Hotline: +91 98765 43210</p>
+          <p>Email: care@stacklypetvet.com</p>
+        </div>
+        <div class="arch-card contact-info-card">
+          <div class="arch-card-icon" style="width:50px;height:50px;font-size:1.2rem;margin-bottom:10px;"><i class="fa-solid fa-clock"></i></div>
+          <h3 style="font-size:1.15rem;margin-bottom:6px;">Working Hours</h3>
+          <p>Monday - Saturday: 09:00 AM - 08:00 PM</p>
+          <p style="color:var(--primary);font-weight:600;">Sunday: 24/7 Trauma Emergency Only</p>
+        </div>
+      </div>
+
+      <div class="reveal-item" data-reveal="right">
+        <div class="contact-form-card">
+          <h3 style="margin-bottom:10px;">Send Us A Direct Message</h3>
+          <p style="margin-bottom:20px;font-size:0.9rem;">Fill in your details. Our triage nurse will respond within 30 minutes.</p>
+
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="contactName">Your Full Name</label>
+              <input id="contactName" name="name" type="text" placeholder="e.g. Anbarasan K">
+              <div class="field-error" id="nameError"></div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="contactEmail">Email Address</label>
+                <input id="contactEmail" name="email" type="email" placeholder="name@domain.com">
+                <div class="field-error" id="emailError"></div>
+              </div>
+              <div class="form-group">
+                <label for="contactPhone">Phone Number</label>
+                <input id="contactPhone" name="phone" type="tel" placeholder="+91 98765 00000">
+                <div class="field-error" id="phoneError"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contactService">Interested Service</label>
+              <select id="contactService" name="service">
+                <option value="">Select service?</option>
+                <option>General Consultation</option>
+                <option>Emergency / Trauma</option>
+                <option>Surgery</option>
+                <option>Ultrasound & X-Ray</option>
+                <option>Dental Care</option>
+                <option>Grooming & Spa</option>
+                <option>Vaccination</option>
+              </select>
+              <div class="field-error" id="serviceError"></div>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message / Medical Symptoms</label>
+              <textarea id="contactMessage" name="message" rows="4" placeholder="Describe symptoms or reason for visit?"></textarea>
+              <div class="field-error" id="messageError"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fa-solid fa-paper-plane"></i> Submit Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-light">
+    <div class="container tour-split">
+      <div class="slideshow reveal-item" data-slideshow>
+        <div class="slideshow-slide is-active">
+          <img src="assets/premium_photo-1661963606290-34deef08c3c2.webp" alt="Hospital entrance">
+          <div class="slideshow-caption"><h3>Easy To Find</h3><p>MMR Complex, Chinna Thirupathi</p></div>
+        </div>
+        <div class="slideshow-slide">
+          <img src="assets/veterinarian-taking-care-pet-dog.webp" alt="Reception">
+          <div class="slideshow-caption"><h3>Warm Reception</h3><p>Triage support from the first minute</p></div>
+        </div>
+        <div class="slideshow-slide">
+          <img src="assets/karlo-tottoc-ybZ5hRxaWS4-unsplash.webp" alt="Care team">
+          <div class="slideshow-caption"><h3>Care Team Ready</h3><p>Doctors on standby for walk-ins & emergencies</p></div>
+        </div>
+        <div class="slideshow-dots" data-slideshow-dots></div>
+      </div>
+      <div class="stats-bar reveal-item" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;height:100%;align-content:center;">
+        <div class="stat-item"><h3 class="counter-val" data-target="30">0</h3><p>Min Avg Response</p></div>
+        <div class="stat-item"><h3 class="counter-val" data-target="24">0</h3><p>Hour Emergency Line</p></div>
+        <div class="stat-item"><h3 class="counter-val" data-target="6">0</h3><p>Consult Rooms</p></div>
+        <div class="stat-item"><h3 class="counter-val" data-target="100">0</h3><p>% Triage Coverage</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book A Visit Section -->
+  <section class="section bg-light" id="book-visit">
+    <div class="container" style="max-width:800px;">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-calendar-plus"></i> Online Appointment</span>
+        <h2 class="section-title">Book A Hospital Visit</h2>
+        <p class="section-desc">Schedule a consultation, vaccination, or diagnostic scan in under two minutes with zero registration required.</p>
+      </div>
+
+      <div class="auth-card reveal-item" style="max-width:100%;margin:0 auto;box-shadow:var(--shadow-md);background:#ffffff;">
+        <form id="bookingForm" novalidate>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="bookPetName">Pet's Name</label>
+              <input id="bookPetName" name="pet" type="text" placeholder="e.g. Bruno" required>
+              <div class="field-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="bookSpecies">Pet Species</label>
+              <select id="bookSpecies" name="species" required>
+                <option value="">Select species</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+                <option>Rabbit / Small Mammal</option>
+              </select>
+              <div class="field-error"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bookService">Service Required</label>
+            <select id="bookService" name="service" required>
+              <option value="">Select service</option>
+              <option>General Doctor Consultation</option>
+              <option>Skin &amp; Ear Cytology</option>
+              <option>Ultrasound &amp; Radiology Scan</option>
+              <option>Dental Scaling &amp; Cleaning</option>
+              <option>Spa &amp; Medicated Grooming</option>
+              <option>Vaccination Booster</option>
+            </select>
+            <div class="field-error"></div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="bookDate">Appointment Date</label>
+              <input id="bookDate" name="date" type="date" required>
+              <div class="field-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="bookTime">Time Slot</label>
+              <select id="bookTime" name="time" required>
+                <option value="">Select time</option>
+                <option>10:00 AM - 11:00 AM</option>
+                <option>11:30 AM - 12:30 PM</option>
+                <option>03:00 PM - 04:00 PM</option>
+                <option>05:30 PM - 06:30 PM</option>
+              </select>
+              <div class="field-error"></div>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="bookOwner">Your Full Name</label>
+              <input id="bookOwner" name="owner" type="text" placeholder="Pet parent name" required>
+              <div class="field-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="bookPhone">Phone Number</label>
+              <input id="bookPhone" name="phone" type="tel" placeholder="+91 98765 00000" required>
+              <div class="field-error"></div>
+            </div>
+          </div>
+
+  <!-- New Section 1: Salem Landmark Driving Directions -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-compass"></i> Driving Directions</span>
+        <h2 class="section-title">Reaching Stackly From Around Salem</h2>
+        <p class="section-desc">Conveniently located at MMR Complex, Chinna Thirupathi near Chinna Muniyappan Kovil.</p>
+      </div>
+
+      <div class="directions-grid">
+        <div class="direction-card reveal-item" data-delay="1">
+          <div style="display:flex;align-items:center;justify-space-between;margin-bottom:10px;">
+            <h3 style="margin:0;"><i class="fa-solid fa-train"></i> Salem Railway Station</h3>
+            <span class="ethic-pill" style="background:var(--primary-light);color:var(--primary);">~15 Mins</span>
+          </div>
+          <p>Drive via Suramangalam Main Road towards Four Roads, turn towards Chinna Thirupathi to reach MMR Complex.</p>
+        </div>
+
+        <div class="direction-card reveal-item" data-delay="2">
+          <div style="display:flex;align-items:center;justify-space-between;margin-bottom:10px;">
+            <h3 style="margin:0;"><i class="fa-solid fa-location-arrow"></i> Hasthampatti Junction</h3>
+            <span class="ethic-pill" style="background:var(--secondary-light);color:var(--secondary);">~8 Mins</span>
+          </div>
+          <p>Head south on Yercaud Main Road, turn right towards Chinna Muniyappan Kovil street to reach our hospital.</p>
+        </div>
+
+        <div class="direction-card reveal-item" data-delay="3">
+          <div style="display:flex;align-items:center;justify-space-between;margin-bottom:10px;">
+            <h3 style="margin:0;"><i class="fa-solid fa-bus"></i> New Bus Stand / Fairlands</h3>
+            <span class="ethic-pill" style="background:rgba(43,45,66,0.08);color:var(--dark);">~10 Mins</span>
+          </div>
+          <p>Drive past Five Roads towards Omalur Main Road and cut across to Chinna Thirupathi circle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 2: Direct Department Helplines -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-headset"></i> Direct Hotlines</span>
+        <h2 class="section-title">Direct Department Extension Numbers</h2>
+        <p class="section-desc">Connect directly with the specific clinical team handling your pet's care.</p>
+      </div>
+
+      <div class="extension-grid">
+        <div class="extension-card reveal-item" data-delay="1">
+          <i class="fa-solid fa-truck-medical"></i>
+          <h4>Emergency Ambulance</h4>
+          <span>Ext. 101</span>
+        </div>
+        <div class="extension-card reveal-item" data-delay="2">
+          <i class="fa-solid fa-briefcase-medical"></i>
+          <h4>Surgical Desk</h4>
+          <span>Ext. 102</span>
+        </div>
+        <div class="extension-card reveal-item" data-delay="3">
+          <i class="fa-solid fa-wave-square"></i>
+          <h4>Ultrasound &amp; X-Ray</h4>
+          <span>Ext. 103</span>
+        </div>
+        <div class="extension-card reveal-item" data-delay="4">
+          <i class="fa-solid fa-scissors"></i>
+          <h4>Grooming &amp; Spa</h4>
+          <span>Ext. 104</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 3: Pre-Consultation Checklist -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-clipboard-list"></i> What To Bring</span>
+        <h2 class="section-title">Pre-Consultation Checklist</h2>
+        <p class="section-desc">Items to carry for a seamless doctor consultation at our Chinna Thirupathi hospital.</p>
+      </div>
+
+      <div class="checklist-grid">
+        <div class="checklist-card reveal-item" data-delay="1">
+          <div class="checklist-icon"><i class="fa-solid fa-id-card-clip"></i></div>
+          <div>
+            <h3>Pet Health Record Card</h3>
+            <p>Previous vaccine booklet, microchip ID details, and historical prescription records.</p>
+          </div>
+        </div>
+        <div class="checklist-card reveal-item" data-delay="2">
+          <div class="checklist-icon"><i class="fa-solid fa-pills"></i></div>
+          <div>
+            <h3>Current Prescription Meds</h3>
+            <p>Bring ongoing supplements, skin creams, or chronic disease medicines currently given to your pet.</p>
+          </div>
+        </div>
+        <div class="checklist-card reveal-item" data-delay="3">
+          <div class="checklist-icon"><i class="fa-solid fa-camera"></i></div>
+          <div>
+            <h3>Symptom Video / Photo</h3>
+            <p>Short video clips of limping, coughing, or unusual behavior help our doctors diagnose faster.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stackly-overlay" id="contactSuccessOverlay" aria-live="polite">
+    <div class="stackly-modal">
+      <i class="fa-solid fa-circle-check ok"></i>
+      <h3>Message Sent!</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:16px;">Thank you — your message reached the Stackly Veterinary Team in Salem.</p>
+      <button type="button" class="btn btn-primary btn-sm" data-close-overlay="contactSuccessOverlay">Close</button>
+    </div>
+  </div>
+
+  <div class="stackly-overlay" id="booking-modal" aria-live="polite">
+    <div class="stackly-modal">
+      <i class="fa-solid fa-circle-check ok"></i>
+      <h3>Appointment Confirmed!</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:18px;">Your visit request is recorded for Stackly Veterinary Hospital, MMR Complex, Salem. A confirmation SMS will follow shortly.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="customer-dashboard.html" class="btn btn-primary btn-sm">Go To Patient Dashboard</a>
+        <button type="button" class="btn btn-secondary btn-sm" data-close-overlay="booking-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col footer-brand">
+          <img src="assets/footer-logo.webp" alt="Stackly Logo Footer">
+          <p>Stackly Veterinary Hospital & Pet Care Clinic delivers world-class medical treatment, surgery, and wellness care for all companion animals in Salem.</p>
+          
+          <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
+            <input type="email" placeholder="Enter Email Address" required>
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+
+        <!-- Col 2: Specialty Services -->
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Skin & Ear Cytology</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Ultrasound Scan Services</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Dental Care & Cleanings</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Nutritional Counseling</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Puppy Wellness Program</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Surgical Procedures</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quicklinks -->
+        <div class="footer-col">
+          <h4>Quicklinks</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-angle-right"></i> Services</a></li>
+            <li><a href="team.html"><i class="fa-solid fa-angle-right"></i> Veterinarians</a></li>
+            <li><a href="blog.html"><i class="fa-solid fa-angle-right"></i> Blog</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Opening Hours -->
+        <div class="footer-col">
+          <h4>Opening Hours</h4>
+          <div class="opening-hours-list">
+            <div class="hours-row">
+              <span>Mon - Tues</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Wed - Thu</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Fri - Sat</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Sunday</span>
+              <span style="color: #e06d53;">Emergency Only</span>
+            </div>
+          </div>
+          <div style="margin-top: 15px; font-size: 0.82rem; color: #a39f99;">
+            <i class="fa-solid fa-location-dot" style="color: var(--secondary);"></i> MMR Complex, Chinna Thirupathi, Salem
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; Copyright 2026. All rights reserved. <strong>Stackly Veterinary Hospital</strong>.</p>
+        <p>Address: MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

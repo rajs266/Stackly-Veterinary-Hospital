@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackly | Advanced Veterinary Hospital & Pet Care Clinic</title>
+  <meta name="description" content="Stackly Veterinary Hospital in Salem offers 24/7 emergency pet care, surgical procedures, ultrasound scanning, dental hygiene, and luxury pet grooming.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  
+  <!-- FontAwesome & Custom CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span><i class="fa-solid fa-location-dot"></i> MMR Complex, Chinna Thirupathi, Salem - 636008</span>
+        <span><i class="fa-solid fa-phone"></i> +91 98765 43210</span>
+        <span><i class="fa-solid fa-clock"></i> Mon-Sat: 09:00 AM - 08:00 PM | Sun: Emergency Only</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="404.html" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404.html" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="404.html" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+    <header class="navbar">
+    <div class="container navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+      </a>
+
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="nav-panel" id="nav-panel">
+        <div class="nav-panel-header">
+          <a href="index.html" class="brand-logo nav-panel-brand">
+            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+          </a>
+          <button type="button" class="nav-close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="team.html" class="nav-link">Veterinarians</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-secondary">Sign In</a>
+          <a href="contact.html#book-visit" class="btn btn-primary">Book Visit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Feature Badges & Arched Visual -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content reveal-item">
+        <div class="hero-badge">
+          <i class="fa-solid fa-paw"></i> Stackly Pet Care Clinic Salem
+        </div>
+        <h1 class="hero-title">Giving Your Pets The <span class="shimmer-text">Loving Care</span> They Deserve</h1>
+        <p class="hero-desc">Advanced Advanced tertiary veterinary medicine, gentle surgical care, ultrasonic scanning, and luxury pet grooming right at MMR Complex, Salem.</p>
+        
+        <div class="hero-buttons">
+          <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-paw"></i> Schedule Appointment</a>
+          <a href="services.html" class="btn btn-secondary"><i class="fa-solid fa-stethoscope"></i> Explore Services</a>
+        </div>
+
+        <div class="hero-features">
+          <div class="hero-feature-item">
+            <i class="fa-solid fa-truck-medical"></i> 24/7 Pet Ambulance
+          </div>
+          <div class="hero-feature-item">
+            <i class="fa-solid fa-user-doctor"></i> Certified Surgeons
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal-item">
+        <div class="hero-image-wrapper">
+          <img src="assets/vet doc1 (1).webp" alt="Veterinarian examining Beagle dog at Stackly Clinic" width="540" height="680" loading="eager" decoding="async">
+        </div>
+
+        <div class="floating-card floating-card-1 animate-float">
+          <div class="floating-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="floating-text">
+            <h5>4.9 Rating</h5>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-2 animate-float-delayed">
+          <div class="floating-icon"><i class="fa-solid fa-truck-medical"></i></div>
+          <div class="floating-text">
+            <h5>24/7 ER</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us — split layout (reference style, Stackly content) -->
+  <section class="section about-split">
+    <div class="container about-split-grid">
+      <div class="about-split-content reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-paw"></i> About Us</span>
+        <h2 class="about-split-title">Salem’s Trusted Home For Complete Veterinary Care</h2>
+
+        <div class="about-trust-card">
+          <div class="about-trust-copy">
+            <p class="about-trust-label">Trusted By Pet Families</p>
+            <strong class="about-trust-stat">5000+</strong>
+            <p class="about-trust-desc">Dogs, cats, and exotic pets treated with gentle clinical care at our Chinna Thirupathi hospital.</p>
+          </div>
+          <div class="about-trust-badge"><i class="fa-solid fa-paw"></i></div>
+        </div>
+
+        <ul class="about-feature-list">
+          <li><i class="fa-solid fa-paw"></i> Advanced surgical theatre</li>
+          <li><i class="fa-solid fa-paw"></i> In-house diagnostic lab</li>
+          <li><i class="fa-solid fa-paw"></i> Ultrasound &amp; digital X-ray</li>
+          <li><i class="fa-solid fa-paw"></i> Soft-tissue &amp; ortho surgery</li>
+          <li><i class="fa-solid fa-paw"></i> Dental scaling &amp; oral care</li>
+          <li><i class="fa-solid fa-paw"></i> 24/7 emergency triage</li>
+        </ul>
+
+        <a href="about.html" class="btn btn-primary">Know Our Story <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="about-split-media reveal-item">
+        <img src="assets/veterinarian-taking-care-pet-dog.webp" alt="Stackly veterinarian examining a pet" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Programs — stacked cards layout -->
+  <section class="section bg-light care-programs">
+    <div class="container care-programs-grid">
+      <div class="care-programs-left reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-heart-pulse"></i> Care Programs</span>
+        <h2 class="care-programs-title">Plans Built Around Your Pet’s Real Needs</h2>
+        <p class="care-programs-desc">From first puppy vaccines to senior wellness, choose a care path designed by Stackly’s clinical team.</p>
+        <div class="care-programs-visual">
+          <img src="assets/care_program_wellness.webp" alt="Veterinarian discussing pet health plan" loading="lazy">
+          <span class="care-programs-float"><i class="fa-solid fa-bone"></i></span>
+        </div>
+      </div>
+
+      <div class="care-programs-stack reveal-item">
+        <article class="care-plan-card">
+          <div class="care-plan-icon"><i class="fa-solid fa-cat"></i></div>
+          <h3>Wellness Shield</h3>
+          <p>Annual vaccines, deworming calendar, nutrition review, and digital health records for everyday protection.</p>
+          <div class="care-plan-meta">
+            <strong>From ₹1,499</strong>
+            <span>/ yearly start</span>
+          </div>
+          <a href="get-started.html" class="btn btn-primary">Book Wellness <i class="fa-solid fa-paw"></i></a>
+        </article>
+
+        <article class="care-plan-card care-plan-card-alt">
+          <div class="care-plan-icon"><i class="fa-solid fa-dog"></i></div>
+          <h3>Surgery Ready</h3>
+          <p>Pre-op bloodwork, anaesthesia monitoring, recovery kennel stay, and post-surgery follow-up calls included.</p>
+          <div class="care-plan-meta">
+            <strong>Custom quote</strong>
+            <span>/ case based</span>
+          </div>
+          <a href="contact.html" class="btn btn-primary">Talk To Surgeon <i class="fa-solid fa-stethoscope"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Care — 4 step process -->
+  <section class="section how-care">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-route"></i> How We Care</span>
+        <h2 class="section-title">A Calm Path From Arrival To Recovery</h2>
+        <p class="section-desc">Every visit follows a clear clinical flow so pet parents always know what happens next.</p>
+      </div>
+
+      <div class="how-care-grid">
+        <article class="how-care-card reveal-item">
+          <span class="how-care-step">01</span>
+          <div class="how-care-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          <h3>Triage &amp; History</h3>
+          <p>We note symptoms, diet, and past treatments before any procedure begins.</p>
+        </article>
+        <article class="how-care-card reveal-item">
+          <span class="how-care-step">02</span>
+          <div class="how-care-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Diagnosis</h3>
+          <p>Lab tests, scans, and physical exams confirm the right clinical plan.</p>
+        </article>
+        <article class="how-care-card reveal-item">
+          <span class="how-care-step">03</span>
+          <div class="how-care-icon"><i class="fa-solid fa-syringe"></i></div>
+          <h3>Treatment</h3>
+          <p>Medicine, surgery, or therapy is delivered with continuous monitoring.</p>
+        </article>
+        <article class="how-care-card reveal-item">
+          <span class="how-care-step">04</span>
+          <div class="how-care-icon"><i class="fa-solid fa-house-medical"></i></div>
+          <h3>Home Recovery</h3>
+          <p>Clear aftercare notes and follow-up reminders keep healing on track.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stackly Arched Services Grid Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-bone"></i> Our Specialty Services</span>
+        <h2 class="section-title">Making Memories Together With Healthy Pets</h2>
+        <p class="section-desc">We offer complete clinical, preventive, and surgical care tailored specifically for dogs, cats, birds, and exotic pets.</p>
+      </div>
+
+      <div class="arch-grid">
+        <!-- Arched Card 1 -->
+        <div class="arch-card tilt-card reveal-item">
+          <div class="arch-card-icon"><i class="fa-solid fa-truck-pickup"></i></div>
+          <h3 class="arch-card-title">Pet Taxi 24/7</h3>
+          <p class="arch-card-desc">Safe, temperature-controlled transport for medical emergencies and routine checkups across Salem.</p>
+          <img src="assets/premium_photo-1661963606290-34deef08c3c2.webp" class="arch-card-img" alt="Pet Taxi Service">
+          <a href="services.html" class="btn btn-secondary btn-sm">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Arched Card 2 (Inverted Top Arch) -->
+        <div class="arch-card invert-arch tilt-card reveal-item">
+          <img src="assets/pet_grooming_service.webp" class="arch-card-img" alt="Pet Grooming">
+          <div class="arch-card-icon"><i class="fa-solid fa-scissors"></i></div>
+          <h3 class="arch-card-title">Pet Grooming</h3>
+          <p class="arch-card-desc">Medicated bath treatments, claw trimming, fur styling, and coat revitalizing by professional pet stylists.</p>
+          <a href="services.html" class="btn btn-primary btn-sm">Book Grooming <i class="fa-solid fa-paw"></i></a>
+        </div>
+
+        <!-- Arched Card 3 -->
+        <div class="arch-card tilt-card reveal-item">
+          <div class="arch-card-icon"><i class="fa-solid fa-dog"></i></div>
+          <h3 class="arch-card-title">Pet Training & Wellness</h3>
+          <p class="arch-card-desc">Behavioral coaching, puppy vaccination schedules, and dietary nutrition programs designed by doctors.</p>
+          <img src="assets/karlo-tottoc-ybZ5hRxaWS4-unsplash.webp" class="arch-card-img" alt="Pet Training">
+          <a href="services.html" class="btn btn-secondary btn-sm">Explore Plans <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hospital moments slideshow -->
+  <section class="section bg-light">
+    <div class="container tour-split">
+      <div class="slideshow reveal-item" data-slideshow>
+        <div class="slideshow-slide is-active">
+          <img src="assets/inside_gentle_exam.webp" alt="Gentle exam at Stackly clinic">
+          <div class="slideshow-caption"><h3>Gentle Exams</h3><p>Low-stress handling in every consult room</p></div>
+        </div>
+        <div class="slideshow-slide">
+          <img src="assets/inside_surgery_suite.webp" alt="Sterile surgery suite at Stackly">
+          <div class="slideshow-caption"><h3>Surgery Suite</h3><p>Sterile theatres for soft-tissue &amp; ortho</p></div>
+        </div>
+        <div class="slideshow-slide">
+          <img src="assets/inside_happy_recovery.webp" alt="Pet recovery ward at Stackly">
+          <div class="slideshow-caption"><h3>Happy Recoveries</h3><p>Quiet wards and clear home-care plans</p></div>
+        </div>
+        <div class="slideshow-dots" data-slideshow-dots></div>
+      </div>
+      <div class="reveal-item" data-reveal="right">
+        <div class="section-header" style="text-align:left;margin-bottom:16px;">
+          <span class="section-tag"><i class="fa-solid fa-images"></i> Inside Stackly</span>
+          <h2 style="margin:10px 0;">A Day At Our Salem Hospital</h2>
+          <p>From triage to recovery — see the spaces where Salem pets heal.</p>
+        </div>
+        <div class="how-care-grid" style="grid-template-columns:1fr;">
+          <div class="how-care-card">
+            <span class="how-care-step">01</span>
+            <h3>Arrive & Triage</h3>
+            <p>Quick assessment so urgent cases never wait behind wellness visits.</p>
+          </div>
+          <div class="how-care-card">
+            <span class="how-care-step">02</span>
+            <h3>Diagnose & Treat</h3>
+            <p>Imaging, lab, and doctor consults under one roof at MMR Complex.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialist Doctor Feature Section (Cutout PNG + Rich Content) -->
+  <section class="section doctor-feature-section bg-light">
+    <div class="container doctor-feature-grid">
+      <!-- Left Column: Pure Feature Cutout PNG Doctor Image -->
+      <div class="doctor-feature-visual reveal-item">
+        <div class="doctor-visual-container">
+          <img src="assets/vet doc1.webp" alt="Stackly Lead Female Veterinarian Specialist" class="doctor-visual-img">
+        </div>
+      </div>
+
+      <!-- Right Column: Interesting Matching Height Content -->
+      <div class="doctor-feature-content reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-sparkles"></i> Doctor-Led Care</span>
+        <h2 class="doctor-feature-title">Compassionate Medical Care Tailored To Every Pet’s Personality</h2>
+        <p class="doctor-feature-desc">At Stackly Veterinary Hospital, our certified clinical team combines advanced medical technology with warm, zero-stress handling so your pets feel safe at every visit.</p>
+
+        <div class="doctor-highlights-list">
+          <div class="doctor-highlight-card">
+            <div class="highlight-icon"><i class="fa-solid fa-stethoscope"></i></div>
+            <div class="highlight-info">
+              <h3>One-on-One Consultations</h3>
+              <p>Thorough 30-minute physical examinations with zero rush, allowing doctors to understand your pet's exact history.</p>
+            </div>
+          </div>
+
+          <div class="doctor-highlight-card">
+            <div class="highlight-icon"><i class="fa-solid fa-laptop-medical"></i></div>
+            <div class="highlight-info">
+              <h3>Real-Time Digital Health Pass</h3>
+              <p>Instant access to diagnostic reports, digital X-rays, vaccine schedules, and doctor prescriptions on your phone.</p>
+            </div>
+          </div>
+
+          <div class="doctor-highlight-card">
+            <div class="highlight-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <div class="highlight-info">
+              <h3>Pain-Free Surgical Recovery</h3>
+              <p>Dedicated post-op recovery suites equipped with continuous warm monitoring and individualized pain management.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="doctor-feature-actions">
+          <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Doctor Consultation</a>
+          <a href="team.html" class="btn btn-secondary"><i class="fa-solid fa-user-doctor"></i> View Full Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency 24/7 Banner Section -->
+  <section class="section-sm container">
+    <div class="banner-emergency reveal-item">
+      <div class="banner-content">
+        <span class="section-tag" style="background: rgba(255,255,255,0.15); color: #fff; border:none;"><i class="fa-solid fa-siren-on"></i> Emergency Assistance</span>
+        <h2>Need Immediate Medical Care For Your Pet?</h2>
+        <p>Our trauma and surgical team in Chinna Thirupathi, Salem is on standby 24 hours a day.</p>
+      </div>
+      <div class="phone-badge">
+        <i class="fa-solid fa-phone-volume"></i> +91 98765 43210
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Clinical Departments Flip Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-microscope"></i> Specialized Medicine</span>
+        <h2 class="section-title">Comprehensive Clinical Facilities</h2>
+        <p class="section-desc">Flip through our specialized medical departments engineered for precision diagnosis and fast recovery.</p>
+      </div>
+
+      <div class="arch-grid">
+        <!-- Flip Card 1 -->
+        <div class="flip-card-container reveal-item">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="arch-card-icon"><i class="fa-solid fa-wave-square"></i></div>
+              <h3>Ultrasound & Digital X-Ray</h3>
+              <p>High-resolution internal imaging for organ diagnostics and bone fracture analysis.</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Diagnostic Imaging</h3>
+              <p>Non-invasive Doppler ultrasound scans, echocardiography, and digital radiography with instant results.</p>
+              <a href="contact.html#book-visit" class="btn btn-primary btn-sm mt-3" style="margin-top: auto !important; margin-bottom: 6px;">Book Scan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flip Card 2 -->
+        <div class="flip-card-container reveal-item">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="arch-card-icon"><i class="fa-solid fa-tooth"></i></div>
+              <h3>Dental Care & Scalers</h3>
+              <p>Ultrasonic plaque scaling, tooth extraction, and oral health checkups.</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Oral Hygiene Care</h3>
+              <p>Prevent periodontal disease, bad breath, and tooth infections with gentle dental polishing.</p>
+              <a href="contact.html#book-visit" class="btn btn-primary btn-sm mt-3" style="margin-top: auto !important; margin-bottom: 6px;">Book Dental Check</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flip Card 3 -->
+        <div class="flip-card-container reveal-item">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="arch-card-icon"><i class="fa-solid fa-syringe"></i></div>
+              <h3>Vaccination & Microchips</h3>
+              <p>Core pet immunization packages and ISO-compliant microchip identification.</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Immunization Shield</h3>
+              <p>Protection against Rabies, Parvovirus, DHPP, and Feline Leukemia with lifetime tracking.</p>
+              <a href="contact.html#book-visit" class="btn btn-primary btn-sm mt-3" style="margin-top: auto !important; margin-bottom: 6px;">Get Vaccinated</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Veterinary Specialists Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-user-doctor"></i> Medical Team</span>
+        <h2 class="section-title">Meet Our Expert Veterinarians</h2>
+        <p class="section-desc">Our passionate veterinary surgeons and clinical specialists bring over 15 years of surgical and pet care excellence.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card reveal-item">
+          <div class="team-img-box">
+            <img src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh Kumar - Chief Veterinary Surgeon">
+            <div class="team-socials">
+              <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h4 class="team-name">Dr. Rajesh Kumar</h4>
+            <p class="team-role">Chief Veterinary Surgeon (BVSc & AH)</p>
+          </div>
+        </div>
+
+        <div class="team-card reveal-item">
+          <div class="team-img-box">
+            <img src="assets/dr_priya_sharma.webp" alt="Dr. Priya Sharma">
+            <div class="team-socials">
+              <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h4 class="team-name">Dr. Priya Sharma</h4>
+            <p class="team-role">Feline Medicine & Cardiology</p>
+          </div>
+        </div>
+
+        <div class="team-card reveal-item">
+          <div class="team-img-box">
+            <img src="assets/dr_anitha_ramesh.webp" alt="Dr. Anitha Ramesh">
+            <div class="team-socials">
+              <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h4 class="team-name">Dr. Anitha Ramesh</h4>
+            <p class="team-role">Dermatology & Allergy Cytology</p>
+          </div>
+        </div>
+
+        <div class="team-card reveal-item">
+          <div class="team-img-box">
+            <img src="assets/dr_senthil_nathan.webp" alt="Dr. Senthil Nathan">
+            <div class="team-socials">
+              <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h4 class="team-name">Dr. Senthil Nathan</h4>
+            <p class="team-role">Emergency & Trauma Surgeon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Animated Hospital Statistics -->
+  <section class="section-sm container">
+    <div class="stats-bar reveal-item">
+      <div class="stat-item">
+        <h3 class="counter-val" data-target="15">0</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-item">
+        <h3 class="counter-val" data-target="8500">0</h3>
+        <p>Successful Surgeries</p>
+      </div>
+      <div class="stat-item">
+        <h3 class="counter-val" data-target="12">0</h3>
+        <p>Specialist Doctors</p>
+      </div>
+      <div class="stat-item">
+        <h3 class="counter-val" data-target="99">0</h3>
+        <p>% Patient Satisfaction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — split layout with tilted image -->
+  <section class="section faq-split">
+    <div class="container faq-split-grid">
+      <div class="faq-split-left reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-comments"></i> Ask Stackly</span>
+        <h2 class="faq-split-title">Frequently Asked Questions</h2>
+        <div class="faq-tilt-frame">
+          <img src="assets/ask_stackly_consult.webp" alt="Pet parent consultation at Stackly hospital" loading="lazy">
+        </div>
+      </div>
+
+      <div class="faq-split-right reveal-item">
+        <div class="faq-list faq-list-split">
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>What are consultation hours at Stackly?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Outpatient clinic runs Mon–Sat, 9:00 AM to 8:00 PM at Chinna Thirupathi, Salem. Emergency surgery stays open 24/7.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Do you handle emergency trauma cases?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Call +91 98765 43210 so triage can prepare oxygen, IV fluids, and surgical support before you arrive.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Which pets can you treat?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>We care for dogs, cats, rabbits, birds, and selected exotic pets with species-aware protocols.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I view reports online?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes — sign in to the Customer Dashboard for vaccines, lab results, and prescriptions anytime.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How should I prepare my pet for surgery?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Usually withhold food 8–10 hours before anaesthesia. Bring past reports and current medicines; our team will confirm exact fasting rules.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pet Parent Stories -->
+  <section class="section bg-light stories-section">
+    <div class="container">
+      <div class="section-header reveal-item">
+        <span class="section-tag"><i class="fa-solid fa-quote-left"></i> Pet Parent Stories</span>
+        <h2 class="section-title">Healing Moments From Our Salem Families</h2>
+        <p class="section-desc">Real recoveries that remind us why gentle veterinary medicine matters every day.</p>
+      </div>
+
+      <div class="stories-grid">
+        <article class="story-card reveal-item">
+          <img src="assets/story_beagle_bruno_card.webp" alt="Bruno the Beagle recovered and healthy" loading="lazy">
+          <div class="story-body">
+            <div class="story-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p>“Bruno’s fracture surgery was explained step by step. He was walking confidently within weeks.”</p>
+            <h4>Meena R. <span>— Beagle parent</span></h4>
+          </div>
+        </article>
+
+        <article class="story-card reveal-item">
+          <img src="assets/story_persian_cat_card.webp" alt="Misty the Persian cat healthy and happy" loading="lazy">
+          <div class="story-body">
+            <div class="story-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p>“The dental team handled Misty’s cleaning so gently. Bad breath gone, and she eats happily again.”</p>
+            <h4>Priya S. <span>— Persian cat parent</span></h4>
+          </div>
+        </article>
+
+        <article class="story-card reveal-item">
+          <img src="assets/story_indie_dog_card.webp" alt="Rescued Indie pup recovered after emergency care" loading="lazy">
+          <div class="story-body">
+            <div class="story-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p>“Midnight emergency for our pup — Stackly’s triage team was ready before we reached the gate.”</p>
+            <h4>Anitha V. <span>— Indie dog parent</span></h4>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section (Matching Reference Theme Opening Hours & Links) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col footer-brand">
+          <img src="assets/footer-logo.webp" alt="Stackly Logo Footer">
+          <p>Stackly Veterinary Hospital & Pet Care Clinic delivers world-class medical treatment, surgery, and wellness care for all companion animals in Salem.</p>
+          
+          <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
+            <input type="email" placeholder="Enter Email Address" required>
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+
+        <!-- Col 2: Specialty Services -->
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Skin & Ear Cytology</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Ultrasound Scan Services</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Dental Care & Cleanings</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Nutritional Counseling</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Puppy Wellness Program</a></li>
+            <li><a href="404.html"><i class="fa-solid fa-angle-right"></i> Surgical Procedures</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quicklinks -->
+        <div class="footer-col">
+          <h4>Quicklinks</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-angle-right"></i> Services</a></li>
+            <li><a href="team.html"><i class="fa-solid fa-angle-right"></i> Veterinarians</a></li>
+            <li><a href="blog.html"><i class="fa-solid fa-angle-right"></i> Blog</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Opening Hours -->
+        <div class="footer-col">
+          <h4>Opening Hours</h4>
+          <div class="opening-hours-list">
+            <div class="hours-row">
+              <span>Mon - Tues</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Wed - Thu</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Fri - Sat</span>
+              <span>09:00AM - 06:00PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Sunday</span>
+              <span style="color: #e06d53;">Emergency Only</span>
+            </div>
+          </div>
+          <div style="margin-top: 15px; font-size: 0.82rem; color: #a39f99;">
+            <i class="fa-solid fa-location-dot" style="color: var(--secondary);"></i> MMR Complex, Chinna Thirupathi, Salem
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; Copyright 2026. All rights reserved. <strong>Stackly Veterinary Hospital</strong>.</p>
+        <p>Address: MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Admin Portal | Stackly Veterinary Hospital</title>
+  <meta name="description" content="Admin and doctor staff portal for Stackly Veterinary Hospital Salem. Manage patient triage, surgical schedules, and revenue stats.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Admin Header -->
+  <header class="navbar dash-navbar" style="background: var(--dark); color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div class="container dash-navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Logo">
+      </a>
+
+      <div class="dash-navbar-meta">
+        <span class="badge-status badge-emergency"><i class="fa-solid fa-bolt"></i> 24/7 Trauma Triage Active</span>
+        <div class="dash-user">
+          <div class="dash-avatar">DR</div>
+          <div>
+            <div class="dash-user-name" style="color:#fff;">Dr. Rajesh Kumar</div>
+            <div class="dash-user-role">Chief Vet Surgeon</div>
+          </div>
+        </div>
+        <a href="login.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Layout -->
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div style="font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 14px;">Hospital Controls</div>
+        <ul class="sidebar-menu">
+          <li><a href="#" class="sidebar-link active" data-tab="admin-queue"><i class="fa-solid fa-clipboard-list"></i> Today's Queue (18)</a></li>
+          <li><a href="#" class="sidebar-link" data-tab="admin-patients"><i class="fa-solid fa-hospital-user"></i> Patient Records</a></li>
+          <li><a href="#" class="sidebar-link" data-tab="admin-surgeons"><i class="fa-solid fa-user-doctor"></i> Doctor Roster</a></li>
+          <li><a href="#" class="sidebar-link" data-tab="admin-analytics"><i class="fa-solid fa-chart-line"></i> Revenue & Stats</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dash-main">
+      
+      <div id="admin-queue" class="tab-pane">
+        <div class="dash-header">
+          <div>
+            <h2>Hospital Queue Management - Salem Branch</h2>
+            <p>Live Triage & Outpatient Management at MMR Complex Clinic.</p>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="dash-card-grid">
+          <div class="dash-stat-card">
+            <i class="fa-solid fa-users" style="font-size: 1.8rem; color: var(--primary);"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">24</h3>
+              <p>Total Patients Today</p>
+            </div>
+          </div>
+
+          <div class="dash-stat-card" style="border-left-color: #ef4444;">
+            <i class="fa-solid fa-truck-medical" style="font-size: 1.8rem; color: #ef4444;"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">3</h3>
+              <p>Emergency Triage</p>
+            </div>
+          </div>
+
+          <div class="dash-stat-card" style="border-left-color: #10b981;">
+            <i class="fa-solid fa-check-double" style="font-size: 1.8rem; color: #10b981;"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">15</h3>
+              <p>Surgeries Completed</p>
+            </div>
+          </div>
+
+          <div class="dash-stat-card" style="border-left-color: var(--secondary);">
+            <i class="fa-solid fa-indian-rupee-sign" style="font-size: 1.8rem; color: var(--secondary);"></i>
+            <div>
+              <h3 style="font-size: 1.5rem;">₹48,500</h3>
+              <p>Daily Pharmacy & Clinical Billing</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Triage Queue Table -->
+        <h3 style="margin-bottom: 12px;">Live Outpatient Appointments</h3>
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Pet Name & Breed</th>
+              <th>Owner Contact</th>
+              <th>Assigned Doctor</th>
+              <th>Service</th>
+              <th>Triage Priority</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#STK-901</td>
+              <td><strong>Rocky</strong> (Golden Retriever)</td>
+              <td>+91 94432 12345</td>
+              <td>Dr. Senthil Nathan</td>
+              <td>Trauma Fracture Scan</td>
+              <td><span class="badge-status badge-emergency">Emergency</span></td>
+              <td><button class="btn btn-primary btn-sm action-confirm-btn">Confirm Visit</button></td>
+            </tr>
+            <tr>
+              <td>#STK-902</td>
+              <td><strong>Bruno</strong> (Beagle)</td>
+              <td>+91 98765 43210</td>
+              <td>Dr. Anitha Ramesh</td>
+              <td>Skin Cytology Check</td>
+              <td><span class="badge-status badge-pending">Scheduled</span></td>
+              <td><button class="btn btn-primary btn-sm action-confirm-btn">Confirm Visit</button></td>
+            </tr>
+            <tr>
+              <td>#STK-903</td>
+              <td><strong>Milo</strong> (Persian Cat)</td>
+              <td>+91 97890 56789</td>
+              <td>Dr. Priya Sharma</td>
+              <td>Dental Scaling</td>
+              <td><span class="badge-status badge-confirmed">In Ward</span></td>
+              <td><button class="btn btn-secondary btn-sm" disabled>Done</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

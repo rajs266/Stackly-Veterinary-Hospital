@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Stackly Veterinary Hospital</title>
+  <meta name="description" content="The requested page or resource could not be found. Return to Stackly Veterinary Hospital homepage.">
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(135deg, #fff9f5 0%, #f7ebe1 100%);">
+
+  <!-- Header Navbar -->
+    <header class="navbar">
+    <div class="container navbar-bar">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+      </a>
+
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="nav-panel" id="nav-panel">
+        <div class="nav-panel-header">
+          <a href="index.html" class="brand-logo nav-panel-brand">
+            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+          </a>
+          <button type="button" class="nav-close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="team.html" class="nav-link">Veterinarians</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="index.html" class="btn btn-primary">Back To Home</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 404 Visual Content -->
+  <main style="padding: 60px 20px; text-align: center;">
+    <div style="max-width: 500px; margin: 0 auto;" class="reveal-item">
+      <div style="font-size: 5rem; color: var(--primary); font-family: var(--font-heading); line-height: 1; margin-bottom: 10px;">
+        4<i class="fa-solid fa-paw hover-shake" style="color: var(--secondary); font-size: 4rem;"></i>4
+      </div>
+      <h2 style="font-size: 2rem; margin-bottom: 12px;">Oops! Woof! Page Not Found</h2>
+      <p style="margin-bottom: 24px; color: var(--text-muted);">The link or page you are looking for might be temporarily unavailable or redirected to our medical triage.</p>
+      
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="index.html" class="btn btn-primary"><i class="fa-solid fa-house"></i> Return To Home</a>
+        <a href="services.html" class="btn btn-secondary"><i class="fa-solid fa-stethoscope"></i> View Services</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: var(--dark); color: #9ca3af; padding: 15px 0; text-align: center; font-size: 0.82rem;">
+    <div class="container">
+      &copy; 2026 Stackly Veterinary Hospital. MMR Complex, Salem.
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
