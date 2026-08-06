@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get Started | Create Account & Book Visit | Stackly Veterinary Hospital</title>
+  <title>Create Account | Get Started | Stackly Veterinary Hospital</title>
   <meta name="description" content="Create your Stackly Pet Care account or book a veterinary visit online at our Salem hospital.">
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -44,49 +44,22 @@
     </div>
   </div>
 
-<header class="navbar">
-    <div class="container navbar-bar">
-      <a href="index.html" class="brand-logo">
-        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
-      </a>
-      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <div class="nav-panel" id="nav-panel">
-        <div class="nav-panel-header">
-          <a href="index.html" class="brand-logo nav-panel-brand">
-            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+  <div class="auth-split-screen">
+
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border-color);">
+          <a href="index.html" class="brand-logo" style="display:inline-flex;">
+            <img src="assets/logo.webp" alt="Stackly Logo" style="height:40px;">
           </a>
-          <button type="button" class="nav-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+          <a href="index.html" style="font-size:0.88rem;font-weight:700;color:var(--primary);display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+            <i class="fa-solid fa-house"></i> Back to Home
+          </a>
         </div>
-        <ul class="nav-menu">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="services.html" class="nav-link">Services</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-        <div class="nav-actions">
-          <a href="login.html" class="btn btn-secondary">Sign In</a>
+        <div style="text-align:center;margin-bottom:18px;">
+          <h2 style="font-size:1.6rem;color:var(--dark);margin-bottom:4px;">Create Your Free Account</h2>
+          <p class="auth-sub" style="margin-bottom:0;">Choose your portal role to register.</p>
         </div>
-      </div>
-    </div>
-  </header>
-
-  <section class="page-hero" style="min-height:220px;">
-    <div class="page-hero-media"><img src="assets/veterinarian-taking-care-pet-dog.webp" alt=""></div>
-    <div class="container">
-      <span class="section-tag"><i class="fa-solid fa-paw"></i> Get Started</span>
-      <h1>Create Account Or Book A Visit</h1>
-      <p>Join the Stackly Pet Care portal, or schedule a consultation in under two minutes.</p>
-    </div>
-  </section>
-
-  <main class="container" style="flex:1;padding-bottom:40px;">
-    <div style="max-width:560px;margin:0 auto;">
-      <!-- Sign Up -->
-      <div class="auth-card reveal-item" data-reveal="scale">
-        <img src="assets/logo.webp" alt="Stackly" style="height:48px;display:block;margin:0 auto 10px;">
-        <h2>Create Your Free Account</h2>
-        <p class="auth-sub">Choose your portal role to register.</p>
 
         <form id="registerForm" novalidate autocomplete="off">
           <div class="role-cards" id="regRoles">
@@ -133,7 +106,7 @@
             <label for="regPassword">Password</label>
             <div class="password-wrap">
               <input id="regPassword" name="password" type="password" placeholder="Min. 8 characters" autocomplete="new-password">
-              <button type="button" class="toggle-password" data-target="regPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+              <button type="button" class="toggle-password" data-target="regPassword" aria-label="Show password" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
             </div>
             <div class="field-error" id="regPasswordError"></div>
           </div>
@@ -142,20 +115,20 @@
             <label for="regConfirmPassword">Confirm Password</label>
             <div class="password-wrap">
               <input id="regConfirmPassword" name="confirm_password" type="password" placeholder="Re-enter password" autocomplete="new-password">
-              <button type="button" class="toggle-password" data-target="regConfirmPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+              <button type="button" class="toggle-password" data-target="regConfirmPassword" aria-label="Show password" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
             </div>
             <div class="field-error" id="regConfirmPasswordError"></div>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px;">
-            <i class="fa-solid fa-user-plus"></i> Create Account
+          <button type="submit" class="btn btn-primary" style="width:100%;padding:12px 16px;margin-top:6px;font-size:1rem;">
+            <i class="fa-solid fa-user-plus"></i> Create Free Account
           </button>
         </form>
 
         <div class="auth-divider">OR CONTINUE WITH</div>
         <div class="social-auth">
-          <a href="404.html"><i class="fa-brands fa-google"></i> Google</a>
-          <a href="404.html"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+          <a href="404.html" onclick="event.preventDefault(); window.location.href='404.html';"><i class="fa-brands fa-google"></i> Google</a>
+          <a href="404.html" onclick="event.preventDefault(); window.location.href='404.html';"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
         </div>
 
         <p style="text-align:center;margin-top:18px;font-size:0.85rem;color:var(--text-muted);">
@@ -163,7 +136,79 @@
         </p>
       </div>
     </div>
-  </main>
+
+    <div class="auth-content-side">
+      <div class="auth-content-bg">
+        <img src="assets/inside_happy_recovery.webp" alt="Stackly Pet Care Registration">
+      </div>
+
+      <div class="auth-content-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
+          <a href="index.html" class="brand-logo">
+            <img src="assets/logo.webp" alt="Stackly Logo" style="height:48px;filter:brightness(0) invert(1) drop-shadow(0 4px 12px rgba(224,109,83,0.4));">
+          </a>
+          <span class="emergency-live-pill" style="background:rgba(244,162,97,0.25);color:var(--secondary);border-color:rgba(244,162,97,0.4);">
+            <i class="fa-solid fa-sparkles"></i> Quick 2-Minute Setup
+          </span>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <span class="section-tag" style="background:linear-gradient(90deg, rgba(224,109,83,0.35), rgba(244,162,97,0.35));color:#ffe8c8;border:1px solid rgba(255,255,255,0.25);">
+            <i class="fa-solid fa-heart-circle-check"></i> Join The Stackly Care Family
+          </span>
+        </div>
+
+        <h1 style="font-size:clamp(1.9rem, 3.4vw, 2.7rem);color:#ffffff;margin-bottom:16px;line-height:1.2;font-weight:800;text-shadow:0 4px 16px rgba(0,0,0,0.5);">
+          Give Your Pet Gentle, World-Class Medical Protection
+        </h1>
+
+        <p style="font-size:1.02rem;color:rgba(255,255,255,0.92);margin-bottom:28px;line-height:1.65;max-width:500px;text-shadow:0 2px 8px rgba(0,0,0,0.4);">
+          Create your free account today for instant appointment reservations, customized pet nutrition guidance, and priority emergency triage booking across Salem.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
+          <div class="auth-feature-card">
+            <div style="width:44px;height:44px;border-radius:14px;background:rgba(244,162,97,0.25);color:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+              <i class="fa-solid fa-paw"></i>
+            </div>
+            <div>
+              <strong style="font-size:0.98rem;color:#fff;display:block;">Digital Pet Medical Passport</strong>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Store vaccination dates, weight tracking &amp; diet history</span>
+            </div>
+          </div>
+
+          <div class="auth-feature-card">
+            <div style="width:44px;height:44px;border-radius:14px;background:rgba(224,109,83,0.3);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+              <i class="fa-solid fa-shield-cat"></i>
+            </div>
+            <div>
+              <strong style="font-size:0.98rem;color:#fff;display:block;">Zero-Pain Isoflurane Anesthesia Standard</strong>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Safe inhalation anesthesia for spays, dental &amp; orthopedic surgery</span>
+            </div>
+          </div>
+
+          <div class="auth-feature-card">
+            <div style="width:44px;height:44px;border-radius:14px;background:rgba(74,222,128,0.25);color:#4ade80;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+            <div>
+              <strong style="font-size:0.98rem;color:#fff;display:block;">Proactive Vaccine &amp; Deworming Alerts</strong>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Automated SMS &amp; email reminders so your pet stays protected</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(15,23,42,0.65);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.25);padding:16px 20px;border-radius:22px;display:flex;align-items:center;gap:14px;max-width:500px;">
+          <img src="assets/dr_priya_sharma.webp" alt="Dr. Priya Sharma" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);flex-shrink:0;">
+          <div>
+            <p style="margin:0 0 4px;font-size:0.85rem;color:rgba(255,255,255,0.92);font-style:italic;">“We treat every pet as our own family member with gentleness and surgical precision.”</p>
+            <strong style="font-size:0.8rem;color:var(--secondary);">Dr. Priya Sharma · Senior Feline Specialist</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <div class="stackly-overlay" id="regSuccessModal" aria-live="polite">
     <div class="stackly-modal">
@@ -173,21 +218,6 @@
     </div>
   </div>
 
-  <div class="stackly-overlay" id="booking-modal" aria-live="polite">
-    <div class="stackly-modal">
-      <i class="fa-solid fa-circle-check ok"></i>
-      <h3>Appointment Confirmed!</h3>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:18px;">Your visit request is recorded for Stackly Veterinary Hospital, MMR Complex, Salem. A confirmation SMS will follow shortly.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <a href="customer-dashboard.html" class="btn btn-primary btn-sm">Go To Patient Dashboard</a>
-        <button type="button" class="btn btn-secondary btn-sm" data-close-overlay="booking-modal">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <footer style="background:var(--dark);color:#9ca3af;padding:15px 0;text-align:center;font-size:0.82rem;">
-    <div class="container">&copy; 2026 Stackly Veterinary Hospital. MMR Complex, Salem.</div>
-  </footer>
   <script src="script.js"></script>
 </body>
 </html>

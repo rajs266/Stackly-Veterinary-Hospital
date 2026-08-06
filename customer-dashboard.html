@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Dashboard | Stackly Pet Care Portal</title>
-  <meta name="description" content="Manage your registered pets, view upcoming appointments, download digital medical prescriptions and vaccination records.">
+  <title>Pet Care Portal | Stackly Veterinary Hospital</title>
+  <meta name="description" content="Manage pets, appointments, prescriptions and vaccination records at Stackly Veterinary Hospital, Salem.">
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dash-page">
   <div id="site-preloader" class="site-preloader" aria-live="polite" aria-busy="true">
     <div class="preloader-bg"></div>
     <div class="preloader-waves" aria-hidden="true">
@@ -23,15 +22,9 @@
     <div class="preloader-inner">
       <div class="preloader-spinner" aria-hidden="true">
         <div class="spin-halo"></div>
-        <svg class="spin-ring spin-ring-a" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="52" pathLength="100"></circle>
-        </svg>
-        <svg class="spin-ring spin-ring-b" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="42" pathLength="100"></circle>
-        </svg>
-        <svg class="spin-ring spin-ring-c" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="32" pathLength="100"></circle>
-        </svg>
+        <svg class="spin-ring spin-ring-a" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" pathLength="100"></circle></svg>
+        <svg class="spin-ring spin-ring-b" viewBox="0 0 120 120"><circle cx="60" cy="60" r="42" pathLength="100"></circle></svg>
+        <svg class="spin-ring spin-ring-c" viewBox="0 0 120 120"><circle cx="60" cy="60" r="32" pathLength="100"></circle></svg>
         <div class="spin-core">
           <svg class="spin-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
             <path class="spin-heart" d="M32 54S10 40 10 24c0-8 6-14 14-14 5 0 8 3 8 3s3-3 8-3c8 0 14 6 14 14 0 16-22 30-22 30z"/>
@@ -45,143 +38,465 @@
     </div>
   </div>
 
-<!-- Dashboard Navbar -->
-  <header class="navbar dash-navbar">
-    <div class="container dash-navbar-bar">
-      <a href="index.html" class="brand-logo">
-        <img src="assets/logo.webp" alt="Stackly Logo">
-      </a>
-
-      <div class="dash-navbar-meta">
-        <div class="dash-user">
-          <div class="dash-avatar dash-avatar-light">AK</div>
-          <div>
-            <div class="dash-user-name">Anbarasan K</div>
-            <div class="dash-user-role" style="color: var(--text-muted);">Pet Owner (Salem)</div>
+  <div class="page-wrapper">
+    <div class="dash-layout">
+      <aside class="dash-sidebar" id="dashSidebar">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar js-user-initials">AK</div>
+          <div class="sidebar-user-details">
+            <div class="sidebar-user-name js-user-name">Anbarasan K</div>
+            <div class="sidebar-user-email js-user-email">anbarasan@stackly.com</div>
           </div>
         </div>
-        <a href="login.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+        <div class="sidebar-role-card">
+          <i class="fas fa-paw"></i> <span>PET PARENT PORTAL</span>
+        </div>
+        <div class="dash-sidebar-nav-container">
+          <div class="dash-nav-label">Overview</div>
+          <button type="button" class="dash-nav-btn active" data-target="dashboardHome"><i class="fas fa-house"></i> Dashboard</button>
+          <div class="dash-nav-label">Care</div>
+          <button type="button" class="dash-nav-btn" data-target="pets"><i class="fas fa-paw"></i> My Pets</button>
+          <button type="button" class="dash-nav-btn" data-target="appointments"><i class="fas fa-calendar-days"></i> Appointments</button>
+          <button type="button" class="dash-nav-btn" data-target="records"><i class="fas fa-file-medical"></i> Records</button>
+          <button type="button" class="dash-nav-btn" data-target="careTips"><i class="fas fa-lightbulb"></i> Care Tips</button>
+          <div class="dash-nav-label">Account</div>
+          <button type="button" class="dash-nav-btn" data-target="notifications"><i class="fas fa-bell"></i> Notifications</button>
+          <button type="button" class="dash-nav-btn" data-target="settings"><i class="fas fa-gear"></i> Settings</button>
+        </div>
+        <a href="404.html" class="dash-hotline-card" style="display:block; text-decoration:none;">
+          <div class="dash-hotline-title"><i class="fas fa-phone-volume"></i> Emergency Hotline</div>
+          <span class="dash-hotline-num">+91 98765 43210</span>
+          <p>24/7 Salem trauma desk</p>
+        </a>
+        <button type="button" class="dash-nav-btn dash-logout-btn" data-logout><i class="fas fa-right-from-bracket"></i> Logout</button>
+      </aside>
+
+      <div class="dash-sidebar-overlay" id="dashOverlay"></div>
+
+      <header class="dash-top">
+        <div class="dash-top-left">
+          <div class="dash-top-logo-zone">
+            <button type="button" class="dash-menu-toggle" id="dashMenuToggle" aria-label="Open menu" aria-expanded="false">
+              <span class="menu-icon" aria-hidden="true"><i class="fas fa-bars"></i></span>
+              <span class="close-icon" aria-hidden="true"><i class="fas fa-xmark"></i></span>
+            </button>
+            <a href="index.html" class="dash-top-logo"><img src="assets/logo.webp" alt="Stackly"></a>
+            <div class="dash-top-divider"></div>
+          </div>
+          <div class="dash-top-welcome">
+            <h2>Welcome back, <span class="js-user-name">Anbarasan</span></h2>
+            <p>Your pets’ care snapshot at Stackly Salem.</p>
+          </div>
+        </div>
+        <div class="dash-top-right">
+          <button type="button" class="dash-bell" data-target="notifications" title="Notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i><span class="dot"></span>
+          </button>
+          <div class="dash-user">
+            <div class="dash-avatar js-user-initials">AK</div>
+            <div class="dash-user-details">
+              <div class="dash-user-name js-user-name">Anbarasan K</div>
+              <div class="sidebar-user-email js-user-email">anbarasan@stackly.com</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dash-main">
+
+        <section class="dash-panel active" id="section-dashboardHome">
+          <div class="dash-card welcome-hub" style="background: linear-gradient(120deg, rgba(30, 41, 59, 0.92), rgba(224,109,83,0.55)), url('assets/veterinarian-taking-care-pet-dog.webp') center/cover;">
+            <div class="welcome-hub-main">
+              <div class="welcome-head-inline">
+                <h3>Gentle care starts here</h3>
+                <span class="welcome-tag"><span class="pulse-dot"></span> Vaccine Due</span>
+              </div>
+              <p>Bruno’s annual wellness is due soon — book early to keep his vaccines on track.</p>
+            </div>
+            <div class="welcome-strip">
+              <div class="welcome-stat-pill">
+                <div class="stat-ico"><i class="fas fa-paw"></i></div>
+                <div class="stat-info">
+                  <h4>3</h4>
+                  <p>Pets</p>
+                </div>
+              </div>
+              <div class="welcome-stat-pill">
+                <div class="stat-ico"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-info">
+                  <h4>Aug 12</h4>
+                  <p>Next Visit</p>
+                </div>
+              </div>
+              <div class="welcome-stat-pill">
+                <div class="stat-ico"><i class="fas fa-heart-pulse"></i></div>
+                <div class="stat-info">
+                  <h4>92%</h4>
+                  <p>Care Score</p>
+                </div>
+              </div>
+              <div class="welcome-right-cards">
+                <div class="welcome-feature-card">
+                  <img src="assets/dr_priya_sharma.webp" alt="Dr. Priya Sharma">
+                  <div class="feature-body">
+                    <span class="feature-badge"><i class="fas fa-user-doctor"></i> On-Duty Vet</span>
+                    <h5 class="feature-title">Dr. Priya</h5>
+                    <p class="feature-sub"><i class="fas fa-circle-check"></i> Specialist</p>
+                  </div>
+                </div>
+                <div class="welcome-feature-card">
+                  <img src="assets/inside_gentle_exam.webp" alt="Care Suite">
+                  <div class="feature-body">
+                    <span class="feature-badge" style="color: #4caf50;"><i class="fas fa-shield-heart"></i> Care Desk</span>
+                    <h5 class="feature-title">Care Suite</h5>
+                    <p class="feature-sub"><i class="fas fa-clock"></i> 24/7 Active</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-pet-strip">
+            <img src="assets/story_beagle_bruno_card.webp" alt="Bruno">
+            <img src="assets/story_persian_cat_card.webp" alt="Misty">
+            <img src="assets/story_indie_dog_card.webp" alt="Indie">
+          </div>
+
+          <div class="dash-grid dash-grid-4">
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-paw"></i></div><h3>3</h3><p>Registered Pets</p></div>
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-calendar-check"></i></div><h3>Aug 12</h3><p>Next Visit</p></div>
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-syringe"></i></div><h3>2</h3><p>Vaccines Due</p></div>
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-heart-pulse"></i></div><h3>92</h3><p>Care Score</p></div>
+          </div>
+
+          <div class="dash-grid dash-grid-2" style="margin-top: 22px; grid-template-columns: 2fr 1fr;">
+            <div class="dash-card">
+              <div class="dash-card-head">
+                <h3 class="dash-card-title">Upcoming Appointment</h3>
+                <button type="button" class="btn btn-outline btn-sm" data-target="appointments">View All</button>
+              </div>
+              <div class="notif-item">
+                <div class="notif-ico"><i class="fas fa-stethoscope"></i></div>
+                <div>
+                  <strong>Bruno — Wellness Check</strong>
+                  <p>Tue, Aug 12 · 10:30 AM · Dr. Priya Sharma</p>
+                </div>
+                <span class="pill">Confirmed</span>
+              </div>
+              <div class="notif-item">
+                <div class="notif-ico"><i class="fas fa-scissors"></i></div>
+                <div>
+                  <strong>Misty — Dental Clean</strong>
+                  <p>Fri, Aug 22 · 3:00 PM · Dr. Anitha Ramesh</p>
+                </div>
+                <span class="pill warn">Pending</span>
+              </div>
+              <div class="stat-row" style="margin-top: 16px;"><span>Overall care progress</span><span>92%</span></div>
+              <div class="bar-track"><span class="bar-fill" data-value="92"></span></div>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 14px;">Quick Actions</h3>
+              <div class="qa-grid">
+                <a class="qa-btn" href="contact.html#book-visit"><i class="fas fa-calendar-plus"></i> Book Visit</a>
+                <button type="button" class="qa-btn" data-target="pets"><i class="fas fa-paw"></i> My Pets</button>
+                <button type="button" class="qa-btn" data-target="records"><i class="fas fa-file-medical"></i> Records</button>
+                <a class="qa-btn qa-btn-urgent" href="404.html"><i class="fas fa-truck-medical"></i> Emergency</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-grid dash-grid-3" style="margin-top: 22px;">
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/inside_gentle_exam.webp" alt="Gentle exam tips"></div>
+              <h3 class="dash-card-title">Calm exam routines</h3>
+              <p>How Stackly keeps anxious pets relaxed during checkups.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/care_program_wellness.webp" alt="Wellness program"></div>
+              <h3 class="dash-card-title">Wellness program</h3>
+              <p>Seasonal vaccine packs designed for Salem’s climate.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/ask_stackly_consult.webp" alt="Ask Stackly"></div>
+              <h3 class="dash-card-title">Ask Stackly</h3>
+              <p>Message our care desk for diet or recovery questions.</p>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="dash-panel" id="section-pets">
+          <div class="dash-card-head" style="margin-bottom: 18px;">
+            <div>
+              <h2 class="dash-section-title">My Pets</h2>
+              <p class="dash-section-sub">Profiles registered at Stackly Salem.</p>
+            </div>
+            <a href="contact.html#book-visit" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Pet</a>
+          </div>
+          <div class="dash-grid dash-grid-3">
+            <div class="dash-card pet-profile-card">
+              <div class="dash-card-img"><img src="assets/story_beagle_bruno_card.webp" alt="Bruno"></div>
+              <div class="pet-card-top">
+                <h3 class="dash-card-title">Bruno</h3>
+                <span class="pill">Healthy</span>
+              </div>
+              <p>Beagle · Male · 4 yrs</p>
+              <div class="pet-meta"><span><i class="fas fa-weight-scale"></i> 12.4 kg</span><span><i class="fas fa-syringe"></i> Vaccines due</span></div>
+              <button type="button" class="btn btn-outline btn-sm" data-target="records" style="margin-top: 14px;">View Records</button>
+            </div>
+            <div class="dash-card pet-profile-card">
+              <div class="dash-card-img"><img src="assets/story_persian_cat_card.webp" alt="Misty"></div>
+              <div class="pet-card-top">
+                <h3 class="dash-card-title">Misty</h3>
+                <span class="pill warn">Dental watch</span>
+              </div>
+              <p>Persian · Female · 3 yrs</p>
+              <div class="pet-meta"><span><i class="fas fa-weight-scale"></i> 4.1 kg</span><span><i class="fas fa-tooth"></i> Clean scheduled</span></div>
+              <button type="button" class="btn btn-outline btn-sm" data-target="appointments" style="margin-top: 14px;">Appointments</button>
+            </div>
+            <div class="dash-card pet-profile-card">
+              <div class="dash-card-img"><img src="assets/story_indie_dog_card.webp" alt="Indie"></div>
+              <div class="pet-card-top">
+                <h3 class="dash-card-title">Indie</h3>
+                <span class="pill">Recovering</span>
+              </div>
+              <p>Indie Dog · Male · 2 yrs</p>
+              <div class="pet-meta"><span><i class="fas fa-weight-scale"></i> 18.0 kg</span><span><i class="fas fa-bandage"></i> Post-op week 2</span></div>
+              <button type="button" class="btn btn-outline btn-sm" data-target="careTips" style="margin-top: 14px;">Recovery Tips</button>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="dash-panel" id="section-appointments">
+          <div class="dash-card-head" style="margin-bottom: 18px;">
+            <div>
+              <h2 class="dash-section-title">Appointments</h2>
+              <p class="dash-section-sub">Upcoming visits and recent history.</p>
+            </div>
+            <a href="contact.html#book-visit" class="btn btn-primary btn-sm"><i class="fas fa-calendar-plus"></i> Book Visit</a>
+          </div>
+          <div class="dash-card" style="margin-bottom: 22px;">
+            <h3 class="dash-card-title" style="margin-bottom: 12px;">Upcoming</h3>
+            <div class="notif-item">
+              <div class="notif-ico"><i class="fas fa-stethoscope"></i></div>
+              <div><strong>Bruno — Annual Wellness</strong><p>Aug 12, 2026 · 10:30 AM · Consult Room 2</p></div>
+              <span class="pill">Confirmed</span>
+            </div>
+            <div class="notif-item">
+              <div class="notif-ico"><i class="fas fa-tooth"></i></div>
+              <div><strong>Misty — Dental Cleaning</strong><p>Aug 22, 2026 · 3:00 PM · Surgery Suite</p></div>
+              <span class="pill warn">Pending</span>
+            </div>
+            <div class="notif-item">
+              <div class="notif-ico"><i class="fas fa-scissors"></i></div>
+              <div><strong>Indie — Grooming Follow-up</strong><p>Sep 2, 2026 · 11:00 AM · Groom Bay</p></div>
+              <span class="pill">Confirmed</span>
+            </div>
+          </div>
+          <div class="dash-card">
+            <h3 class="dash-card-title" style="margin-bottom: 12px;">Visit History</h3>
+            <div class="table-scroll">
+              <table class="dash-table">
+                <thead><tr><th>Date</th><th>Pet</th><th>Service</th><th>Doctor</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Jul 18, 2026</td><td>Indie</td><td>Orthopedic review</td><td>Dr. Rajesh</td><td><span class="pill">Completed</span></td></tr>
+                  <tr><td>Jun 30, 2026</td><td>Bruno</td><td>Vaccination booster</td><td>Dr. Priya</td><td><span class="pill">Completed</span></td></tr>
+                  <tr><td>Jun 12, 2026</td><td>Misty</td><td>Skin allergy consult</td><td>Dr. Anitha</td><td><span class="pill">Completed</span></td></tr>
+                  <tr><td>May 20, 2026</td><td>Bruno</td><td>Ear infection</td><td>Dr. Senthil</td><td><span class="pill">Completed</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="dash-panel" id="section-records">
+          <h2 class="dash-section-title">Medical Records</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Prescriptions and vaccination timeline.</p>
+          <div class="dash-grid dash-grid-2">
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 14px;"><i class="fas fa-prescription highlight"></i> Prescriptions</h3>
+              <div class="record-item">
+                <strong>Amoxicillin 250mg</strong>
+                <p>Bruno · Ear infection · Jul 2026 · 7 days</p>
+                <span class="pill">Active</span>
+              </div>
+              <div class="record-item">
+                <strong>Gabapentin 100mg</strong>
+                <p>Indie · Post-op comfort · Jul 2026 · tapering</p>
+                <span class="pill warn">Taper</span>
+              </div>
+              <div class="record-item">
+                <strong>Omega skin oil</strong>
+                <p>Misty · Coat support · Jun 2026</p>
+                <span class="pill">Completed</span>
+              </div>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 14px;"><i class="fas fa-syringe highlight"></i> Vaccination Timeline</h3>
+              <div class="timeline">
+                <div class="timeline-item done"><strong>Rabies</strong><p>Bruno · Jun 30, 2026</p></div>
+                <div class="timeline-item done"><strong>DHPP Booster</strong><p>Bruno · Jun 30, 2026</p></div>
+                <div class="timeline-item due"><strong>Feline RCP</strong><p>Misty · Due Aug 22, 2026</p></div>
+                <div class="timeline-item due"><strong>Lepto</strong><p>Indie · Due Sep 5, 2026</p></div>
+              </div>
+              <div class="stat-row" style="margin-top: 16px;"><span>Vaccine compliance</span><span>78%</span></div>
+              <div class="bar-track"><span class="bar-fill" data-value="78"></span></div>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="dash-panel" id="section-careTips">
+          <h2 class="dash-section-title">Care Tips</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Practical guidance from the Stackly care team.</p>
+          <div class="dash-grid dash-grid-3">
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/inside_gentle_exam.webp" alt="Exam prep"></div>
+              <h3 class="dash-card-title">Before the exam</h3>
+              <p>Skip heavy meals 2 hours prior and bring recent photos of symptoms.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/inside_happy_recovery.webp" alt="Recovery"></div>
+              <h3 class="dash-card-title">Happy recovery</h3>
+              <p>Soft bedding, short leash walks, and meds on a fixed schedule.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/inside_surgery_suite.webp" alt="Surgery prep"></div>
+              <h3 class="dash-card-title">Surgery day</h3>
+              <p>Arrive 20 minutes early; fasting instructions will be SMS’d the night before.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/ask_stackly_consult.webp" alt="Consult"></div>
+              <h3 class="dash-card-title">Virtual consult</h3>
+              <p>Use Ask Stackly for follow-up questions between clinic visits.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/care_program_wellness.webp" alt="Wellness"></div>
+              <h3 class="dash-card-title">Seasonal wellness</h3>
+              <p>Tick prevention intensifies from June–October in Salem.</p>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/pet_grooming_service.webp" alt="Grooming"></div>
+              <h3 class="dash-card-title">Grooming cadence</h3>
+              <p>Persian coats need monthly dematting; book Misty’s next slot early.</p>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="dash-panel" id="section-notifications">
+          <div class="dash-card-head" style="margin-bottom: 18px;">
+            <div>
+              <h2 class="dash-section-title">Notifications</h2>
+              <p class="dash-section-sub">Clinic updates and reminders.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="markAllRead">Mark all as read</button>
+          </div>
+          <div class="dash-card">
+            <div class="notif-item unread">
+              <div class="notif-ico"><i class="fas fa-syringe"></i></div>
+              <div><strong>Vaccine reminder</strong><p>Misty’s RCP booster is due on Aug 22.</p></div>
+              <span class="pill warn">New</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-ico"><i class="fas fa-calendar-check"></i></div>
+              <div><strong>Appointment confirmed</strong><p>Bruno’s wellness visit is locked for Aug 12, 10:30 AM.</p></div>
+              <span class="pill">New</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-ico"><i class="fas fa-file-prescription"></i></div>
+              <div><strong>Prescription ready</strong><p>Indie’s post-op meds refill is available at the pharmacy desk.</p></div>
+              <span class="pill">New</span>
+            </div>
+            <div class="notif-item">
+              <div class="notif-ico"><i class="fas fa-heart"></i></div>
+              <div><strong>Recovery milestone</strong><p>Indie completed week 1 of orthopedic recovery.</p></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-ico"><i class="fas fa-bullhorn"></i></div>
+              <div><strong>Clinic notice</strong><p>Extended evening hours every Thursday through September.</p></div>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="dash-panel" id="section-settings">
+          <h2 class="dash-section-title">Account Settings</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Keep your contact details current for SMS reminders.</p>
+          <div class="dash-grid dash-grid-2">
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 16px;">Profile</h3>
+              <form id="settingsForm" class="dash-form">
+                <div class="form-group">
+                  <label for="settingsName">Full name</label>
+                  <input type="text" id="settingsName" name="name" value="Anbarasan K" required>
+                </div>
+                <div class="form-group">
+                  <label for="settingsEmail">Email</label>
+                  <input type="email" id="settingsEmail" name="email" value="anbarasan@stackly.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="settingsPhone">Phone</label>
+                  <input type="tel" id="settingsPhone" name="phone" value="9876543210" maxlength="10">
+                </div>
+                <div class="form-group">
+                  <label for="settingsCity">City</label>
+                  <input type="text" id="settingsCity" name="city" value="Salem">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="window.location.href='404.html'; return false;">Save Profile</button>
+              </form>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 16px;">Preferences</h3>
+              <label class="switch-row">
+                <span>
+                  <strong>SMS appointment reminders</strong>
+                  <p>Get a text 24 hours before each visit.</p>
+                </span>
+                <input type="checkbox" class="switch-toggle" checked aria-label="SMS reminders">
+              </label>
+              <label class="switch-row">
+                <span>
+                  <strong>Vaccine due alerts</strong>
+                  <p>Notify me when boosters are within 14 days.</p>
+                </span>
+                <input type="checkbox" class="switch-toggle" checked aria-label="Vaccine alerts">
+              </label>
+              <label class="switch-row">
+                <span>
+                  <strong>Care tip emails</strong>
+                  <p>Occasional seasonal pet-care guidance.</p>
+                </span>
+                <input type="checkbox" class="switch-toggle" aria-label="Care tip emails">
+              </label>
+              <div class="dash-note">
+                <i class="fas fa-lock"></i>
+                <div>
+                  <strong>Password</strong>
+                  <p>To reset your password, sign out and use “Forgot password” on the login page.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="logoutModal">
+    <div class="modal-card">
+      <div class="modal-icon"><i class="fas fa-right-from-bracket"></i></div>
+      <h3>Heading out?</h3>
+      <p>You're about to sign out of your Stackly Pet Care account.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="cancelLogout">Stay Signed In</button>
+        <button type="button" class="btn btn-primary" id="confirmLogout">Yes, Log Out</button>
       </div>
     </div>
-  </header>
-
-  <!-- Dashboard Layout -->
-  <div class="dashboard-layout">
-    
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div>
-        <div style="font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 14px;">Main Menu</div>
-        <ul class="sidebar-menu">
-          <li><a href="#" class="sidebar-link active" data-tab="tab-overview"><i class="fa-solid fa-gauge"></i> Overview</a></li>
-          <li><a href="#" class="sidebar-link" data-tab="tab-pets"><i class="fa-solid fa-paw"></i> My Pets (2)</a></li>
-          <li><a href="#" class="sidebar-link" data-tab="tab-appointments"><i class="fa-solid fa-calendar-days"></i> Appointments</a></li>
-          <li><a href="#" class="sidebar-link" data-tab="tab-records"><i class="fa-solid fa-file-medical"></i> Medical Prescriptions</a></li>
-        </ul>
-      </div>
-
-      <div style="background: rgba(255,255,255,0.06); padding: 14px; border-radius: var(--radius-sm);">
-        <div style="font-size: 0.8rem; font-weight: 600; color: #fff; margin-bottom: 4px;"><i class="fa-solid fa-phone-volume" style="color: var(--secondary);"></i> Emergency Hotline</div>
-        <div style="font-size: 0.9rem; font-weight: 700; color: var(--secondary);">+91 98765 43210</div>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="dash-main">
-      
-      <!-- Tab 1: Overview -->
-      <div id="tab-overview" class="tab-pane">
-        <div class="dash-header">
-          <div>
-            <h2>Welcome Back, Anbarasan!</h2>
-            <p>Here is your pet care summary at Stackly Veterinary Hospital, Salem.</p>
-          </div>
-          <a href="get-started.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Book New Visit</a>
-        </div>
-
-        <div class="dash-card-grid">
-          <div class="dash-stat-card">
-            <i class="fa-solid fa-dog" style="font-size: 1.8rem; color: var(--primary);"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">2</h3>
-              <p>Registered Pets</p>
-            </div>
-          </div>
-
-          <div class="dash-stat-card" style="border-left-color: var(--secondary);">
-            <i class="fa-solid fa-calendar-check" style="font-size: 1.8rem; color: var(--secondary);"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">1</h3>
-              <p>Upcoming Visit</p>
-            </div>
-          </div>
-
-          <div class="dash-stat-card" style="border-left-color: #10b981;">
-            <i class="fa-solid fa-syringe" style="font-size: 1.8rem; color: #10b981;"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">Up to date</h3>
-              <p>Rabies Vaccine</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Registered Pets Quick Cards -->
-        <h3 style="margin-bottom: 12px;">Your Pets Profile</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 30px;">
-          
-          <div style="background: #fff; padding: 18px; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); display: flex; gap: 16px; align-items: center;">
-            <img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" alt="Beagle">
-            <div>
-              <h4 style="margin-bottom: 2px;">Bruno (Beagle)</h4>
-              <p style="font-size: 0.8rem; margin-bottom: 4px;">Age: 2 Yrs | Weight: 12.4 kg</p>
-              <span class="badge-status badge-confirmed">Healthy</span>
-            </div>
-          </div>
-
-          <div style="background: #fff; padding: 18px; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); display: flex; gap: 16px; align-items: center;">
-            <img src="assets/premium_photo-1664300965124-5919ac08340f.webp" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" alt="Persian Cat">
-            <div>
-              <h4 style="margin-bottom: 2px;">Luna (Persian Cat)</h4>
-              <p style="font-size: 0.8rem; margin-bottom: 4px;">Age: 1 Yr | Weight: 3.8 kg</p>
-              <span class="badge-status badge-pending">Vaccine Due in 10 days</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Recent Appointments Table -->
-        <h3 style="margin-bottom: 12px;">Recent Appointment History</h3>
-        <table class="dash-table">
-          <thead>
-            <tr>
-              <th>Date & Time</th>
-              <th>Pet Name</th>
-              <th>Service</th>
-              <th>Doctor</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Aug 08, 2026 - 11:30 AM</td>
-              <td>Bruno (Beagle)</td>
-              <td>Skin & Ear Cytology Check</td>
-              <td>Dr. Anitha Ramesh</td>
-              <td><span class="badge-status badge-confirmed">Confirmed</span></td>
-            </tr>
-            <tr>
-              <td>Jul 14, 2026 - 04:00 PM</td>
-              <td>Luna (Persian Cat)</td>
-              <td>Routine Dental Scaling</td>
-              <td>Dr. Priya Sharma</td>
-              <td><span class="badge-status badge-confirmed">Completed</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </main>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

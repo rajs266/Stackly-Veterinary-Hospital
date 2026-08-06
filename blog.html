@@ -6,7 +6,7 @@
   <title>Pet Health Blog | Stackly Veterinary Hospital Salem</title>
   <meta name="description" content="Read expert veterinary articles on puppy vaccination schedules, cat nutrition, seasonal tick protection, and pet wellness tips from Stackly doctors.">
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-<!-- Top Bar -->
+
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-info">
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <!-- Header -->
+
     <header class="navbar">
     <div class="container navbar-bar">
       <a href="index.html" class="brand-logo">
@@ -106,15 +106,15 @@
       <p>Practical tips on nutrition, vaccines, dental care, and emergency readiness.</p>
       <div class="page-hero-actions">
         <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Visit</a>
-        <a href="tel:+919876543210" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call Now</a>
+        <a href="404.html" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call Now</a>
       </div>
     </div>
   </section>
 
-  <!-- Blog Main Section -->
+
   <section class="section">
     <div class="container">
-      <!-- Magazine Spotlight Article -->
+
       <div class="blog-spotlight reveal-item">
         <div class="blog-spotlight-img">
           <img src="assets/inside_surgery_suite.webp" alt="Pet Surgery Preparation Guide">
@@ -134,18 +134,18 @@
         </div>
       </div>
 
-      <!-- Filter Bar -->
+
       <div class="filter-bar reveal-item">
-        <button type="button" class="filter-btn active">All Articles</button>
-        <button type="button" class="filter-btn">Canine Health</button>
-        <button type="button" class="filter-btn">Feline Care</button>
-        <button type="button" class="filter-btn">Surgeries &amp; Anesthesia</button>
-        <button type="button" class="filter-btn">Dental &amp; Skin</button>
+        <button type="button" class="filter-btn active" data-filter="all">All Articles</button>
+        <button type="button" class="filter-btn" data-filter="canine-health">Canine Health</button>
+        <button type="button" class="filter-btn" data-filter="feline-care">Feline Care</button>
+        <button type="button" class="filter-btn" data-filter="surgeries-anesthesia">Surgeries &amp; Anesthesia</button>
+        <button type="button" class="filter-btn" data-filter="dental-skin">Dental &amp; Skin</button>
       </div>
 
-      <!-- Magazine Articles Grid -->
+
       <div class="blog-magazine-grid">
-        <article class="blog-magazine-card reveal-item" data-delay="1">
+        <article class="blog-magazine-card reveal-item" data-category="canine-health" data-delay="1">
           <div class="blog-magazine-img">
             <img src="assets/karlo-tottoc-ybZ5hRxaWS4-unsplash.webp" alt="Puppy Vaccination Guide">
           </div>
@@ -160,7 +160,7 @@
           </div>
         </article>
 
-        <article class="blog-magazine-card reveal-item" data-delay="2">
+        <article class="blog-magazine-card reveal-item" data-category="dental-skin" data-delay="2">
           <div class="blog-magazine-img">
             <img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" alt="Ear Infection Symptoms">
           </div>
@@ -175,7 +175,7 @@
           </div>
         </article>
 
-        <article class="blog-magazine-card reveal-item" data-delay="3">
+        <article class="blog-magazine-card reveal-item" data-category="feline-care" data-delay="3">
           <div class="blog-magazine-img">
             <img src="assets/story_persian_cat.webp" alt="Feline Hydration Tips">
           </div>
@@ -190,7 +190,7 @@
           </div>
         </article>
 
-        <article class="blog-magazine-card reveal-item" data-delay="1">
+        <article class="blog-magazine-card reveal-item" data-category="canine-health" data-delay="1">
           <div class="blog-magazine-img">
             <img src="assets/story_beagle_bruno.webp" alt="Canine Joint Health">
           </div>
@@ -205,7 +205,7 @@
           </div>
         </article>
 
-        <article class="blog-magazine-card reveal-item" data-delay="2">
+        <article class="blog-magazine-card reveal-item" data-category="dental-skin" data-delay="2">
           <div class="blog-magazine-img">
             <img src="assets/ask_stackly_consult.webp" alt="Dental Care Routine">
           </div>
@@ -220,7 +220,7 @@
           </div>
         </article>
 
-        <article class="blog-magazine-card reveal-item" data-delay="3">
+        <article class="blog-magazine-card reveal-item" data-category="surgeries-anesthesia" data-delay="3">
           <div class="blog-magazine-img">
             <img src="assets/story_indie_dog.webp" alt="Pet First Aid Kit">
           </div>
@@ -238,7 +238,7 @@
     </div>
   </section>
 
-  <!-- New Section 1: Weekly Pet Health Newsletter Banner -->
+
   <section class="section-sm container">
     <div class="cta-banner reveal-item" style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:28px; align-items:center; padding:28px 36px;">
       <div class="cta-banner-bg"></div>
@@ -247,7 +247,7 @@
         <h2 style="font-size:clamp(1.5rem, 2.5vw, 2.05rem); margin:8px 0 10px;">Subscribe To Stackly Pet Parent Health Digest</h2>
         <p style="font-size:0.92rem; color:rgba(255,255,255,0.9); margin-bottom:18px; line-height:1.55;">Get monthly vet advice, seasonal vaccination reminders, and grooming tips delivered to your inbox.</p>
         <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';" style="max-width:100%;">
-          <input type="email" placeholder="Enter Email Address" style="color:var(--dark);" required>
+          <input type="email" placeholder="Enter Email Address" style="color:#ffffff;" required>
           <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
         </form>
       </div>
@@ -309,22 +309,22 @@
     </div>
   </section>
 
-  <!-- Footer -->
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <!-- Col 1: Brand Info -->
+
         <div class="footer-col footer-brand">
           <img src="assets/footer-logo.webp" alt="Stackly Logo Footer">
           <p>Stackly Veterinary Hospital & Pet Care Clinic delivers world-class medical treatment, surgery, and wellness care for all companion animals in Salem.</p>
-          
+
           <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
             <input type="email" placeholder="Enter Email Address" required>
             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
           </form>
         </div>
 
-        <!-- Col 2: Specialty Services -->
+
         <div class="footer-col">
           <h4>Our Services</h4>
           <ul class="footer-links">
@@ -337,7 +337,7 @@
           </ul>
         </div>
 
-        <!-- Col 3: Quicklinks -->
+
         <div class="footer-col">
           <h4>Quicklinks</h4>
           <ul class="footer-links">
@@ -350,7 +350,7 @@
           </ul>
         </div>
 
-        <!-- Col 4: Opening Hours -->
+
         <div class="footer-col">
           <h4>Opening Hours</h4>
           <div class="opening-hours-list">

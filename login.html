@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In & Portal Access | Stackly Veterinary Hospital</title>
+  <title>Sign In &amp; Portal Access | Stackly Veterinary Hospital</title>
   <meta name="description" content="Log in to Stackly Pet Care Portal. Access pet medical records as a Pet Owner or manage hospital schedules as Admin/Vet Staff.">
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -44,97 +44,168 @@
     </div>
   </div>
 
-<header class="navbar">
-    <div class="container navbar-bar">
-      <a href="index.html" class="brand-logo">
-        <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
-      </a>
-      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <div class="nav-panel" id="nav-panel">
-        <div class="nav-panel-header">
-          <a href="index.html" class="brand-logo nav-panel-brand">
-            <img src="assets/logo.webp" alt="Stackly Veterinary Hospital Logo">
+  <div class="auth-split-screen">
+
+    <div class="auth-content-side">
+      <div class="auth-content-bg">
+        <img src="assets/veterinarian-taking-care-pet-dog.webp" alt="Stackly Pet Care">
+      </div>
+
+      <div class="auth-content-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
+          <a href="index.html" class="brand-logo">
+            <img src="assets/logo.webp" alt="Stackly Logo" style="height:48px;filter:brightness(0) invert(1) drop-shadow(0 4px 12px rgba(224,109,83,0.4));">
           </a>
-          <button type="button" class="nav-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+          <span class="emergency-live-pill">
+            <i class="fa-solid fa-circle"></i> 24/7 Salem ICU Active
+          </span>
         </div>
-        <ul class="nav-menu">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="services.html" class="nav-link">Services</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-        <div class="nav-actions">
-          <a href="contact.html#book-visit" class="btn btn-primary">Book Visit</a>
+
+        <div style="margin-bottom:14px;">
+          <span class="section-tag" style="background:linear-gradient(90deg, rgba(224,109,83,0.35), rgba(244,162,97,0.35));color:#ffe8c8;border:1px solid rgba(255,255,255,0.25);">
+            <i class="fa-solid fa-shield-heart"></i> Pet Parent Digital Portal
+          </span>
+        </div>
+
+        <h1 style="font-size:clamp(1.9rem, 3.4vw, 2.7rem);color:#ffffff;margin-bottom:16px;line-height:1.2;font-weight:800;text-shadow:0 4px 16px rgba(0,0,0,0.5);">
+          Advanced Veterinary Care &amp; Health Records At Your Fingertips
+        </h1>
+
+        <p style="font-size:1.02rem;color:rgba(255,255,255,0.92);margin-bottom:28px;line-height:1.65;max-width:500px;text-shadow:0 2px 8px rgba(0,0,0,0.4);">
+          Sign in to access digital vaccination passports, download blood &amp; ultrasound scan reports, view ongoing prescription doses, and schedule priority doctor consults.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
+          <div class="auth-feature-card">
+            <div style="width:44px;height:44px;border-radius:14px;background:rgba(244,162,97,0.25);color:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+              <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <div>
+              <strong style="font-size:0.98rem;color:#fff;display:block;">Electronic Health &amp; Vaccine Passports</strong>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Instant PDF downloads of medical history &amp; lab results</span>
+            </div>
+          </div>
+
+          <div class="auth-feature-card">
+            <div style="width:44px;height:44px;border-radius:14px;background:rgba(224,109,83,0.3);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div>
+              <strong style="font-size:0.98rem;color:#fff;display:block;">12 Specialist Surgeons &amp; Clinicians On Call</strong>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Feline cardiology, orthopedics, cytology &amp; ICU experts</span>
+            </div>
+          </div>
+
+          <div class="auth-feature-card">
+            <div style="width:44px;height:44px;border-radius:14px;background:rgba(74,222,128,0.25);color:#4ade80;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+              <i class="fa-solid fa-truck-medical"></i>
+            </div>
+            <div>
+              <strong style="font-size:0.98rem;color:#fff;display:block;">24/7 Priority Emergency Ambulance Triage</strong>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Climate-controlled transport with onboard oxygen</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(15,23,42,0.65);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.25);padding:16px 20px;border-radius:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;max-width:500px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="avatar-group">
+              <img src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh Kumar">
+              <img src="assets/dr_priya_sharma.webp" alt="Dr. Priya Sharma">
+              <img src="assets/dr_anitha_ramesh.webp" alt="Dr. Anitha Ramesh">
+              <img src="assets/dr_senthil_nathan.webp" alt="Dr. Senthil Nathan">
+            </div>
+            <div>
+              <strong style="font-size:0.95rem;color:#fff;display:block;">Top Rated Salem Vets</strong>
+              <span style="font-size:0.78rem;color:var(--secondary);"><i class="fa-solid fa-star"></i> 4.9 / 5.0 Rating</span>
+            </div>
+          </div>
+
+          <div style="border-left:1px solid rgba(255,255,255,0.2);padding-left:14px;">
+            <strong style="font-size:1.15rem;color:var(--secondary);display:block;line-height:1;">15k+</strong>
+            <span style="font-size:0.75rem;color:rgba(255,255,255,0.8);">Pets Cared For</span>
+          </div>
         </div>
       </div>
+
     </div>
-  </header>
 
-  <main class="container" style="flex:1;">
-    <div class="auth-card reveal-item">
-      <img src="assets/logo.webp" alt="Stackly" style="height:48px;display:block;margin:0 auto 10px;">
-      <h2>Stackly Portal Access</h2>
-      <p class="auth-sub">Sign in as a pet parent or hospital staff.</p>
-
-      <form id="loginForm" novalidate>
-        <div class="role-cards" id="loginRoles">
-          <label class="role-card is-selected">
-            <input type="radio" name="role" value="customer" checked>
-            <i class="fa-solid fa-paw"></i>
-            <strong>Pet Owner</strong>
-            <span>Customer portal</span>
-          </label>
-          <label class="role-card">
-            <input type="radio" name="role" value="admin">
-            <i class="fa-solid fa-user-doctor"></i>
-            <strong>Vet Staff</strong>
-            <span>Admin dashboard</span>
-          </label>
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border-color);">
+          <a href="index.html" class="brand-logo" style="display:inline-flex;">
+            <img src="assets/logo.webp" alt="Stackly Logo" style="height:40px;">
+          </a>
+          <a href="index.html" style="font-size:0.88rem;font-weight:700;color:var(--primary);display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+            <i class="fa-solid fa-house"></i> Back to Home
+          </a>
+        </div>
+        <div style="text-align:center;margin-bottom:18px;">
+          <h2 style="font-size:1.6rem;color:var(--dark);margin-bottom:4px;">Stackly Portal Access</h2>
+          <p class="auth-sub" style="margin-bottom:0;">Sign in as a pet parent or hospital staff.</p>
         </div>
 
-        <div class="form-group">
-          <label for="signInName">Full Name</label>
-          <input id="signInName" name="fullname" type="text" placeholder="Your full name" autocomplete="name">
-          <div class="field-error" id="signInNameError"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="signInEmail">Email Address</label>
-          <input id="signInEmail" name="email" type="email" placeholder="name@domain.com" autocomplete="email">
-          <div class="field-error" id="signInEmailError"></div>
-        </div>
-
-        <div class="form-group">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <label for="signInPassword">Password</label>
-            <a href="404.html" style="font-size:0.78rem;color:var(--primary);">Forgot Password?</a>
+        <form id="loginForm" novalidate>
+          <div class="role-cards" id="loginRoles">
+            <label class="role-card is-selected">
+              <input type="radio" name="role" value="customer" checked>
+              <i class="fa-solid fa-paw"></i>
+              <strong>Pet Owner</strong>
+              <span>Customer portal</span>
+            </label>
+            <label class="role-card">
+              <input type="radio" name="role" value="admin">
+              <i class="fa-solid fa-user-doctor"></i>
+              <strong>Vet Staff</strong>
+              <span>Admin dashboard</span>
+            </label>
           </div>
-          <div class="password-wrap">
-            <input id="signInPassword" name="password" type="password" placeholder="••••••••" autocomplete="current-password">
-            <button type="button" class="toggle-password" data-target="signInPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+
+          <div class="form-group">
+            <label for="signInName">Full Name</label>
+            <input id="signInName" name="fullname" type="text" placeholder="Your full name" autocomplete="name">
+            <div class="field-error" id="signInNameError"></div>
           </div>
-          <div class="field-error" id="signInPasswordError"></div>
+
+          <div class="form-group">
+            <label for="signInEmail">Email Address</label>
+            <input id="signInEmail" name="email" type="email" placeholder="name@domain.com" autocomplete="email">
+            <div class="field-error" id="signInEmailError"></div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label for="signInPassword">Password</label>
+              <a href="404.html" style="font-size:0.78rem;color:var(--primary);font-weight:600;">Forgot Password?</a>
+            </div>
+            <div class="password-wrap">
+              <input id="signInPassword" name="password" type="password" placeholder="••••••••" autocomplete="current-password">
+              <button type="button" class="toggle-password" data-target="signInPassword" aria-label="Show password" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
+            </div>
+            <div class="field-error" id="signInPasswordError"></div>
+          </div>
+
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;margin:6px 0 14px;color:var(--text-muted);">
+            <input type="checkbox" id="rememberMe"> Remember login on this device
+          </label>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;padding:12px 16px;font-size:1rem;">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
+          </button>
+        </form>
+
+        <div class="auth-divider">OR CONTINUE WITH</div>
+        <div class="social-auth">
+          <a href="404.html" onclick="event.preventDefault(); window.location.href='404.html';"><i class="fa-brands fa-google"></i> Google</a>
+          <a href="404.html" onclick="event.preventDefault(); window.location.href='404.html';"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
         </div>
 
-        <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;margin:8px 0 16px;color:var(--text-muted);">
-          <input type="checkbox" id="rememberMe"> Remember login on this device
-        </label>
-
-        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard</button>
-      </form>
-
-      <div class="auth-divider">OR CONTINUE WITH</div>
-      <div class="social-auth">
-        <a href="404.html"><i class="fa-brands fa-google"></i> Google</a>
-        <a href="404.html"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+        <p style="text-align:center;margin-top:18px;font-size:0.85rem;color:var(--text-muted);">
+          New here? <a href="get-started.html" style="color:var(--primary);font-weight:700;">Create an account to register</a>
+        </p>
       </div>
-
-      <p style="text-align:center;margin-top:18px;font-size:0.85rem;color:var(--text-muted);">
-        New here? <a href="get-started.html" style="color:var(--primary);font-weight:700;">Book a visit to register</a>
-      </p>
     </div>
-  </main>
+  </div>
 
   <div class="stackly-overlay" id="loginConfirmOverlay" aria-live="polite">
     <div class="stackly-modal">
@@ -144,9 +215,6 @@
     </div>
   </div>
 
-  <footer style="background:var(--dark);color:#9ca3af;padding:15px 0;text-align:center;font-size:0.82rem;">
-    <div class="container">&copy; 2026 Stackly Veterinary Hospital. MMR Complex, Salem.</div>
-  </footer>
   <script src="script.js"></script>
 </body>
 </html>

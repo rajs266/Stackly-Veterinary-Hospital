@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hospital Admin Portal | Stackly Veterinary Hospital</title>
-  <meta name="description" content="Admin and doctor staff portal for Stackly Veterinary Hospital Salem. Manage patient triage, surgical schedules, and revenue stats.">
+  <meta name="description" content="Admin portal for Stackly Veterinary Hospital Salem — manage triage queue, patients, doctors, and revenue.">
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dash-page dash-page-admin">
   <div id="site-preloader" class="site-preloader" aria-live="polite" aria-busy="true">
     <div class="preloader-bg"></div>
     <div class="preloader-waves" aria-hidden="true">
@@ -23,15 +22,9 @@
     <div class="preloader-inner">
       <div class="preloader-spinner" aria-hidden="true">
         <div class="spin-halo"></div>
-        <svg class="spin-ring spin-ring-a" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="52" pathLength="100"></circle>
-        </svg>
-        <svg class="spin-ring spin-ring-b" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="42" pathLength="100"></circle>
-        </svg>
-        <svg class="spin-ring spin-ring-c" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="32" pathLength="100"></circle>
-        </svg>
+        <svg class="spin-ring spin-ring-a" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" pathLength="100"></circle></svg>
+        <svg class="spin-ring spin-ring-b" viewBox="0 0 120 120"><circle cx="60" cy="60" r="42" pathLength="100"></circle></svg>
+        <svg class="spin-ring spin-ring-c" viewBox="0 0 120 120"><circle cx="60" cy="60" r="32" pathLength="100"></circle></svg>
         <div class="spin-core">
           <svg class="spin-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
             <path class="spin-heart" d="M32 54S10 40 10 24c0-8 6-14 14-14 5 0 8 3 8 3s3-3 8-3c8 0 14 6 14 14 0 16-22 30-22 30z"/>
@@ -45,137 +38,549 @@
     </div>
   </div>
 
-<!-- Admin Header -->
-  <header class="navbar dash-navbar" style="background: var(--dark); color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1);">
-    <div class="container dash-navbar-bar">
-      <a href="index.html" class="brand-logo">
-        <img src="assets/logo.webp" alt="Stackly Logo">
-      </a>
-
-      <div class="dash-navbar-meta">
-        <span class="badge-status badge-emergency"><i class="fa-solid fa-bolt"></i> 24/7 Trauma Triage Active</span>
-        <div class="dash-user">
-          <div class="dash-avatar">DR</div>
-          <div>
-            <div class="dash-user-name" style="color:#fff;">Dr. Rajesh Kumar</div>
-            <div class="dash-user-role">Chief Vet Surgeon</div>
+  <div class="page-wrapper">
+    <div class="dash-layout">
+      <aside class="dash-sidebar" id="dashSidebar">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar js-user-initials">DR</div>
+          <div class="sidebar-user-details">
+            <div class="sidebar-user-name js-user-name">Dr. Rajesh Kumar</div>
+            <div class="sidebar-user-email js-user-email">admin@stackly.com</div>
           </div>
         </div>
-        <a href="login.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+        <div class="sidebar-role-card admin">
+          <i class="fas fa-user-shield"></i> <span>HOSPITAL ADMIN</span>
+        </div>
+        <div class="dash-sidebar-nav-container">
+          <div class="dash-nav-label">Overview</div>
+          <button type="button" class="dash-nav-btn active" data-target="overview"><i class="fas fa-house"></i> Dashboard</button>
+          <div class="dash-nav-label">Hospital</div>
+          <button type="button" class="dash-nav-btn" data-target="patients"><i class="fas fa-hospital-user"></i> Patients</button>
+          <button type="button" class="dash-nav-btn" data-target="queue"><i class="fas fa-clipboard-list"></i> Queue</button>
+          <button type="button" class="dash-nav-btn" data-target="doctors"><i class="fas fa-user-doctor"></i> Doctors</button>
+          <button type="button" class="dash-nav-btn" data-target="services"><i class="fas fa-kit-medical"></i> Services</button>
+          <button type="button" class="dash-nav-btn" data-target="revenue"><i class="fas fa-indian-rupee-sign"></i> Revenue</button>
+          <button type="button" class="dash-nav-btn" data-target="reports"><i class="fas fa-chart-line"></i> Reports</button>
+          <div class="dash-nav-label">Account</div>
+          <button type="button" class="dash-nav-btn" data-target="notifications"><i class="fas fa-bell"></i> Notifications</button>
+          <button type="button" class="dash-nav-btn" data-target="settings"><i class="fas fa-gear"></i> Settings</button>
+          <button type="button" class="dash-nav-btn" data-target="support"><i class="fas fa-circle-question"></i> Support</button>
+        </div>
+        <button type="button" class="dash-nav-btn dash-logout-btn" data-logout><i class="fas fa-right-from-bracket"></i> Logout</button>
+      </aside>
+
+      <div class="dash-sidebar-overlay" id="dashOverlay"></div>
+
+      <header class="dash-top">
+        <div class="dash-top-left">
+          <div class="dash-top-logo-zone">
+            <button type="button" class="dash-menu-toggle" id="dashMenuToggle" aria-label="Open menu" aria-expanded="false">
+              <span class="menu-icon" aria-hidden="true"><i class="fas fa-bars"></i></span>
+              <span class="close-icon" aria-hidden="true"><i class="fas fa-xmark"></i></span>
+            </button>
+            <a href="index.html" class="dash-top-logo"><img src="assets/logo.webp" alt="Stackly"></a>
+            <div class="dash-top-divider"></div>
+          </div>
+          <div class="dash-top-welcome">
+            <h2>Welcome back, <span class="js-user-name">Dr. Rajesh</span></h2>
+            <p>Salem clinic command center — live triage & ops.</p>
+          </div>
+        </div>
+        <div class="dash-top-right">
+          <button type="button" class="dash-bell" data-target="notifications" title="Notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i><span class="dot"></span>
+          </button>
+          <div class="dash-user">
+            <div class="dash-avatar js-user-initials">DR</div>
+            <div class="dash-user-details">
+              <div class="dash-user-name js-user-name">Dr. Rajesh Kumar</div>
+              <div class="sidebar-user-email js-user-email">admin@stackly.com</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dash-main">
+
+        <section class="dash-panel active" id="section-overview">
+          <div class="dash-card welcome-hub" style="background: linear-gradient(120deg, rgba(30, 41, 59, 0.92), rgba(224,109,83,0.55)), url('assets/inside_surgery_suite.webp') center/cover;">
+            <div class="welcome-hub-main">
+              <div class="welcome-head-inline">
+                <h3>Hospital Command Center</h3>
+                <span class="welcome-tag"><span class="pulse-dot"></span> Live Ops</span>
+              </div>
+              <p>Queue, theatre, and billing for Stackly Salem — all in one hub.</p>
+            </div>
+            <div class="welcome-strip">
+              <div class="welcome-stat-pill">
+                <div class="stat-ico"><i class="fas fa-clipboard-list"></i></div>
+                <div class="stat-info">
+                  <h4>18</h4>
+                  <p>Queue Today</p>
+                </div>
+              </div>
+              <div class="welcome-stat-pill">
+                <div class="stat-ico"><i class="fas fa-scissors"></i></div>
+                <div class="stat-info">
+                  <h4>3</h4>
+                  <p>In Surgery</p>
+                </div>
+              </div>
+              <div class="welcome-stat-pill">
+                <div class="stat-ico"><i class="fas fa-triangle-exclamation"></i></div>
+                <div class="stat-info">
+                  <h4>2</h4>
+                  <p>Critical</p>
+                </div>
+              </div>
+              <div class="welcome-right-cards">
+                <div class="welcome-feature-card">
+                  <img src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh Kumar">
+                  <div class="feature-body">
+                    <span class="feature-badge"><i class="fas fa-user-shield"></i> Chief Vet</span>
+                    <h5 class="feature-title">Dr. Rajesh</h5>
+                    <p class="feature-sub"><i class="fas fa-circle-check"></i> On Duty</p>
+                  </div>
+                </div>
+                <div class="welcome-feature-card">
+                  <img src="assets/inside_surgery_suite.webp" alt="Surgery Suite">
+                  <div class="feature-body">
+                    <span class="feature-badge" style="color: #4caf50;"><i class="fas fa-hospital"></i> ICU Bay</span>
+                    <h5 class="feature-title">Theatre 1</h5>
+                    <p class="feature-sub"><i class="fas fa-clock"></i> Live Ops</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-grid dash-grid-4">
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-clipboard-list"></i></div><h3>18</h3><p>Queue Today</p></div>
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-scissors"></i></div><h3>3</h3><p>In Surgery</p></div>
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-indian-rupee-sign"></i></div><h3>₹48k</h3><p>Billing Today</p></div>
+            <div class="dash-card dash-card-bounce-icon"><div class="dash-ico"><i class="fas fa-triangle-exclamation"></i></div><h3>2</h3><p>Critical</p></div>
+          </div>
+
+          <div class="dash-grid dash-grid-2" style="margin-top: 22px; grid-template-columns: 2fr 1fr;">
+            <div class="dash-card">
+              <div class="dash-card-head">
+                <h3 class="dash-card-title">Live Triage Queue</h3>
+                <button type="button" class="btn btn-outline btn-sm" data-target="queue">Open Queue</button>
+              </div>
+              <div class="table-scroll">
+                <table class="dash-table">
+                  <thead><tr><th>Patient</th><th>Species</th><th>Reason</th><th>Priority</th><th>Action</th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td>Bruno (Beagle)</td><td>Canine</td><td>Fever / lethargy</td>
+                      <td><span class="pill warn">Urgent</span></td>
+                      <td><button type="button" class="btn btn-primary btn-xs action-confirm-btn" data-booking-action="approve">Confirm</button></td>
+                    </tr>
+                    <tr>
+                      <td>Misty (Persian)</td><td>Feline</td><td>Dental pain</td>
+                      <td><span class="pill">Routine</span></td>
+                      <td><button type="button" class="btn btn-primary btn-xs action-confirm-btn" data-booking-action="approve">Confirm</button></td>
+                    </tr>
+                    <tr>
+                      <td>Rocky (Indie)</td><td>Canine</td><td>Trauma — limp</td>
+                      <td><span class="pill bad">Critical</span></td>
+                      <td><button type="button" class="btn btn-primary btn-xs action-confirm-btn" data-booking-action="approve">Confirm</button></td>
+                    </tr>
+                    <tr>
+                      <td>Luna (Lab)</td><td>Canine</td><td>Vaccination</td>
+                      <td><span class="pill">Routine</span></td>
+                      <td><button type="button" class="btn btn-primary btn-xs action-confirm-btn" data-booking-action="approve">Confirm</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 14px;">Quick Actions</h3>
+              <div class="qa-grid">
+                <button type="button" class="qa-btn" data-target="queue"><i class="fas fa-list-check"></i> Manage Queue</button>
+                <button type="button" class="qa-btn" data-target="patients"><i class="fas fa-dog"></i> Patients</button>
+                <button type="button" class="qa-btn" data-target="doctors"><i class="fas fa-user-doctor"></i> Doctors</button>
+                <button type="button" class="qa-btn" data-target="revenue"><i class="fas fa-chart-pie"></i> Revenue</button>
+              </div>
+              <h3 class="dash-card-title" style="margin: 22px 0 12px;">Doctors on Duty</h3>
+              <div class="duty-row">
+                <img src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh">
+                <div><strong>Dr. Rajesh Kumar</strong><p>Surgery · OR 1</p></div>
+                <span class="status-dot status-dot--live"></span>
+              </div>
+              <div class="duty-row">
+                <img src="assets/dr_priya_sharma.webp" alt="Dr. Priya">
+                <div><strong>Dr. Priya Sharma</strong><p>OPD · Room 2</p></div>
+                <span class="status-dot status-dot--live"></span>
+              </div>
+              <div class="duty-row">
+                <img src="assets/dr_anitha_ramesh.webp" alt="Dr. Anitha">
+                <div><strong>Dr. Anitha Ramesh</strong><p>Dental · Suite B</p></div>
+                <span class="status-dot status-dot--live"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-patients">
+          <div class="dash-card-head" style="margin-bottom: 18px;">
+            <div>
+              <h2 class="dash-section-title">Patient Directory</h2>
+              <p class="dash-section-sub">Searchable records across Salem branch.</p>
+            </div>
+          </div>
+          <div class="dash-card" style="margin-bottom: 22px;">
+            <div class="dash-search-wrap">
+              <i class="fas fa-magnifying-glass"></i>
+              <input type="search" id="patientSearch" class="dash-search" placeholder="Search by pet, owner, or species…" aria-label="Search patients">
+            </div>
+            <div class="table-scroll" style="margin-top: 16px;">
+              <table class="dash-table" id="patientTable">
+                <thead><tr><th>Pet</th><th>Owner</th><th>Species</th><th>Last Visit</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr data-search="bruno anbarasan canine beagle"><td>Bruno</td><td>Anbarasan K</td><td>Canine</td><td>Jun 30, 2026</td><td><span class="pill">Active</span></td></tr>
+                  <tr data-search="misty anbarasan feline persian"><td>Misty</td><td>Anbarasan K</td><td>Feline</td><td>Jun 12, 2026</td><td><span class="pill warn">Watch</span></td></tr>
+                  <tr data-search="indie anbarasan canine indie"><td>Indie</td><td>Anbarasan K</td><td>Canine</td><td>Jul 18, 2026</td><td><span class="pill">Recovering</span></td></tr>
+                  <tr data-search="rocky meera canine indie"><td>Rocky</td><td>Meera N</td><td>Canine</td><td>Aug 5, 2026</td><td><span class="pill bad">Critical</span></td></tr>
+                  <tr data-search="luna karthik canine lab"><td>Luna</td><td>Karthik S</td><td>Canine</td><td>Jul 28, 2026</td><td><span class="pill">Active</span></td></tr>
+                  <tr data-search="oreo deepa feline"><td>Oreo</td><td>Deepa R</td><td>Feline</td><td>Jul 10, 2026</td><td><span class="pill">Active</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="dash-grid dash-grid-3">
+            <div class="dash-card species-card">
+              <div class="dash-card-img"><img src="assets/story_beagle_bruno_card.webp" alt="Canines"></div>
+              <h3 class="dash-card-title">Canines</h3>
+              <p>142 active patients · 9 in queue today</p>
+            </div>
+            <div class="dash-card species-card">
+              <div class="dash-card-img"><img src="assets/story_persian_cat_card.webp" alt="Felines"></div>
+              <h3 class="dash-card-title">Felines</h3>
+              <p>86 active patients · 5 dental holds</p>
+            </div>
+            <div class="dash-card species-card">
+              <div class="dash-card-img"><img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" alt="Exotics"></div>
+              <h3 class="dash-card-title">Exotics & Birds</h3>
+              <p>24 registered · specialist Thursdays</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-queue">
+          <h2 class="dash-section-title">Appointment Queue</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Approve, confirm, or decline booking requests.</p>
+          <div class="dash-card">
+            <div class="table-scroll">
+              <table class="dash-table">
+                <thead><tr><th>Time</th><th>Pet / Owner</th><th>Service</th><th>Doctor Pref</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>09:15</td><td>Bruno / Anbarasan</td><td>Wellness</td><td>Dr. Priya</td>
+                    <td><span class="pill warn">Pending</span></td>
+                    <td class="queue-actions">
+                      <button type="button" class="btn btn-primary btn-xs" data-booking-action="approve">Approve</button>
+                      <button type="button" class="btn btn-outline btn-xs" data-booking-action="decline">Decline</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>10:00</td><td>Rocky / Meera</td><td>Trauma</td><td>Dr. Rajesh</td>
+                    <td><span class="pill warn">Pending</span></td>
+                    <td class="queue-actions">
+                      <button type="button" class="btn btn-primary btn-xs" data-booking-action="approve">Confirm</button>
+                      <button type="button" class="btn btn-outline btn-xs" data-booking-action="decline">Decline</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>11:30</td><td>Misty / Anbarasan</td><td>Dental</td><td>Dr. Anitha</td>
+                    <td><span class="pill warn">Pending</span></td>
+                    <td class="queue-actions">
+                      <button type="button" class="btn btn-primary btn-xs" data-booking-action="approve">Approve</button>
+                      <button type="button" class="btn btn-outline btn-xs" data-booking-action="decline">Decline</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>14:00</td><td>Luna / Karthik</td><td>Vaccination</td><td>Any</td>
+                    <td><span class="pill warn">Pending</span></td>
+                    <td class="queue-actions">
+                      <button type="button" class="btn btn-primary btn-xs" data-booking-action="approve">Approve</button>
+                      <button type="button" class="btn btn-outline btn-xs" data-booking-action="decline">Decline</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>15:45</td><td>Oreo / Deepa</td><td>Grooming</td><td>Groom Bay</td>
+                    <td><span class="pill warn">Pending</span></td>
+                    <td class="queue-actions">
+                      <button type="button" class="btn btn-primary btn-xs" data-booking-action="approve">Approve</button>
+                      <button type="button" class="btn btn-outline btn-xs" data-booking-action="decline">Decline</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-doctors">
+          <h2 class="dash-section-title">Doctor Roster</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Specialists on the Stackly Salem team.</p>
+          <div class="dash-grid dash-grid-3">
+            <div class="dash-card doctor-card">
+              <img class="doctor-photo" src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh Kumar">
+              <h3 class="dash-card-title">Dr. Rajesh Kumar</h3>
+              <p>Chief Vet Surgeon · Orthopedics</p>
+              <div class="rating"><i class="fas fa-star"></i> 4.9 · 12 yrs</div>
+            </div>
+            <div class="dash-card doctor-card">
+              <img class="doctor-photo" src="assets/dr_priya_sharma.webp" alt="Dr. Priya Sharma">
+              <h3 class="dash-card-title">Dr. Priya Sharma</h3>
+              <p>Internal Medicine · Wellness</p>
+              <div class="rating"><i class="fas fa-star"></i> 4.8 · 9 yrs</div>
+            </div>
+            <div class="dash-card doctor-card">
+              <img class="doctor-photo" src="assets/dr_anitha_ramesh.webp" alt="Dr. Anitha Ramesh">
+              <h3 class="dash-card-title">Dr. Anitha Ramesh</h3>
+              <p>Dental & Soft Tissue</p>
+              <div class="rating"><i class="fas fa-star"></i> 4.7 · 8 yrs</div>
+            </div>
+            <div class="dash-card doctor-card">
+              <img class="doctor-photo" src="assets/dr_senthil_nathan.webp" alt="Dr. Senthil Nathan">
+              <h3 class="dash-card-title">Dr. Senthil Nathan</h3>
+              <p>Emergency & Critical Care</p>
+              <div class="rating"><i class="fas fa-star"></i> 4.8 · 11 yrs</div>
+            </div>
+            <div class="dash-card doctor-card">
+              <img class="doctor-photo" src="assets/dr_meera_nambiar.webp" alt="Dr. Meera Nambiar">
+              <h3 class="dash-card-title">Dr. Meera Nambiar</h3>
+              <p>Dermatology · Allergy</p>
+              <div class="rating"><i class="fas fa-star"></i> 4.6 · 7 yrs</div>
+            </div>
+            <div class="dash-card doctor-card">
+              <img class="doctor-photo" src="assets/dr_vikram_sethi.webp" alt="Dr. Vikram Sethi">
+              <h3 class="dash-card-title">Dr. Vikram Sethi</h3>
+              <p>Imaging · Diagnostics</p>
+              <div class="rating"><i class="fas fa-star"></i> 4.7 · 10 yrs</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-services">
+          <h2 class="dash-section-title">Services & Programs</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Packages offered at the Salem hospital.</p>
+          <div class="dash-grid dash-grid-2">
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/inside_surgery_suite.webp" alt="Surgery"></div>
+              <h3 class="dash-card-title">Surgery Suite</h3>
+              <p>Orthopedic, soft-tissue, and emergency procedures with dedicated recovery bays.</p>
+              <span class="pill" style="margin-top: 10px;">From ₹8,500</span>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/female-vet-using-otoscope-examine-ear-beautiful-beagle-dog-sick-cute-pet-sitting-examination-table-animal-clinic.webp" alt="Dental"></div>
+              <h3 class="dash-card-title">Dental Care</h3>
+              <p>Full mouth exams, scaling, extractions, and pain-managed recovery.</p>
+              <span class="pill" style="margin-top: 10px;">From ₹3,200</span>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/pet_grooming_service.webp" alt="Grooming"></div>
+              <h3 class="dash-card-title">Grooming</h3>
+              <p>Medicated baths, dematting, and breed-specific coat care.</p>
+              <span class="pill" style="margin-top: 10px;">From ₹1,200</span>
+            </div>
+            <div class="dash-card dash-card-tilt">
+              <div class="dash-card-img"><img src="assets/care_program_wellness.webp" alt="Wellness"></div>
+              <h3 class="dash-card-title">Wellness Program</h3>
+              <p>Annual vaccine packs, parasite control, and nutrition consults.</p>
+              <span class="pill" style="margin-top: 10px;">From ₹4,999 / yr</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-revenue">
+          <h2 class="dash-section-title">Revenue</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Billing snapshot for Salem branch.</p>
+          <div class="dash-grid dash-grid-4" style="margin-bottom: 22px;">
+            <div class="dash-card"><h3>₹48.2k</h3><p>Today</p></div>
+            <div class="dash-card"><h3>₹3.1L</h3><p>This Week</p></div>
+            <div class="dash-card"><h3>₹12.4L</h3><p>This Month</p></div>
+            <div class="dash-card"><h3>94%</h3><p>Collection Rate</p></div>
+          </div>
+          <div class="dash-card">
+            <h3 class="dash-card-title" style="margin-bottom: 12px;">Recent Transactions</h3>
+            <div class="table-scroll">
+              <table class="dash-table">
+                <thead><tr><th>Invoice</th><th>Patient</th><th>Service</th><th>Amount</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>#SV-4821</td><td>Indie</td><td>Ortho review</td><td>₹2,800</td><td><span class="pill">Paid</span></td></tr>
+                  <tr><td>#SV-4820</td><td>Bruno</td><td>Vaccines</td><td>₹1,650</td><td><span class="pill">Paid</span></td></tr>
+                  <tr><td>#SV-4819</td><td>Misty</td><td>Dental consult</td><td>₹900</td><td><span class="pill warn">Pending</span></td></tr>
+                  <tr><td>#SV-4818</td><td>Rocky</td><td>Trauma triage</td><td>₹4,200</td><td><span class="pill">Paid</span></td></tr>
+                  <tr><td>#SV-4817</td><td>Luna</td><td>Wellness pack</td><td>₹3,500</td><td><span class="pill">Paid</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-reports">
+          <h2 class="dash-section-title">Reports</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Operational health for the week.</p>
+          <div class="dash-grid dash-grid-3" style="margin-bottom: 22px;">
+            <div class="dash-card">
+              <h3 class="dash-card-title">Client Satisfaction</h3>
+              <div class="stat-row"><span>Survey score</span><span>96%</span></div>
+              <div class="bar-track"><span class="bar-fill" data-value="96"></span></div>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title">Recovery Rate</h3>
+              <div class="stat-row"><span>Post-op outcomes</span><span>91%</span></div>
+              <div class="bar-track"><span class="bar-fill" data-value="91"></span></div>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title">Bed Occupancy</h3>
+              <div class="stat-row"><span>Inpatient wards</span><span>74%</span></div>
+              <div class="bar-track"><span class="bar-fill" data-value="74"></span></div>
+            </div>
+          </div>
+          <div class="dash-card">
+            <h3 class="dash-card-title" style="margin-bottom: 12px;">Top Services This Month</h3>
+            <div class="table-scroll">
+              <table class="dash-table">
+                <thead><tr><th>Service</th><th>Visits</th><th>Revenue</th><th>Trend</th></tr></thead>
+                <tbody>
+                  <tr><td>Wellness & Vaccines</td><td>186</td><td>₹3.8L</td><td><span class="pill">+12%</span></td></tr>
+                  <tr><td>Dental</td><td>64</td><td>₹2.1L</td><td><span class="pill">+8%</span></td></tr>
+                  <tr><td>Surgery</td><td>28</td><td>₹4.6L</td><td><span class="pill">+5%</span></td></tr>
+                  <tr><td>Grooming</td><td>112</td><td>₹1.4L</td><td><span class="pill warn">+2%</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-notifications">
+          <div class="dash-card-head" style="margin-bottom: 18px;">
+            <div>
+              <h2 class="dash-section-title">Admin Inbox</h2>
+              <p class="dash-section-sub">Staff and system alerts.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="markAllRead">Mark all as read</button>
+          </div>
+          <div class="dash-card">
+            <div class="notif-item unread">
+              <div class="notif-ico"><i class="fas fa-triangle-exclamation"></i></div>
+              <div><strong>Critical admit</strong><p>Rocky (Indie) flagged for trauma triage — OR standby requested.</p></div>
+              <span class="pill bad">Alert</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-ico"><i class="fas fa-box"></i></div>
+              <div><strong>Pharmacy stock</strong><p>Amoxicillin 250mg below reorder threshold.</p></div>
+              <span class="pill warn">New</span>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-ico"><i class="fas fa-calendar"></i></div>
+              <div><strong>Overbook risk</strong><p>Thursday OPD already at 92% capacity.</p></div>
+              <span class="pill">New</span>
+            </div>
+            <div class="notif-item">
+              <div class="notif-ico"><i class="fas fa-user-check"></i></div>
+              <div><strong>Shift swap approved</strong><p>Dr. Senthil covering Friday night emergency desk.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-settings">
+          <h2 class="dash-section-title">Clinic Settings</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Hospital profile and system health.</p>
+          <div class="dash-grid dash-grid-2">
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 16px;">Clinic Profile</h3>
+              <form id="settingsForm" class="dash-form">
+                <div class="form-group">
+                  <label for="clinicName">Clinic name</label>
+                  <input type="text" id="clinicName" value="Stackly Veterinary Hospital — Salem" required>
+                </div>
+                <div class="form-group">
+                  <label for="clinicPhone">Front desk phone</label>
+                  <input type="tel" id="clinicPhone" value="9876543210" maxlength="10">
+                </div>
+                <div class="form-group">
+                  <label for="clinicHours">OPD hours</label>
+                  <input type="text" id="clinicHours" value="Mon–Sat 9:00 AM – 8:00 PM">
+                </div>
+                <div class="form-group">
+                  <label for="clinicAddress">Address</label>
+                  <textarea id="clinicAddress" rows="3">MMR Complex, Salem, Tamil Nadu</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="window.location.href='404.html'; return false;">Save Settings</button>
+              </form>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 16px;">System Health</h3>
+              <div class="health-row ok"><i class="fas fa-circle-check"></i><div><strong>Triage board</strong><p>Online · synced 2 min ago</p></div></div>
+              <div class="health-row ok"><i class="fas fa-circle-check"></i><div><strong>Lab interface</strong><p>Connected</p></div></div>
+              <div class="health-row warn"><i class="fas fa-circle-exclamation"></i><div><strong>Pharmacy feed</strong><p>Delayed 8 minutes</p></div></div>
+              <div class="stat-row" style="margin-top: 18px;"><span>Uptime (30d)</span><span>99.4%</span></div>
+              <div class="bar-track"><span class="bar-fill" data-value="99"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dash-panel" id="section-support">
+          <h2 class="dash-section-title">Support</h2>
+          <p class="dash-section-sub" style="margin-bottom: 18px;">Raise a ticket or use the hospital hotline.</p>
+          <div class="dash-grid dash-grid-2">
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 16px;">Submit a Ticket</h3>
+              <form id="supportForm" class="dash-form">
+                <div class="form-group">
+                  <label for="ticketSubject">Subject</label>
+                  <input type="text" id="ticketSubject" required placeholder="e.g. Queue board not refreshing">
+                </div>
+                <div class="form-group">
+                  <label for="ticketPriority">Priority</label>
+                  <select id="ticketPriority" class="js-sa-select" name="priority">
+                    <option value="normal" selected>Normal</option>
+                    <option value="high">High</option>
+                    <option value="critical">Critical</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ticketMessage">Details</label>
+                  <textarea id="ticketMessage" rows="4" required placeholder="Describe the issue…"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Ticket</button>
+              </form>
+            </div>
+            <div class="dash-card">
+              <h3 class="dash-card-title" style="margin-bottom: 14px;">Hotline & FAQ</h3>
+              <a href="404.html" class="dash-hotline-card inline" style="display:block; text-decoration:none;">
+                <div class="dash-hotline-title"><i class="fas fa-phone-volume"></i> Ops Hotline</div>
+                <span class="dash-hotline-num">+91 98765 43210</span>
+                <p>IT / facilities desk · 24/7</p>
+              </a>
+              <details class="dash-faq-item"><summary>How do I reassign a doctor mid-queue?</summary><p>Open Queue → select the booking → Approve again after changing doctor preference in the patient chart.</p></details>
+              <details class="dash-faq-item"><summary>Where do I export monthly revenue?</summary><p>Revenue panel lists invoices; full CSV export is available from Settings → System Health (coming soon).</p></details>
+              <details class="dash-faq-item"><summary>Who unlocks critical pharmacy overrides?</summary><p>Chief Vet Surgeon or on-call admin with HOSPITAL ADMIN role.</p></details>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="logoutModal">
+    <div class="modal-card">
+      <div class="modal-icon"><i class="fas fa-right-from-bracket"></i></div>
+      <h3>Leaving the clinic?</h3>
+      <p>You're about to sign out of the Stackly Hospital Admin portal.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="cancelLogout">Stay Signed In</button>
+        <button type="button" class="btn btn-primary" id="confirmLogout">Yes, Log Out</button>
       </div>
     </div>
-  </header>
-
-  <!-- Dashboard Layout -->
-  <div class="dashboard-layout">
-    
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div>
-        <div style="font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 14px;">Hospital Controls</div>
-        <ul class="sidebar-menu">
-          <li><a href="#" class="sidebar-link active" data-tab="admin-queue"><i class="fa-solid fa-clipboard-list"></i> Today's Queue (18)</a></li>
-          <li><a href="#" class="sidebar-link" data-tab="admin-patients"><i class="fa-solid fa-hospital-user"></i> Patient Records</a></li>
-          <li><a href="#" class="sidebar-link" data-tab="admin-surgeons"><i class="fa-solid fa-user-doctor"></i> Doctor Roster</a></li>
-          <li><a href="#" class="sidebar-link" data-tab="admin-analytics"><i class="fa-solid fa-chart-line"></i> Revenue & Stats</a></li>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="dash-main">
-      
-      <div id="admin-queue" class="tab-pane">
-        <div class="dash-header">
-          <div>
-            <h2>Hospital Queue Management - Salem Branch</h2>
-            <p>Live Triage & Outpatient Management at MMR Complex Clinic.</p>
-          </div>
-        </div>
-
-        <!-- Metrics Grid -->
-        <div class="dash-card-grid">
-          <div class="dash-stat-card">
-            <i class="fa-solid fa-users" style="font-size: 1.8rem; color: var(--primary);"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">24</h3>
-              <p>Total Patients Today</p>
-            </div>
-          </div>
-
-          <div class="dash-stat-card" style="border-left-color: #ef4444;">
-            <i class="fa-solid fa-truck-medical" style="font-size: 1.8rem; color: #ef4444;"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">3</h3>
-              <p>Emergency Triage</p>
-            </div>
-          </div>
-
-          <div class="dash-stat-card" style="border-left-color: #10b981;">
-            <i class="fa-solid fa-check-double" style="font-size: 1.8rem; color: #10b981;"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">15</h3>
-              <p>Surgeries Completed</p>
-            </div>
-          </div>
-
-          <div class="dash-stat-card" style="border-left-color: var(--secondary);">
-            <i class="fa-solid fa-indian-rupee-sign" style="font-size: 1.8rem; color: var(--secondary);"></i>
-            <div>
-              <h3 style="font-size: 1.5rem;">₹48,500</h3>
-              <p>Daily Pharmacy & Clinical Billing</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Triage Queue Table -->
-        <h3 style="margin-bottom: 12px;">Live Outpatient Appointments</h3>
-        <table class="dash-table">
-          <thead>
-            <tr>
-              <th>Patient ID</th>
-              <th>Pet Name & Breed</th>
-              <th>Owner Contact</th>
-              <th>Assigned Doctor</th>
-              <th>Service</th>
-              <th>Triage Priority</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>#STK-901</td>
-              <td><strong>Rocky</strong> (Golden Retriever)</td>
-              <td>+91 94432 12345</td>
-              <td>Dr. Senthil Nathan</td>
-              <td>Trauma Fracture Scan</td>
-              <td><span class="badge-status badge-emergency">Emergency</span></td>
-              <td><button class="btn btn-primary btn-sm action-confirm-btn">Confirm Visit</button></td>
-            </tr>
-            <tr>
-              <td>#STK-902</td>
-              <td><strong>Bruno</strong> (Beagle)</td>
-              <td>+91 98765 43210</td>
-              <td>Dr. Anitha Ramesh</td>
-              <td>Skin Cytology Check</td>
-              <td><span class="badge-status badge-pending">Scheduled</span></td>
-              <td><button class="btn btn-primary btn-sm action-confirm-btn">Confirm Visit</button></td>
-            </tr>
-            <tr>
-              <td>#STK-903</td>
-              <td><strong>Milo</strong> (Persian Cat)</td>
-              <td>+91 97890 56789</td>
-              <td>Dr. Priya Sharma</td>
-              <td>Dental Scaling</td>
-              <td><span class="badge-status badge-confirmed">In Ward</span></td>
-              <td><button class="btn btn-secondary btn-sm" disabled>Done</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </main>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

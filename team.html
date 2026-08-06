@@ -6,7 +6,7 @@
   <title>Veterinary Team | Stackly Veterinary Hospital Salem</title>
   <meta name="description" content="Meet Stackly's team of certified veterinary surgeons, feline specialists, pet dermatologists, and emergency trauma doctors.">
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-<!-- Top Bar -->
+
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-info">
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <!-- Header -->
+
     <header class="navbar">
     <div class="container navbar-bar">
       <a href="index.html" class="brand-logo">
@@ -106,24 +106,24 @@
       <p>Meet the surgeons and clinicians who care for Salem pets every day.</p>
       <div class="page-hero-actions">
         <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Visit</a>
-        <a href="tel:+919876543210" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call Now</a>
+        <a href="404.html" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call Now</a>
       </div>
     </div>
   </section>
 
-  <!-- Filterable Team Grid -->
+
   <section class="section">
     <div class="container">
       <div class="filter-bar reveal-item">
-        <button type="button" class="filter-btn active">All Specialists</button>
-        <button type="button" class="filter-btn">Chief Surgeons</button>
-        <button type="button" class="filter-btn">Feline Medicine</button>
-        <button type="button" class="filter-btn">Dermatology</button>
-        <button type="button" class="filter-btn">Emergency ICU</button>
+        <button type="button" class="filter-btn active" data-filter="all">All Specialists</button>
+        <button type="button" class="filter-btn" data-filter="chief-surgeons">Chief Surgeons</button>
+        <button type="button" class="filter-btn" data-filter="feline-medicine">Feline Medicine</button>
+        <button type="button" class="filter-btn" data-filter="dermatology">Dermatology</button>
+        <button type="button" class="filter-btn" data-filter="emergency-icu">Emergency ICU</button>
       </div>
 
       <div class="team-grid">
-        <div class="team-card reveal-item" data-delay="1">
+        <div class="team-card reveal-item" data-category="chief-surgeons" data-delay="1">
           <div class="team-img-box">
             <img src="assets/dr_rajesh_kumar.webp" alt="Dr. Rajesh Kumar">
             <div class="team-socials">
@@ -140,7 +140,7 @@
           </div>
         </div>
 
-        <div class="team-card reveal-item" data-delay="2">
+        <div class="team-card reveal-item" data-category="feline-medicine" data-delay="2">
           <div class="team-img-box">
             <img src="assets/dr_priya_sharma.webp" alt="Dr. Priya Sharma">
             <div class="team-socials">
@@ -157,7 +157,7 @@
           </div>
         </div>
 
-        <div class="team-card reveal-item" data-delay="3">
+        <div class="team-card reveal-item" data-category="dermatology" data-delay="3">
           <div class="team-img-box">
             <img src="assets/dr_anitha_ramesh.webp" alt="Dr. Anitha Ramesh">
             <div class="team-socials">
@@ -174,7 +174,7 @@
           </div>
         </div>
 
-        <div class="team-card reveal-item" data-delay="4">
+        <div class="team-card reveal-item" data-category="emergency-icu" data-delay="4">
           <div class="team-img-box">
             <img src="assets/dr_senthil_nathan.webp" alt="Dr. Senthil Nathan">
             <div class="team-socials">
@@ -190,11 +190,79 @@
             <a href="contact.html#book-visit" class="btn btn-primary btn-sm">Book Consultation</a>
           </div>
         </div>
+
+        <div class="team-card reveal-item" data-category="chief-surgeons" data-delay="1">
+          <div class="team-img-box">
+            <img src="assets/dr_vikram_sethi.webp" alt="Dr. Vikram Sethi">
+            <div class="team-socials">
+              <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Dr. Vikram Sethi</h3>
+            <p class="team-role">Senior Orthopedic &amp; Chief Surgeon</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Specializes in complex bone fracture plating, spinal decompression &amp; joint surgery.</p>
+            <a href="contact.html#book-visit" class="btn btn-primary btn-sm">Book Consultation</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal-item" data-category="feline-medicine" data-delay="2">
+          <div class="team-img-box">
+            <img src="assets/dr_meera_nambiar.webp" alt="Dr. Meera Nambiar">
+            <div class="team-socials">
+              <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Dr. Meera Nambiar</h3>
+            <p class="team-role">Feline Behaviorist &amp; Clinical Nutritionist</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Expert in feline renal diets, stress reduction protocols &amp; digestive health.</p>
+            <a href="contact.html#book-visit" class="btn btn-primary btn-sm">Book Consultation</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal-item" data-category="dermatology" data-delay="3">
+          <div class="team-img-box">
+            <img src="assets/dr_arvind_swamy.webp" alt="Dr. Arvind Swamy">
+            <div class="team-socials">
+              <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Dr. Arvind Swamy</h3>
+            <p class="team-role">Clinical Dermatologist &amp; Otologist</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Focused on chronic ear disease, autoimmune skin disorders &amp; laser therapy.</p>
+            <a href="contact.html#book-visit" class="btn btn-primary btn-sm">Book Consultation</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal-item" data-category="emergency-icu" data-delay="4">
+          <div class="team-img-box">
+            <img src="assets/dr_kavitha_sundaram.webp" alt="Dr. Kavitha Sundaram">
+            <div class="team-socials">
+              <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Dr. Kavitha Sundaram</h3>
+            <p class="team-role">Critical Care &amp; Anesthesiology Specialist</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Manages high-risk anesthesia monitoring, ventilator support &amp; emergency resuscitation.</p>
+            <a href="contact.html#book-visit" class="btn btn-primary btn-sm">Book Consultation</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- New Section 1: Support Nursing & Clinical Specialists -->
+
   <section class="section bg-light">
     <div class="container">
       <div class="section-header reveal-item">
@@ -232,7 +300,7 @@
     </div>
   </section>
 
-  <!-- New Section 2: Continuing Education & Surgical Standards -->
+
   <section class="section-sm container">
     <div class="cta-banner reveal-item">
       <div class="cta-banner-bg"></div>
@@ -242,13 +310,18 @@
         <p>Our veterinary surgeons complete annual international accredited workshops in advanced soft-tissue repair, inhalation anesthesia safety, and feline cardiology diagnostics.</p>
         <div class="cta-banner-actions">
           <a href="contact.html#book-visit" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Doctor Consult</a>
-          <a href="tel:+919876543210" class="btn btn-ghost-light"><i class="fa-solid fa-phone"></i> Call Emergency Surgeon</a>
+          <a href="404.html" class="btn btn-ghost-light"><i class="fa-solid fa-phone"></i> Call Emergency Surgeon</a>
+        </div>
+      </div>
+      <div class="cta-banner-media">
+        <div class="cta-media-frame">
+          <img src="assets/medical_standards_vet.webp" alt="Medical Standards Surgical Suite" style="width:100%;height:100%;object-fit:cover;">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- New Section 3: Doctor Advice & Pet Care Q&A Corner -->
+
   <section class="section bg-light">
     <div class="container">
       <div class="section-header reveal-item">
@@ -327,22 +400,22 @@
     </div>
   </section>
 
-  <!-- Footer -->
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <!-- Col 1: Brand Info -->
+
         <div class="footer-col footer-brand">
           <img src="assets/footer-logo.webp" alt="Stackly Logo Footer">
           <p>Stackly Veterinary Hospital & Pet Care Clinic delivers world-class medical treatment, surgery, and wellness care for all companion animals in Salem.</p>
-          
+
           <form class="newsletter-form" action="404.html" onsubmit="event.preventDefault(); window.location.href='404.html';">
             <input type="email" placeholder="Enter Email Address" required>
             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
           </form>
         </div>
 
-        <!-- Col 2: Specialty Services -->
+
         <div class="footer-col">
           <h4>Our Services</h4>
           <ul class="footer-links">
@@ -355,7 +428,7 @@
           </ul>
         </div>
 
-        <!-- Col 3: Quicklinks -->
+
         <div class="footer-col">
           <h4>Quicklinks</h4>
           <ul class="footer-links">
@@ -368,7 +441,7 @@
           </ul>
         </div>
 
-        <!-- Col 4: Opening Hours -->
+
         <div class="footer-col">
           <h4>Opening Hours</h4>
           <div class="opening-hours-list">

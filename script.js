@@ -1,6 +1,5 @@
-/* Stackly Veterinary Hospital ? single site script */
 
-/* ??? Site preloader (max 2s) ??????????????????????????????????????????????? */
+
 (function initPreloader() {
   const el = document.getElementById('site-preloader');
   if (!el) return;
@@ -27,16 +26,14 @@
     window.setTimeout(hide, wait);
   }
 
-  // Hard cap: page always opens within 2 seconds
   window.setTimeout(hide, MAX_MS);
 
   if (document.readyState === 'complete') finishSoon();
   else window.addEventListener('load', finishSoon, { once: true });
 })();
 
-/* ??? Cursor trail ??????????????????????????????????????????????????????????? */
+
 (function initCursor() {
-  // Skip on touch / reduced-motion — saves a full-screen rAF loop on phones & Edge
   if (window.matchMedia('(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches) {
     return;
   }
@@ -46,13 +43,25 @@
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d', { alpha: true });
 
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+  let dpr = window.devicePixelRatio || 1;
+  let width, height;
+  let rect = { left: 0, top: 0 };
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
+  function updateCanvasSize() {
+    dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    rect = canvas.getBoundingClientRect();
+  }
+
+  updateCanvasSize();
+  window.addEventListener('resize', updateCanvasSize, { passive: true });
+  window.addEventListener('scroll', updateCanvasSize, { passive: true });
 
   const mouse = { x: width / 2, y: height / 2, px: width / 2, py: height / 2 };
   const particles = [];
@@ -75,8 +84,7 @@
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.vy += 0.05;
-      this.size *= 0.96;
+      this.size *= 0.95;
       this.alpha = this.life / this.maxLife;
       this.life--;
     }
@@ -88,7 +96,7 @@
       c.translate(this.x, this.y);
       c.rotate(this.rotation);
       c.beginPath();
-      c.arc(0, 0, Math.max(0.5, this.size), 0, Math.PI * 2);
+      c.arc(0, 0, Math.max(0.4, this.size), 0, Math.PI * 2);
       c.fill();
       c.restore();
     }
@@ -104,31 +112,32 @@
     const dy = mouse.y - mouse.py;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (dist > 4 && particles.length < 48) {
-      for (let i = 0; i < Math.min(3, Math.ceil(dist / 8)); i++) {
+    if (dist > 3 && particles.length < 48) {
+      const count = Math.min(3, Math.ceil(dist / 7));
+      for (let i = 0; i < count; i++) {
         const color = colors[Math.floor(Math.random() * colors.length)];
         particles.push(new Particle(
           mouse.x, mouse.y,
-          (Math.random() - 0.5) * 2 - dx * 0.1,
-          (Math.random() - 0.5) * 2 - dy * 0.1,
-          color, Math.random() * 4 + 2, Math.random() * 25 + 15
+          (Math.random() - 0.5) * 1.2,
+          (Math.random() - 0.5) * 1.2,
+          color, Math.random() * 3.5 + 1.5, Math.random() * 22 + 12
         ));
       }
     }
-  });
+  }, { passive: true });
 
   window.addEventListener('click', (e) => {
     for (let i = 0; i < 12; i++) {
       const angle = (Math.PI * 2 * i) / 12;
-      const speed = Math.random() * 4 + 2;
+      const speed = Math.random() * 3.5 + 1.5;
       particles.push(new Particle(
         e.clientX, e.clientY,
         Math.cos(angle) * speed, Math.sin(angle) * speed,
         colors[Math.floor(Math.random() * colors.length)],
-        Math.random() * 5 + 3, 35
+        Math.random() * 4 + 2, 30
       ));
     }
-  });
+  }, { passive: true });
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
@@ -139,14 +148,20 @@
       if (p.life <= 0 || p.size <= 0.2) particles.splice(i, 1);
     }
 
+    // Precise Cursor Tip Radial Glow locked directly onto pointer tip
     ctx.save();
-    const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 14);
-    grad.addColorStop(0, 'rgba(244, 162, 97, 0.9)');
-    grad.addColorStop(0.5, 'rgba(224, 109, 83, 0.4)');
+    const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 11);
+    grad.addColorStop(0, 'rgba(244, 162, 97, 0.95)');
+    grad.addColorStop(0.5, 'rgba(224, 109, 83, 0.45)');
     grad.addColorStop(1, 'rgba(224, 109, 83, 0)');
     ctx.fillStyle = grad;
     ctx.beginPath();
-    ctx.arc(mouse.x, mouse.y, 14, 0, Math.PI * 2);
+    ctx.arc(mouse.x, mouse.y, 11, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
 
@@ -156,7 +171,7 @@
   animate();
 })();
 
-/* ??? Hero aquarium: real WebGL water + natural fish swim ??????????????????? */
+
 (function initAquarium() {
   const container = document.querySelector('.hero-section');
   if (!container) return;
@@ -233,7 +248,7 @@
     x: -1000, y: -1000, lastX: -1000, lastY: -1000, active: false, speed: 0
   };
 
-  /* WebGL water */
+
   let gl = null;
   let isWebGLFallback = false;
   let shaderProgram = null;
@@ -429,7 +444,7 @@
     ctx.drawImage(bgImg, 0, 0, width, height);
   }
 
-  /* Bubbles */
+
   class Bubble {
     constructor() { this.reset(true); }
 
@@ -480,7 +495,7 @@
     }
   }
 
-  /* Natural aquarium fish – even coverage across full hero (L/R + top/mid/bottom) */
+
   class Fish {
     constructor(laneIndex, total) {
       const marginX = 40;
@@ -851,7 +866,7 @@
   requestAnimationFrame(() => requestAnimationFrame(start));
 })();
 
-/* ??? Main UI + dashboard logic ????????????????????????????????????????????? */
+
 document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.querySelector('.navbar');
   window.addEventListener('scroll', () => {
@@ -859,7 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else navbar?.classList.remove('scrolled');
   });
 
-  /* Full-page mobile navigation */
+
   const navToggle = document.querySelector('.nav-toggle');
   const navClose = document.querySelector('.nav-close');
   const navPanel = document.querySelector('.nav-panel');
@@ -913,8 +928,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  // Auto stagger children in common grids
   document.querySelectorAll(
     '.mosaic-grid, .facilities-track, .stories-grid, .how-care-grid, .arch-grid, .team-grid, .about-feature-list'
   ).forEach((grid) => {
@@ -987,7 +1000,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Dashboard tabs
+  // Legacy dashboard tabs (old markup fallback)
   const tabLinks = document.querySelectorAll('.sidebar-link[data-tab]');
   const tabContents = document.querySelectorAll('.tab-pane');
   tabLinks.forEach((link) => {
@@ -1002,7 +1015,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ?? Helpers ?? */
+
+  if (document.querySelector('.dash-layout')) {
+    initVetDashboard();
+  }
+
+  if (typeof window.StacklySelect?.init === 'function') {
+    window.StacklySelect.init(document);
+  }
+  if (typeof window.StacklyDate?.init === 'function') {
+    window.StacklyDate.init(document);
+  }
+
+
   const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   const nameOk = (v) => /^[A-Za-z\s]+$/.test(v);
   function showErr(input, errEl, msg) {
@@ -1014,18 +1039,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if (errEl) { errEl.textContent = ''; errEl.classList.remove('show'); }
   }
 
-  // Password eye toggles
+  // Password eye toggle — single handler only (no inline onclick; that double-fired)
+  window.togglePasswordVisibility = function (btn) {
+    if (!btn) return;
+    const targetId = btn.getAttribute('data-target');
+    const wrap = btn.closest('.password-wrap');
+    const input = (targetId && document.getElementById(targetId))
+      || wrap?.querySelector('input')
+      || null;
+    if (!input) return;
+
+    const showing = input.getAttribute('type') === 'password';
+    input.setAttribute('type', showing ? 'text' : 'password');
+
+    const icon = btn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-eye', !showing);
+      icon.classList.toggle('fa-eye-slash', showing);
+    } else {
+      btn.innerHTML = showing
+        ? '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-eye" aria-hidden="true"></i>';
+    }
+
+    btn.classList.toggle('is-visible', showing);
+    btn.setAttribute('aria-label', showing ? 'Hide password' : 'Show password');
+    btn.setAttribute('aria-pressed', showing ? 'true' : 'false');
+  };
+
   document.querySelectorAll('.toggle-password').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const input = document.getElementById(btn.getAttribute('data-target'));
-      if (!input) return;
-      const show = input.type === 'password';
-      input.type = show ? 'text' : 'password';
-      btn.innerHTML = show ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.togglePasswordVisibility(btn);
     });
   });
-
-  // Role card selection UI
   document.querySelectorAll('.role-cards').forEach((wrap) => {
     wrap.querySelectorAll('.role-card').forEach((card) => {
       card.addEventListener('click', () => {
@@ -1036,8 +1084,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  // Slideshow
   document.querySelectorAll('[data-slideshow]').forEach((root) => {
     const slides = [...root.querySelectorAll('.slideshow-slide')];
     const dotsWrap = root.querySelector('[data-slideshow-dots]');
@@ -1059,7 +1105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => go((idx + 1) % slides.length), 4200);
   });
 
-  // Login form validation + popup redirect
   const loginForm = document.getElementById('loginForm') || document.getElementById('login-form');
   if (loginForm && document.getElementById('signInEmail')) {
     loginForm.addEventListener('submit', (e) => {
@@ -1098,7 +1143,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('loginConfirmOverlay');
       overlay?.classList.add('show');
       setTimeout(() => {
-        window.location.href = role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html';
+        const dest = role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html';
+        overlay?.classList.remove('show');
+        window.location.href = dest;
       }, 1200);
     });
   } else if (loginForm) {
@@ -1111,7 +1158,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Contact form validation (if present)
+  document.querySelectorAll('input[type="tel"], input[name="phone"]').forEach((input) => {
+    input.setAttribute('maxlength', '10');
+    input.setAttribute('inputmode', 'numeric');
+    input.addEventListener('input', () => {
+      input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+    });
+  });
+
   const contactForm = document.getElementById('contactForm') || document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -1143,18 +1197,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!phone?.value.trim()) { showErr(phone, phoneErr, 'Please enter your phone number'); ok = false; }
+      else if (!/^\d{10}$/.test(phone.value.trim())) { showErr(phone, phoneErr, 'Phone number must be exactly 10 digits'); ok = false; }
 
       if (service && !service.value) { showErr(service, serviceErr, 'Please select a service'); ok = false; }
 
       if (!message?.value.trim()) { showErr(message, messageErr, 'Please enter your message details'); ok = false; }
 
       if (!ok) return;
-      document.getElementById('contactSuccessOverlay')?.classList.add('show');
-      contactForm.reset();
+      window.location.href = '404.html';
     });
   }
-
-  // Register / Sign Up
   const registerForm = document.getElementById('registerForm');
   if (registerForm) {
     registerForm.addEventListener('submit', (e) => {
@@ -1212,7 +1264,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Booking form on get-started
   const bookingForm = document.getElementById('bookingForm');
   if (bookingForm) {
     bookingForm.addEventListener('submit', (e) => {
@@ -1227,17 +1278,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (input.name === 'owner' && !nameOk(input.value.trim())) {
           showErr(input, err, 'Name contains only alphabets');
           ok = false;
+        } else if (input.name === 'phone' && !/^\d{10}$/.test(input.value.trim())) {
+          showErr(input, err, 'Phone number must be exactly 10 digits');
+          ok = false;
         }
       });
       if (!ok) return;
-      const modal = document.getElementById('booking-modal');
-      if (modal) modal.classList.add('show');
-      else alert('Appointment request submitted successfully!');
-      bookingForm.reset();
+      window.location.href = '404.html';
     });
   }
-
-  // Overlay close buttons
   document.querySelectorAll('[data-close-overlay]').forEach((btn) => {
     btn.addEventListener('click', () => {
       document.getElementById(btn.getAttribute('data-close-overlay'))?.classList.remove('show');
@@ -1251,17 +1300,794 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Admin appointment confirm
+  // Admin appointment confirm (legacy badge + new pill rows)
   document.querySelectorAll('.action-confirm-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const row = btn.closest('tr');
       const badge = row?.querySelector('.badge-status');
+      const pill = row?.querySelector('.pill');
       if (badge) {
         badge.className = 'badge-status badge-confirmed';
         badge.textContent = 'Confirmed';
-        btn.disabled = true;
-        btn.textContent = 'Done';
+      }
+      if (pill) {
+        pill.className = 'pill';
+        pill.textContent = 'Confirmed';
+      }
+      btn.disabled = true;
+      btn.textContent = 'Done';
+      if (typeof window.dashToast === 'function') {
+        window.dashToast('Appointment confirmed.', 'success');
       }
     });
   });
+
+  const filterBars = document.querySelectorAll('.filter-bar');
+  filterBars.forEach((bar) => {
+    const btns = bar.querySelectorAll('.filter-btn');
+    const section = bar.closest('.section') || bar.parentElement;
+    const cards = section ? section.querySelectorAll('[data-category]') : [];
+
+    if (btns.length && cards.length) {
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          btns.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filterValue = btn.getAttribute('data-filter') || 'all';
+
+          cards.forEach((card) => {
+            const category = card.getAttribute('data-category');
+            if (filterValue === 'all' || category === filterValue) {
+              card.style.display = '';
+              card.style.animation = 'fadeIn 0.4s ease forwards';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+  });
+
+  window.addEventListener('pageshow', () => {
+    document.querySelectorAll('.stackly-overlay').forEach((overlay) => {
+      overlay.classList.remove('show');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const socialBtn = e.target.closest('.top-bar-links a, .social-auth a, .team-socials a, .footer-links a:has(.fa-facebook-f), a:has(.fa-facebook), a:has(.fa-facebook-f), a:has(.fa-x-twitter), a:has(.fa-twitter), a:has(.fa-instagram), a:has(.fa-google), a:has(.fa-linkedin), a:has(.fa-linkedin-in)');
+    if (socialBtn) {
+      e.preventDefault();
+      window.location.href = '404.html';
+    }
+  });
 });
+
+
+window.StacklySelect = {
+  closeAll(except) {
+    document.querySelectorAll('.sa-select.is-open').forEach((wrap) => {
+      if (except && wrap === except) return;
+      wrap.classList.remove('is-open');
+      const menu = wrap._saMenu;
+      if (menu) {
+        menu.style.display = 'none';
+        menu.hidden = true;
+      }
+      const btn = wrap.querySelector('.sa-select__btn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  },
+
+  positionMenu(btn, menu) {
+    const vv = window.visualViewport;
+    const pad = 10;
+    const vw = Math.max(0, Math.floor(vv?.width || document.documentElement.clientWidth || window.innerWidth || 0));
+    const vh = Math.max(0, Math.floor(vv?.height || document.documentElement.clientHeight || window.innerHeight || 0));
+    const ox = vv?.offsetLeft || 0;
+    const oy = vv?.offsetTop || 0;
+    const rect = btn.getBoundingClientRect();
+    const isNarrow = vw <= 900;
+
+    const maxW = Math.max(160, vw - pad * 2);
+    const width = isNarrow ? maxW : Math.min(Math.max(rect.width, 160), maxW);
+    let left = isNarrow ? (ox + pad) : (rect.left);
+    if (left + width > ox + vw - pad) left = ox + vw - pad - width;
+    if (left < ox + pad) left = ox + pad;
+
+    menu.hidden = false;
+    menu.style.cssText = [
+      'display:block',
+      'position:fixed',
+      'z-index:100050',
+      'box-sizing:border-box',
+      `width:${width}px`,
+      `max-width:${maxW}px`,
+      'min-width:0',
+      `left:${left}px`,
+      'right:auto',
+      'bottom:auto',
+      'overflow-x:hidden',
+      'overflow-y:auto'
+    ].join(';');
+
+    const maxH = Math.min(260, Math.floor(vh * 0.45));
+    menu.style.maxHeight = `${maxH}px`;
+
+    const menuH = Math.min(menu.scrollHeight || maxH, maxH);
+    const spaceBelow = (oy + vh) - rect.bottom - pad;
+    const spaceAbove = rect.top - oy - pad;
+
+    let top;
+    if (spaceBelow < Math.min(160, menuH) && spaceAbove > spaceBelow) {
+      top = Math.max(oy + pad, rect.top - menuH - 6);
+    } else {
+      top = rect.bottom + 6;
+      if (top + menuH > oy + vh - pad) {
+        top = Math.max(oy + pad, oy + vh - pad - menuH);
+      }
+    }
+
+    menu.style.top = `${top}px`;
+    menu.style.maxHeight = `${Math.min(maxH, Math.max(80, oy + vh - top - pad))}px`;
+  },
+
+  enhance(select) {
+    if (!select || select.dataset.saSelect === '1') return;
+    select.dataset.saSelect = '1';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'sa-select';
+    select.parentNode.insertBefore(wrap, select);
+    wrap.appendChild(select);
+    select.classList.add('sa-select__native');
+    select.tabIndex = -1;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sa-select__btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="sa-select__btn-label"></span><i class="fas fa-chevron-down" aria-hidden="true"></i>';
+    wrap.appendChild(btn);
+
+    const menu = document.createElement('div');
+    menu.className = 'sa-select__menu';
+    menu.setAttribute('role', 'listbox');
+    menu.hidden = true;
+    menu.style.display = 'none';
+    document.body.appendChild(menu);
+    wrap._saMenu = menu;
+
+    const labelEl = btn.querySelector('.sa-select__btn-label');
+
+    const syncLabel = () => {
+      const opt = select.options[select.selectedIndex];
+      labelEl.textContent = opt ? opt.textContent : 'Select';
+    };
+
+    const rebuildOptions = () => {
+      menu.innerHTML = '';
+      Array.from(select.options).forEach((opt, idx) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'sa-select__option' + (opt.selected ? ' is-selected' : '');
+        item.setAttribute('role', 'option');
+        item.setAttribute('aria-selected', opt.selected ? 'true' : 'false');
+        item.disabled = !!opt.disabled;
+        item.textContent = opt.textContent;
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (opt.disabled) return;
+          select.selectedIndex = idx;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          syncLabel();
+          window.StacklySelect.closeAll();
+        });
+        menu.appendChild(item);
+      });
+    };
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (wrap.classList.contains('is-open')) {
+        window.StacklySelect.closeAll();
+      } else {
+        window.StacklyDate?.closeAll();
+        window.StacklySelect.closeAll(wrap);
+        rebuildOptions();
+        wrap.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        window.StacklySelect.positionMenu(btn, menu);
+      }
+    });
+
+    select.addEventListener('change', syncLabel);
+    syncLabel();
+  },
+
+  init(root) {
+    const scope = root || document;
+    scope.querySelectorAll('select').forEach((sel) => {
+      if (sel.closest('.dash-layout') || sel.classList.contains('js-sa-select')) {
+        window.StacklySelect.enhance(sel);
+      }
+    });
+  }
+};
+
+window.StacklyDate = {
+  closeAll(except) {
+    document.querySelectorAll('.sa-date.is-open').forEach((wrap) => {
+      if (except && wrap === except) return;
+      wrap.classList.remove('is-open');
+      const panel = wrap._saPanel;
+      if (panel) {
+        panel.style.display = 'none';
+        panel.hidden = true;
+      }
+      const btn = wrap.querySelector('.sa-date__btn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  },
+
+  positionPanel(btn, panel) {
+    if (typeof window.StacklySelect?.positionMenu === 'function') {
+      window.StacklySelect.positionMenu(btn, panel);
+      return;
+    }
+    const rect = btn.getBoundingClientRect();
+    const pad = 10;
+    const vw = window.visualViewport?.width || window.innerWidth;
+    panel.style.position = 'fixed';
+    panel.style.left = `${pad}px`;
+    panel.style.width = `${Math.max(160, vw - pad * 2)}px`;
+    panel.style.top = `${rect.bottom + 6}px`;
+    panel.style.display = 'block';
+    panel.hidden = false;
+  },
+
+  enhance(input) {
+    if (!input || input.dataset.saDate === '1') return;
+    input.dataset.saDate = '1';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'sa-date';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    input.classList.add('sa-date__native');
+    input.tabIndex = -1;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sa-date__btn';
+    btn.setAttribute('aria-haspopup', 'dialog');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="sa-date__btn-label"></span><i class="fas fa-calendar-days" aria-hidden="true"></i>';
+    wrap.appendChild(btn);
+
+    const panel = document.createElement('div');
+    panel.className = 'sa-date__panel';
+    panel.setAttribute('role', 'dialog');
+    panel.hidden = true;
+    panel.style.display = 'none';
+    document.body.appendChild(panel);
+    wrap._saPanel = panel;
+
+    const labelEl = btn.querySelector('.sa-date__btn-label');
+    let view = new Date();
+    view.setDate(1);
+
+    const parseValue = () => {
+      if (!input.value) return null;
+      const p = input.value.split('-').map(Number);
+      if (p.length !== 3 || p.some((n) => Number.isNaN(n))) return null;
+      return new Date(p[0], p[1] - 1, p[2]);
+    };
+
+    const fmtLabel = (d) => {
+      if (!d) return 'Select date';
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    };
+
+    const syncLabel = () => {
+      labelEl.textContent = fmtLabel(parseValue());
+    };
+
+    const ymd = (d) => {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    };
+
+    const today = () => {
+      const t = new Date();
+      t.setHours(0, 0, 0, 0);
+      return t;
+    };
+
+    const render = () => {
+      const selected = parseValue();
+      const year = view.getFullYear();
+      const month = view.getMonth();
+      const monthName = view.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+      const firstDow = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const minStr = input.min || '';
+      const maxStr = input.max || '';
+
+      let cells = '';
+      for (let i = 0; i < firstDow; i++) cells += '<span class="sa-date__blank"></span>';
+      for (let day = 1; day <= daysInMonth; day++) {
+        const d = new Date(year, month, day);
+        const val = ymd(d);
+        const disabled =
+          (minStr && val < minStr) ||
+          (maxStr && val > maxStr) ||
+          d < today();
+        const isSel = selected && ymd(selected) === val;
+        const isToday = ymd(today()) === val;
+        cells += `<button type="button" class="sa-date__day${isSel ? ' is-selected' : ''}${isToday ? ' is-today' : ''}" data-value="${val}" ${disabled ? 'disabled' : ''}>${day}</button>`;
+      }
+
+      panel.innerHTML = `
+        <div class="sa-date__head">
+          <button type="button" class="sa-date__nav" data-nav="-1" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+          <div class="sa-date__month">${monthName}</div>
+          <button type="button" class="sa-date__nav" data-nav="1" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="sa-date__weekdays"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+        <div class="sa-date__grid">${cells}</div>
+      `;
+
+      panel.querySelectorAll('[data-nav]').forEach((navBtn) => {
+        navBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          view.setMonth(view.getMonth() + Number(navBtn.getAttribute('data-nav')));
+          render();
+          window.StacklyDate.positionPanel(btn, panel);
+        });
+      });
+
+      panel.querySelectorAll('.sa-date__day:not(:disabled)').forEach((dayBtn) => {
+        dayBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          input.value = dayBtn.getAttribute('data-value') || '';
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          syncLabel();
+          window.StacklyDate.closeAll();
+        });
+      });
+    };
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (wrap.classList.contains('is-open')) {
+        window.StacklyDate.closeAll();
+        return;
+      }
+      window.StacklySelect?.closeAll();
+      window.StacklyDate.closeAll(wrap);
+      const selected = parseValue();
+      view = selected ? new Date(selected.getFullYear(), selected.getMonth(), 1) : new Date();
+      view.setDate(1);
+      render();
+      wrap.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      window.StacklyDate.positionPanel(btn, panel);
+    });
+
+    input.addEventListener('change', syncLabel);
+    syncLabel();
+  },
+
+  init(root) {
+    const scope = root || document;
+    scope.querySelectorAll('input[type="date"].js-sa-date, input.js-sa-date[type="date"]').forEach((el) => {
+      window.StacklyDate.enhance(el);
+    });
+    const bookDate = scope.querySelector('#bookDate');
+    if (bookDate) window.StacklyDate.enhance(bookDate);
+  }
+};
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.sa-select') && !e.target.closest('.sa-select__menu')) {
+    window.StacklySelect?.closeAll();
+  }
+  if (!e.target.closest('.sa-date') && !e.target.closest('.sa-date__panel')) {
+    window.StacklyDate?.closeAll();
+  }
+});
+
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.sa-select.is-open').forEach((wrap) => {
+    const btn = wrap.querySelector('.sa-select__btn');
+    const menu = wrap._saMenu;
+    if (btn && menu) window.StacklySelect.positionMenu(btn, menu);
+  });
+  document.querySelectorAll('.sa-date.is-open').forEach((wrap) => {
+    const btn = wrap.querySelector('.sa-date__btn');
+    const panel = wrap._saPanel;
+    if (btn && panel) window.StacklyDate.positionPanel(btn, panel);
+  });
+});
+
+window.addEventListener('scroll', () => {
+  window.StacklySelect?.closeAll();
+  window.StacklyDate?.closeAll();
+}, true);
+
+(function bootStacklyPickers() {
+  const run = () => {
+    window.StacklySelect?.init(document);
+    window.StacklyDate?.init(document);
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+})();
+
+
+window.dashToast = function (message, type) {
+  let host = document.querySelector('.dash-toast-host');
+  if (!host) {
+    host = document.createElement('div');
+    host.className = 'dash-toast-host';
+    document.body.appendChild(host);
+  }
+  const el = document.createElement('div');
+  el.className = 'dash-toast ' + (type || 'info');
+  el.textContent = message;
+  host.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity .3s';
+    setTimeout(() => el.remove(), 320);
+  }, 2400);
+};
+
+window.initMobileSidebar = function () {
+  const dashSidebar = document.getElementById('dashSidebar');
+  const menuToggle = document.getElementById('dashMenuToggle');
+  const closeBtn = document.getElementById('closeSidebarBtn');
+  const dashOverlay = document.getElementById('dashOverlay');
+  if (!dashSidebar || !menuToggle) return;
+
+  let lastToggleAt = 0;
+  const mq = window.matchMedia('(max-width: 900px)');
+  const layoutRoot = document.querySelector('.dash-layout');
+  const sidebarHome = layoutRoot || dashSidebar.parentElement;
+  const overlayHome = layoutRoot || (dashOverlay && dashOverlay.parentElement);
+
+  if (!window.__dashSidebarHomeMarker) {
+    window.__dashSidebarHomeMarker = document.createComment('dash-sidebar-home');
+    if (dashSidebar.parentElement) {
+      dashSidebar.parentElement.insertBefore(window.__dashSidebarHomeMarker, dashSidebar);
+    }
+  }
+  if (dashOverlay && !window.__dashOverlayHomeMarker) {
+    window.__dashOverlayHomeMarker = document.createComment('dash-overlay-home');
+    if (dashOverlay.parentElement) {
+      dashOverlay.parentElement.insertBefore(window.__dashOverlayHomeMarker, dashOverlay);
+    }
+  }
+
+  function isMobileDash() {
+    return mq.matches;
+  }
+
+  function clearForcedStyles(el) {
+    if (!el) return;
+    [
+      'left', 'top', 'right', 'bottom', 'height', 'width', 'max-width',
+      'transform', 'visibility', 'opacity', 'pointer-events', 'z-index',
+      'display', 'transition', 'box-shadow', 'padding-top'
+    ].forEach((prop) => el.style.removeProperty(prop));
+  }
+
+  function moveToBody() {
+    if (dashSidebar.parentElement !== document.body) document.body.appendChild(dashSidebar);
+    if (dashOverlay && dashOverlay.parentElement !== document.body) document.body.appendChild(dashOverlay);
+  }
+
+  function restoreHome() {
+    const sm = window.__dashSidebarHomeMarker;
+    const om = window.__dashOverlayHomeMarker;
+    if (sm && sm.parentNode) sm.parentNode.insertBefore(dashSidebar, sm.nextSibling);
+    else if (sidebarHome && dashSidebar.parentElement !== sidebarHome) {
+      sidebarHome.insertBefore(dashSidebar, sidebarHome.firstChild);
+    }
+    if (dashOverlay) {
+      if (om && om.parentNode) om.parentNode.insertBefore(dashOverlay, om.nextSibling);
+      else if (overlayHome && dashOverlay.parentElement !== overlayHome) overlayHome.appendChild(dashOverlay);
+    }
+  }
+
+  function resetDesktopSidebar() {
+    dashSidebar.classList.remove('open');
+    if (dashOverlay) dashOverlay.classList.remove('show');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('dash-sidebar-open');
+    document.documentElement.classList.remove('dash-sidebar-open');
+    clearForcedStyles(dashSidebar);
+    clearForcedStyles(dashOverlay);
+    restoreHome();
+  }
+
+  function applyMobileClosedStyles() {
+    moveToBody();
+    dashSidebar.classList.remove('open');
+    if (dashOverlay) dashOverlay.classList.remove('show');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('dash-sidebar-open');
+    document.documentElement.classList.remove('dash-sidebar-open');
+    dashSidebar.style.setProperty('left', '-105%', 'important');
+    dashSidebar.style.setProperty('top', '60px', 'important');
+    dashSidebar.style.setProperty('height', 'calc(100dvh - 60px)', 'important');
+    dashSidebar.style.setProperty('transform', 'none', 'important');
+    if (dashOverlay) {
+      dashOverlay.style.removeProperty('display');
+      dashOverlay.style.removeProperty('top');
+    }
+  }
+
+  function openSidebar() {
+    if (!isMobileDash()) return;
+    moveToBody();
+    dashSidebar.classList.add('open');
+    if (dashOverlay) dashOverlay.classList.add('show');
+    menuToggle.classList.add('open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    menuToggle.setAttribute('aria-label', 'Close menu');
+    document.body.classList.add('dash-sidebar-open');
+    document.documentElement.classList.add('dash-sidebar-open');
+    dashSidebar.style.setProperty('left', '0', 'important');
+    dashSidebar.style.setProperty('top', '60px', 'important');
+    dashSidebar.style.setProperty('height', 'calc(100dvh - 60px)', 'important');
+    dashSidebar.style.setProperty('transform', 'none', 'important');
+    dashSidebar.style.setProperty('visibility', 'visible', 'important');
+    dashSidebar.style.setProperty('opacity', '1', 'important');
+    dashSidebar.style.setProperty('pointer-events', 'auto', 'important');
+    dashSidebar.style.setProperty('z-index', '1050', 'important');
+    if (dashOverlay) {
+      dashOverlay.style.setProperty('display', 'block', 'important');
+      dashOverlay.style.setProperty('top', '60px', 'important');
+    }
+  }
+
+  function closeSidebar() {
+    if (isMobileDash()) applyMobileClosedStyles();
+    else resetDesktopSidebar();
+  }
+
+  function toggleSidebar(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!isMobileDash()) return;
+    const now = Date.now();
+    if (now - lastToggleAt < 350) return;
+    lastToggleAt = now;
+    if (dashSidebar.classList.contains('open')) closeSidebar();
+    else openSidebar();
+  }
+
+  let lastMobileMode = null;
+
+  function syncSidebarMode(force) {
+    const mobile = isMobileDash();
+    if (!force && mobile === lastMobileMode) {
+      if (!mobile) resetDesktopSidebar();
+      return;
+    }
+    lastMobileMode = mobile;
+    if (mobile) applyMobileClosedStyles();
+    else resetDesktopSidebar();
+  }
+
+  menuToggle.onclick = toggleSidebar;
+  menuToggle.type = 'button';
+  if (closeBtn) {
+    closeBtn.onclick = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      closeSidebar();
+    };
+    closeBtn.type = 'button';
+  }
+  if (dashOverlay) {
+    dashOverlay.onclick = (e) => {
+      if (e) e.preventDefault();
+      closeSidebar();
+    };
+  }
+  if (dashSidebar.dataset.navCloseBound !== '1') {
+    dashSidebar.dataset.navCloseBound = '1';
+    dashSidebar.addEventListener('click', (e) => {
+      if (e.target.closest('.dash-nav-btn[data-target]') && isMobileDash()) closeSidebar();
+    });
+  }
+
+  if (!window.__dashSidebarResizeBound) {
+    window.__dashSidebarResizeBound = true;
+    const onModeChange = () => syncSidebarMode();
+    if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onModeChange);
+    else if (typeof mq.addListener === 'function') mq.addListener(onModeChange);
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(syncSidebarMode, 80);
+    });
+  }
+
+  syncSidebarMode(true);
+  window.openDashSidebar = openSidebar;
+  window.closeDashSidebar = closeSidebar;
+  window.toggleDashSidebar = toggleSidebar;
+  window.resetDashSidebarDesktop = resetDesktopSidebar;
+};
+
+function initVetDashboard() {
+  const isAdmin = document.body.classList.contains('dash-page-admin');
+  const defaultName = isAdmin ? 'Dr. Rajesh Kumar' : 'Anbarasan K';
+  const defaultEmail = isAdmin ? 'admin@stackly.com' : 'anbarasan@stackly.com';
+  let displayName = defaultName;
+  let displayEmail = defaultEmail;
+
+  try {
+    displayName = localStorage.getItem('stackly_user_name') || defaultName;
+    displayEmail = localStorage.getItem('stackly_user_email') || defaultEmail;
+  } catch (_) { /* ignore */ }
+
+  const initials = displayName.trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase()
+    || (isAdmin ? 'DR' : 'AK');
+
+  document.querySelectorAll('.js-user-name').forEach((el) => { el.textContent = displayName; });
+  document.querySelectorAll('.js-user-email').forEach((el) => { el.textContent = displayEmail; });
+  document.querySelectorAll('.js-user-initials').forEach((el) => { el.textContent = initials; });
+
+  const settingsName = document.getElementById('settingsName');
+  const settingsEmail = document.getElementById('settingsEmail');
+  if (settingsName) settingsName.value = displayName;
+  if (settingsEmail) settingsEmail.value = displayEmail;
+
+  const panels = document.querySelectorAll('.dash-panel');
+  const sidebar = document.getElementById('dashSidebar');
+  const overlay = document.getElementById('dashOverlay');
+  const defaultSection = isAdmin ? 'overview' : 'dashboardHome';
+
+  function animateBars(scope) {
+    if (!scope) return;
+    scope.querySelectorAll('.bar-fill').forEach((el) => {
+      const target = el.getAttribute('data-value') || '0';
+      el.style.width = '0%';
+      setTimeout(() => { el.style.width = target + '%'; }, 80);
+    });
+  }
+
+  window.showSection = function (id) {
+    if (!document.getElementById('section-' + id)) return;
+    if (typeof window.StacklySelect?.closeAll === 'function') window.StacklySelect.closeAll();
+    panels.forEach((p) => p.classList.toggle('active', p.id === 'section-' + id));
+    document.querySelectorAll('.dash-nav-btn[data-target]').forEach((b) => {
+      b.classList.toggle('active', b.getAttribute('data-target') === id);
+    });
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('show');
+    document.body.classList.remove('dash-sidebar-open');
+    document.documentElement.classList.remove('dash-sidebar-open');
+    if (typeof window.closeDashSidebar === 'function') window.closeDashSidebar();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const activePanel = document.getElementById('section-' + id);
+    if (['dashboardHome', 'overview', 'records', 'reports', 'settings'].includes(id)) {
+      animateBars(activePanel);
+    }
+    history.replaceState(null, '', '#' + id);
+  };
+
+  document.querySelectorAll('[data-target]').forEach((b) => {
+    if (b.hasAttribute('data-logout')) return;
+    b.addEventListener('click', (e) => {
+      const id = b.getAttribute('data-target');
+      if (!id || !document.getElementById('section-' + id)) return;
+      e.preventDefault();
+      window.showSection(id);
+    });
+  });
+
+  const initial = (location.hash || '#' + defaultSection).replace('#', '');
+  window.showSection(document.getElementById('section-' + initial) ? initial : defaultSection);
+
+  if (typeof window.initMobileSidebar === 'function') window.initMobileSidebar();
+
+  document.querySelectorAll('[data-logout]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.getElementById('logoutModal')?.classList.add('show');
+    });
+  });
+  document.getElementById('cancelLogout')?.addEventListener('click', () => {
+    document.getElementById('logoutModal')?.classList.remove('show');
+  });
+  document.getElementById('confirmLogout')?.addEventListener('click', () => {
+    try {
+      localStorage.removeItem('stackly_login_confirmed');
+    } catch (_) { /* ignore */ }
+    window.location.href = 'login.html';
+  });
+  document.querySelectorAll('.modal-backdrop').forEach((bd) => {
+    bd.addEventListener('click', (e) => {
+      if (e.target === bd) bd.classList.remove('show');
+    });
+  });
+
+  document.getElementById('markAllRead')?.addEventListener('click', () => {
+    document.querySelectorAll('.notif-item.unread').forEach((n) => n.classList.remove('unread'));
+    const bellDot = document.querySelector('.dash-bell .dot');
+    if (bellDot) bellDot.style.display = 'none';
+    window.dashToast('All notifications marked as read.', 'info');
+  });
+
+  document.getElementById('settingsForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = '404.html';
+  });
+
+  document.getElementById('supportForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = '404.html';
+  });
+
+  document.querySelectorAll('[data-booking-action]').forEach((btn) => {
+    if (btn.classList.contains('action-confirm-btn')) return;
+    btn.addEventListener('click', () => {
+      const row = btn.closest('tr');
+      const action = btn.getAttribute('data-booking-action');
+      const cell = btn.closest('td');
+      const pill = row?.querySelector('.pill');
+      if (pill) {
+        pill.textContent = action === 'approve' ? 'Confirmed' : 'Declined';
+        pill.className = 'pill' + (action === 'approve' ? '' : ' bad');
+      }
+      if (cell) {
+        cell.innerHTML = '<button type="button" class="btn btn-outline btn-xs" disabled>'
+          + (action === 'approve' ? 'Confirmed' : 'Declined') + '</button>';
+      }
+      window.dashToast(
+        action === 'approve' ? 'Booking confirmed and owner notified.' : 'Booking request declined.',
+        action === 'approve' ? 'success' : 'info'
+      );
+    });
+  });
+
+  const patientSearch = document.getElementById('patientSearch');
+  if (patientSearch) {
+    patientSearch.addEventListener('input', () => {
+      const q = patientSearch.value.trim().toLowerCase();
+      document.querySelectorAll('#patientTable tbody tr').forEach((row) => {
+        const hay = row.getAttribute('data-search') || row.textContent.toLowerCase();
+        row.style.display = !q || hay.includes(q) ? '' : 'none';
+      });
+    });
+  }
+
+  if (typeof window.StacklySelect?.init === 'function') {
+    window.StacklySelect.init(document);
+  }
+}
+
+
