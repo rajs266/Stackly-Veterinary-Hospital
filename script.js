@@ -752,27 +752,71 @@
 
   window.addEventListener('resize', resize);
 
-  container.addEventListener('mousemove', (e) => {
+  const pointer = { clientX: 0, clientY: 0, hasPos: false };
+
+  function splashAt(x, y, speed) {
+    if (speed > 3.5) {
+      const strength = Math.min(0.42, speed * 0.016);
+      addRipple(x, y, 4 + Math.min(5, Math.floor(speed * 0.15)), strength);
+      if (speed > 8 && Math.random() < 0.25) {
+        spawnCaustic(x, y, speed * 0.03);
+      }
+    } else if (speed > 1.25) {
+      addRipple(x, y, 3, Math.min(0.22, speed * 0.03));
+    }
+  }
+
+  function syncPointerFromClient(clientX, clientY, opts) {
+    const fromScroll = !!(opts && opts.fromScroll);
     const rect = container.getBoundingClientRect();
-    mouse.lastX = mouse.x;
-    mouse.lastY = mouse.y;
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
+
+    if (!inside) {
+      if (mouse.active) {
+        mouse.active = false;
+        mouse.speed = 0;
+        mouse.lastX = mouse.x;
+        mouse.lastY = mouse.y;
+        mouse.x = -1000;
+        mouse.y = -1000;
+      }
+      return;
+    }
+
+    const hadPos = mouse.active && mouse.x > -500;
+    mouse.lastX = hadPos ? mouse.x : x;
+    mouse.lastY = hadPos ? mouse.y : y;
+    mouse.x = x;
+    mouse.y = y;
     mouse.active = true;
 
     const dx = mouse.x - mouse.lastX;
     const dy = mouse.y - mouse.lastY;
     mouse.speed = Math.sqrt(dx * dx + dy * dy);
 
-    // Ripple only on real movement ? no idle corner shaking
-    if (mouse.speed > 3.5) {
-      const strength = Math.min(0.42, mouse.speed * 0.016);
-      addRipple(mouse.x, mouse.y, 4 + Math.min(5, Math.floor(mouse.speed * 0.15)), strength);
-      if (mouse.speed > 8 && Math.random() < 0.25) {
-        spawnCaustic(mouse.x, mouse.y, mouse.speed * 0.03);
-      }
+    // Scroll moves the tank under a still cursor — splash at cursor location
+    if (fromScroll) {
+      const scrollSpeed = Math.max(mouse.speed, Math.abs(dy) || mouse.speed);
+      splashAt(mouse.x, mouse.y, Math.max(scrollSpeed, 4.5));
+    } else {
+      splashAt(mouse.x, mouse.y, mouse.speed);
     }
-  });
+  }
+
+  window.addEventListener('pointermove', (e) => {
+    pointer.clientX = e.clientX;
+    pointer.clientY = e.clientY;
+    pointer.hasPos = true;
+  }, { passive: true });
+
+  container.addEventListener('pointermove', (e) => {
+    pointer.clientX = e.clientX;
+    pointer.clientY = e.clientY;
+    pointer.hasPos = true;
+    syncPointerFromClient(e.clientX, e.clientY, { fromScroll: false });
+  }, { passive: true });
 
   container.addEventListener('click', (e) => {
     const rect = container.getBoundingClientRect();
@@ -783,12 +827,32 @@
     spawnCaustic(x, y, 1.1);
   });
 
-  container.addEventListener('mouseleave', () => {
+  container.addEventListener('pointerleave', (e) => {
+    if (e.relatedTarget && container.contains(e.relatedTarget)) return;
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (x >= 0 && y >= 0 && x <= rect.width && y <= rect.height) return;
     mouse.active = false;
     mouse.speed = 0;
     mouse.x = -1000;
     mouse.y = -1000;
   });
+
+  function onViewportShift() {
+    if (!pointer.hasPos) return;
+    const now = performance.now();
+    if (now - (onViewportShift._t || 0) < 20) return;
+    onViewportShift._t = now;
+    syncPointerFromClient(pointer.clientX, pointer.clientY, { fromScroll: true });
+  }
+
+  window.addEventListener('scroll', onViewportShift, { passive: true, capture: true });
+  window.addEventListener('wheel', onViewportShift, { passive: true, capture: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('scroll', onViewportShift, { passive: true });
+    window.visualViewport.addEventListener('resize', onViewportShift, { passive: true });
+  }
 
   let frame = 0;
   function render() {
