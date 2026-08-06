@@ -1146,12 +1146,48 @@ a {
   border-top: 1px solid #363331;
   padding-top: 16px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 16px;
   font-size: 0.74rem;
   color: #858079;
   width: 100%;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.footer-social a {
+  color: #d1d5db;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social a:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 
@@ -1519,6 +1555,11 @@ a {
     flex-direction: column;
     gap: 10px;
     text-align: center;
+  }
+
+  .footer-bottom p {
+    white-space: normal;
+    font-size: 0.7rem;
   }
 
   .hero-buttons .btn,
