@@ -753,69 +753,101 @@
   window.addEventListener('resize', resize);
 
   const pointer = { clientX: 0, clientY: 0, hasPos: false };
+  let lastRelX = null;
+  let lastRelY = null;
+  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  let scrollSplashPending = false;
 
   function splashAt(x, y, speed) {
     if (speed > 3.5) {
       const strength = Math.min(0.42, speed * 0.016);
       addRipple(x, y, 4 + Math.min(5, Math.floor(speed * 0.15)), strength);
-      if (speed > 8 && Math.random() < 0.25) {
+      if (speed > 8 && Math.random() < 0.28) {
         spawnCaustic(x, y, speed * 0.03);
       }
-    } else if (speed > 1.25) {
-      addRipple(x, y, 3, Math.min(0.22, speed * 0.03));
+    } else if (speed > 1.1) {
+      addRipple(x, y, 3, Math.min(0.24, speed * 0.035));
     }
   }
 
-  function syncPointerFromClient(clientX, clientY, opts) {
+  function readScrollY() {
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  }
+
+  function syncHeroPointer(opts) {
+    if (!pointer.hasPos) return;
     const fromScroll = !!(opts && opts.fromScroll);
+    const scrollDy = opts && typeof opts.scrollDy === 'number' ? opts.scrollDy : 0;
     const rect = container.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    const x = pointer.clientX - rect.left;
+    const y = pointer.clientY - rect.top;
     const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
 
     if (!inside) {
-      if (mouse.active) {
-        mouse.active = false;
-        mouse.speed = 0;
-        mouse.lastX = mouse.x;
-        mouse.lastY = mouse.y;
-        mouse.x = -1000;
-        mouse.y = -1000;
+      mouse.active = false;
+      mouse.speed = 0;
+      mouse.x = -1000;
+      mouse.y = -1000;
+      lastRelX = null;
+      lastRelY = null;
+      return;
+    }
+
+    const prevX = lastRelX;
+    const prevY = lastRelY;
+    mouse.x = x;
+    mouse.y = y;
+    mouse.active = true;
+    lastRelX = x;
+    lastRelY = y;
+
+    if (prevX == null || prevY == null) {
+      mouse.lastX = x;
+      mouse.lastY = y;
+      mouse.speed = 0;
+      if (fromScroll && Math.abs(scrollDy) > 1) {
+        splashAt(x, y, Math.min(28, Math.abs(scrollDy) * 0.9));
       }
       return;
     }
 
-    const hadPos = mouse.active && mouse.x > -500;
-    mouse.lastX = hadPos ? mouse.x : x;
-    mouse.lastY = hadPos ? mouse.y : y;
-    mouse.x = x;
-    mouse.y = y;
-    mouse.active = true;
+    mouse.lastX = prevX;
+    mouse.lastY = prevY;
+    const dx = x - prevX;
+    const dy = y - prevY;
+    let speed = Math.sqrt(dx * dx + dy * dy);
 
-    const dx = mouse.x - mouse.lastX;
-    const dy = mouse.y - mouse.lastY;
-    mouse.speed = Math.sqrt(dx * dx + dy * dy);
-
-    // Scroll moves the tank under a still cursor — splash at cursor location
+    // Edge often updates scroll after wheel; use scroll delta so splash still fires
     if (fromScroll) {
-      const scrollSpeed = Math.max(mouse.speed, Math.abs(dy) || mouse.speed);
-      splashAt(mouse.x, mouse.y, Math.max(scrollSpeed, 4.5));
-    } else {
-      splashAt(mouse.x, mouse.y, mouse.speed);
+      speed = Math.max(speed, Math.abs(scrollDy), Math.abs(dy));
+      if (speed < 2 && Math.abs(scrollDy) > 0.5) speed = Math.abs(scrollDy) * 1.2;
+      if (speed < 3.5 && Math.abs(scrollDy) > 0) speed = Math.max(speed, 5);
     }
+
+    mouse.speed = speed;
+    splashAt(x, y, speed);
   }
 
-  window.addEventListener('pointermove', (e) => {
+  function markPointer(e) {
     pointer.clientX = e.clientX;
     pointer.clientY = e.clientY;
     pointer.hasPos = true;
-  }, { passive: true });
+  }
+
+  // Edge + Chrome: keep last known cursor even when not moving
+  window.addEventListener('pointermove', markPointer, { passive: true });
+  window.addEventListener('mousemove', markPointer, { passive: true });
 
   container.addEventListener('pointermove', (e) => {
-    pointer.clientX = e.clientX;
-    pointer.clientY = e.clientY;
-    pointer.hasPos = true;
-    syncPointerFromClient(e.clientX, e.clientY, { fromScroll: false });
+    markPointer(e);
+    syncHeroPointer({ fromScroll: false });
+  }, { passive: true });
+
+  container.addEventListener('mousemove', (e) => {
+    markPointer(e);
+    // Older Edge path without PointerEvent
+    if (window.PointerEvent) return;
+    syncHeroPointer({ fromScroll: false });
   }, { passive: true });
 
   container.addEventListener('click', (e) => {
@@ -827,36 +859,54 @@
     spawnCaustic(x, y, 1.1);
   });
 
-  container.addEventListener('pointerleave', (e) => {
-    if (e.relatedTarget && container.contains(e.relatedTarget)) return;
+  container.addEventListener('mouseleave', () => {
     const rect = container.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    if (x >= 0 && y >= 0 && x <= rect.width && y <= rect.height) return;
+    if (pointer.hasPos) {
+      const x = pointer.clientX - rect.left;
+      const y = pointer.clientY - rect.top;
+      if (x >= 0 && y >= 0 && x <= rect.width && y <= rect.height) return;
+    }
     mouse.active = false;
     mouse.speed = 0;
     mouse.x = -1000;
     mouse.y = -1000;
+    lastRelX = null;
+    lastRelY = null;
   });
 
-  function onViewportShift() {
-    if (!pointer.hasPos) return;
-    const now = performance.now();
-    if (now - (onViewportShift._t || 0) < 20) return;
-    onViewportShift._t = now;
-    syncPointerFromClient(pointer.clientX, pointer.clientY, { fromScroll: true });
+  function queueScrollSplash() {
+    scrollSplashPending = true;
   }
 
-  window.addEventListener('scroll', onViewportShift, { passive: true, capture: true });
-  window.addEventListener('wheel', onViewportShift, { passive: true, capture: true });
+  function flushScrollSplash() {
+    if (!scrollSplashPending && !pointer.hasPos) return;
+    const sy = readScrollY();
+    const scrollDy = sy - lastScrollY;
+    lastScrollY = sy;
+    if (!pointer.hasPos) {
+      scrollSplashPending = false;
+      return;
+    }
+    if (scrollSplashPending || Math.abs(scrollDy) > 0.1) {
+      scrollSplashPending = false;
+      syncHeroPointer({ fromScroll: true, scrollDy });
+    }
+  }
+
+  window.addEventListener('scroll', queueScrollSplash, { passive: true, capture: true });
+  document.addEventListener('scroll', queueScrollSplash, { passive: true, capture: true });
+  window.addEventListener('wheel', queueScrollSplash, { passive: true, capture: true });
+  document.addEventListener('wheel', queueScrollSplash, { passive: true, capture: true });
   if (window.visualViewport) {
-    window.visualViewport.addEventListener('scroll', onViewportShift, { passive: true });
-    window.visualViewport.addEventListener('resize', onViewportShift, { passive: true });
+    window.visualViewport.addEventListener('scroll', queueScrollSplash, { passive: true });
+    window.visualViewport.addEventListener('resize', queueScrollSplash, { passive: true });
   }
 
   let frame = 0;
   function render() {
     frame += 1;
+    // Edge: apply after layout so hero rect matches current scroll (incl. smooth scroll)
+    flushScrollSplash();
     if (isWebGLFallback) {
       ctx.clearRect(0, 0, width, height);
       drawFallbackBG();
